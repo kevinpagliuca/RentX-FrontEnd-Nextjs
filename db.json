@@ -1,0 +1,52 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "src": "https://i.ibb.co/LSSm8RW/Audi.png",
+      "name": "RS 5 Coupé",
+      "brand": "Audi",
+      "type": "leaf",
+      "value": 640
+    },
+    {
+      "id": 2,
+      "src": "https://i.ibb.co/74jMVn8/Corvete-Z06.png",
+      "name": "Corvette Z06",
+      "brand": "chevrolet",
+      "type": "water",
+      "value": 1200
+    },
+    {
+      "id": 3,
+      "src": "https://i.ibb.co/N9VfvXJ/Porche.png",
+      "name": "Panamera",
+      "brand": "PORCHE",
+      "type": "lightning",
+      "value": 340
+    },
+    {
+      "id": 4,
+      "src": "/Lambo.png",
+      "name": "Huracan",
+      "brand": "LAMBORGHINI",
+      "type": "water",
+      "value": 3600
+    },
+    {
+      "id": 5,
+      "src": "https://i.ibb.co/5Fv55D0/Lancer.png",
+      "name": "Lancer Evo X",
+      "brand": "Audi ",
+      "type": "water",
+      "value": 640
+    },
+    {
+      "id": 6,
+      "src": "https://i.ibb.co/cQXHSZ3/Volvo.png",
+      "name": "XC40",
+      "brand": "VOLVO",
+      "type": "leaf",
+      "value": 1200
+    }
+  ]
+}

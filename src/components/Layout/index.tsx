@@ -21,7 +21,7 @@ export const Layout = ({ title, children }: LayoutProps) => {
         <Sidebar />
         <Content>{children}</Content>
       </Wrapper>
-      <footer style={{ minHeight: "300px", width: "100%", background: "#000" }}></footer>
+      {/* <footer style={{ minHeight: "300px", width: "100%", background: "#000" }}></footer> */}
     </Container>
   );
 };

@@ -1,14 +1,31 @@
-import React from "react";
+import Link from "next/link";
+
+import { FiUser } from "react-icons/fi";
 import { XLogoIcon } from "../../assets/Icons";
 
-import { HeaderContainer } from "./styles";
+import { ButtonBase } from "@material-ui/core";
+
+import { HeaderContainer, HeaderContent } from "./styles";
 
 export const Header = () => {
   return (
     <HeaderContainer>
-        <button>
+      <Link href="/" passHref>
+        <ButtonBase className="buttonLink">
           <XLogoIcon />
-        </button>
+        </ButtonBase>
+      </Link>
+
+      <HeaderContent>
+        <h1>Início</h1>
+
+        <strong>
+          Faça login
+          <ButtonBase>
+            <FiUser />
+          </ButtonBase>
+        </strong>
+      </HeaderContent>
     </HeaderContainer>
   );
 };

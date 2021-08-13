@@ -10,7 +10,7 @@ export const Container = styled.div`
 
 export const Wrapper = styled.div`
   display: flex;
-  height: 100%;
+  min-height: calc(100vh - 5rem);
   position: relative;
 `;
 
@@ -19,6 +19,6 @@ export const Content = styled.div`
   width: 100%;
   height: 100%;
   min-height: 100vh;
-  background: #9999;
+  background: var(--gray-50);
   padding: 2.5rem 7.5rem;
 `;

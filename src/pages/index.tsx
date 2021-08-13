@@ -1,8 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import { LogoIcon } from "../assets/Icons";
 import { Button } from "../components/Form/Button";
 
-import { Container, MainContainer, SideContainer,Content } from "../styles/pages/homeStyles";
+import { Container, MainContainer, SideContainer, Content } from "../styles/pages/landingStyles";
 export default function Home() {
   return (
     <div>
@@ -12,12 +13,12 @@ export default function Home() {
             <LogoIcon />
             <h1>Alugue um carro de maneira simples e fácil</h1>
             <p>Vários modelos para você dirigir seguro, com conforto e segurança.</p>
-            <Link href="/inicio" passHref>
-              <Button  containerClass="btnStart">Começar agora</Button>
+            <Link href="/home" passHref>
+              <Button containerClass="btnStart">Começar agora</Button>
             </Link>
           </SideContainer>
           <MainContainer>
-            <img src="/Component.png" />
+            <Image src="/Component.png" width="600px" height="600px" quality={100} />
           </MainContainer>
         </Content>
       </Container>

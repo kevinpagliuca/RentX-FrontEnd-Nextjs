@@ -11,12 +11,61 @@ export const HeaderContainer = styled.div`
   background: var(--white);
   z-index: 100;
 
-  button {
+  > .buttonLink {
     height: 100%;
-    width: 5rem;
+    min-width: 5rem;
     border: 0;
     background: var(--main);
     color: var(--white);
+    
   }
 `;
 
+export const HeaderContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.75rem 7.25rem;
+  width: 100%;
+  color: var(--gray-500);
+  border-bottom: 1px solid var(--gray-100);
+
+  h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.625rem;
+    color: var(--gray-500);
+  }
+
+  strong {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    font-size: 1rem;
+    font-weight: 600;
+    background: transparent;
+    color: var(--gray-500);
+    position: relative;
+    transition: all 0.3s;
+
+    &:hover {
+      cursor: pointer;      
+      text-decoration: underline;
+    }
+   
+
+    button {
+      margin-left: 1rem;
+      color: var(--gray-400);
+      background: var(--gray-100);
+      border-radius: 50%;
+      min-width: 3rem;
+      min-height: 3rem;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+`;
