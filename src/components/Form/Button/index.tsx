@@ -1,3 +1,4 @@
+import { CircularProgress } from "@material-ui/core";
 import React, {
   ReactNode,
   ButtonHTMLAttributes,
@@ -13,16 +14,19 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   containerClass?: string;
   variant?: "transparent" | "red" | "green" | undefined;
   as?: IntrinsicElementsKeys;
+  loading?: boolean;
+  loadingSize?: number;
 }
 
 const ButtonBase: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
-  { children, containerClass, variant, as, ...rest }: ButtonProps,
+  { children, containerClass, variant, as, loading, loadingSize, ...rest }: ButtonProps,
   ref
 ) => {
   return (
     <Container className={containerClass}>
-      <ButtonComponent {...rest} variant={variant} ref={ref} as={as}>
-        {children}
+      <ButtonComponent {...rest} variant={variant} ref={ref} disabled={loading || rest.disabled}>
+        {loading && <CircularProgress size={loadingSize} color="inherit" />}
+        {!loading && children}
       </ButtonComponent>
     </Container>
   );

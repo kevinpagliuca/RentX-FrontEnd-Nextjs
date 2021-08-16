@@ -9,7 +9,7 @@ export const FormContainer = styled.form`
 
   h1 {
     font: 600 2.25rem "Archivo", sans-serif;
-    color: var(--texts-lights);
+    color: var(--gray-450);
     margin-bottom: 1.5rem;
   }
 

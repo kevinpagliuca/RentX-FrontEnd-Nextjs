@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { Controller, useForm, UseFormHandleSubmit } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { EnvelopeIcon, LockIcon } from "../../assets/Icons";
@@ -21,13 +23,20 @@ type LoginCredentialsType = {
   password: string;
 };
 
+const loginFormSchema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().required().min(6).max(14),
+});
+
 export const SignInForm = () => {
-  const { formState, control, handleSubmit, watch } = useForm<LoginCredentialsType>();
+  const { formState, control, handleSubmit, watch } = useForm<LoginCredentialsType>({
+    resolver: yupResolver(loginFormSchema),
+  });
   const [isVisiblePass, setIsVisiblePass] = useState(false);
   const watchEmail = watch("email");
   const watchPassword = watch("password");
 
-  const isLoginValid = watchEmail && watchPassword !== "" ? false : true;
+  const isLoginValid = watchEmail && watchPassword !== "" && !formState.errors.email && !formState.errors.password ? false : true;
 
   const userRegister = useMutation(
     async (user: LoginCredentialsType) => {
@@ -70,7 +79,8 @@ export const SignInForm = () => {
               name={name}
               onChange={onChange}
               ref={ref}
-              required
+              filled={!formState.errors.email && value !== ""}
+              error={formState.errors.email}
             />
           )}
         />
@@ -84,6 +94,7 @@ export const SignInForm = () => {
               placeholder="Senha"
               type={isVisiblePass ? "text" : "password"}
               required
+              autoComplete="off"
               startIcon={<LockIcon />}
               endIcon={
                 <IconActive
@@ -97,6 +108,8 @@ export const SignInForm = () => {
               name={name}
               onChange={onChange}
               ref={ref}
+              filled={!formState.errors.password && value !== ""}
+              error={formState.errors.password}
             />
           )}
         />
@@ -105,13 +118,18 @@ export const SignInForm = () => {
           <a className="forgetPassTxt">Esqueci minha senha</a>
         </Link>
 
-        <Button disabled={isLoginValid} containerClass="loginBtn">
-          {formState.isSubmitting ? <CircularProgress size={25} color="inherit" /> : "Login"}
+        <Button
+          disabled={isLoginValid}
+          containerClass="loginBtn"
+          loading={formState.isSubmitting}
+          loadingSize={25}
+        >
+          Login
         </Button>
         <Link href="/register" passHref>
-          <Button variant="transparent" as="a">
-            Criar conta gratuita
-          </Button>
+          <a>
+            <Button variant="transparent">Criar conta gratuita</Button>
+          </a>
         </Link>
       </div>
     </FormContainer>
