@@ -19,6 +19,10 @@ export const HeaderContainer = styled.div`
     color: var(--white);
     
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const HeaderContent = styled.div`

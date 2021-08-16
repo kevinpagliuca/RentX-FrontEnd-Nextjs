@@ -7,36 +7,40 @@ export const Container = styled.div`
   justify-content: center;
   position: relative;
   height: 5rem;
+  text-decoration: none;
 `;
 
 type ButtonComponentProps = {
-  variant?: "blue" | "red" | "green";
+  variant?: "transparent" | "red" | "green" | undefined;
 };
 
 export const ButtonComponent = styled.button<ButtonComponentProps>`
-font-family: "Inter", sans-serif;
-font-style: normal;
-font-weight: 500;
-font-size: 1.125rem;
-line-height:1.375rem;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 500 1.125rem "Inter", sans-serif;
+  line-height: 1.375rem;
   padding: 1.325px 5rem;
   background: var(--main);
   color: var(--white);
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
+  border: 2px solid transparent;
   border-radius: 4px;
+  text-decoration: none;
   transition: all 0.3s;
 
-  /* ${(props) =>
-    props.variant === "blue" &&
+  ${(props) =>
+    props.variant === "transparent" &&
     css`
-      background: var(--blue);
-    `} */
+      background: transparent;
+      border-color: var(--gray-300);
+      color: var(--gray-500);
+
+      &:hover {
+        background: var(--gray-300) !important;
+      }
+    `}
 
   &:disabled {
     opacity: 0.5;

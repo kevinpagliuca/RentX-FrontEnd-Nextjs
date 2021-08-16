@@ -13,14 +13,6 @@ export const SidebarContainer = styled.div`
   z-index: 10;
   background: var(--dark);
 
-  > div {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   nav {
     display: flex;
     align-items: center;
@@ -53,6 +45,32 @@ export const SidebarContainer = styled.div`
           width: 3px;
           background: var(--main);
           height: 100%;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    max-height: 5rem;
+    bottom: 0;
+    background: var(--gray-50);
+
+    nav {
+      flex-direction: row;
+
+      button.active {
+        background: transparent;
+        color: var(--main);
+
+        &::before {
+          /* display: none; */
+          bottom: 0;
+          height: 2px;
+          width: 4px;
+          left: 50%;
+          right: 50%;
+          transform: translate(-50%, 50%);
         }
       }
     }

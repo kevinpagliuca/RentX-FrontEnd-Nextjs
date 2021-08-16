@@ -6,7 +6,7 @@
       "name": "RS 5 Coupé",
       "brand": "Audi",
       "type": "leaf",
-      "value": 640
+      "value": 800
     },
     {
       "id": 2,
@@ -47,6 +47,13 @@
       "brand": "VOLVO",
       "type": "leaf",
       "value": 1200
+    }
+  ],
+  "users": [
+    {
+      "email": "kevin.pagliuca@fasters.com.br",
+      "password": "$2a$10$9wYBMzH3BPUq4nYgcdM64eA/9/BeBVR/DhpMqKCIEsofV0EgSdnDe",
+      "id": 1
     }
   ]
 }

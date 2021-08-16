@@ -6,10 +6,12 @@ export const Container = styled.div`
   justify-content: center;
   width: 100%;
   position: relative;
+  color: var(--gray-400);
 
   .startIcon {
     position: absolute;
     left: 2rem;
+    color: inherit;
     & ~ input {
       padding-left: 4rem;
     }
@@ -21,6 +23,7 @@ export const Container = styled.div`
   .endIcon {
     position: absolute;
     right: 2rem;
+    color: inherit;
     & ~ input {
       padding-right: 4rem;
     }

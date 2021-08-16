@@ -2,7 +2,7 @@ import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 import { Layout } from "../components/Layout";
 import { ProdutCard } from "../components/ProdutCard";
-import { useProducts } from "../hooks/useProducts";
+import { getAllProducts, useProducts } from "../hooks/useProducts";
 import { setupAPI } from "../services/api";
 import { Container,TitleContainer, ContainerItems } from "../styles/pages/homeStyles";
 
@@ -22,16 +22,18 @@ export default function Inicio({ product }: ProdutsCardProps) {
   const { data, isLoading, isFetching, refetch } = useProducts({
     initialData: product,
   });
+
   return (
     <Layout title="Página Inicial | RentX">
     
       <Container>
       <TitleContainer>
+          {isFetching && "LOADING"}
           <h1>Carros disponíveis</h1>
           <p>Total 12 carros</p>
         </TitleContainer>
         <ContainerItems>
-        {data.map((item) => (
+        {data?.map((item) => (
           <ProdutCard product={item} />
         ))}
         </ContainerItems>
@@ -42,11 +44,13 @@ export default function Inicio({ product }: ProdutsCardProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const apiServer = setupAPI(ctx);
-  const response = await apiServer.get("products");
+  // const apiServer = setupAPI(ctx);
+  // const response = await apiServer.get("products");
+ const res = await getAllProducts();
+
   return {
     props: {
-      product: response.data,
+      product: res,
     },
   };
 };

@@ -13,12 +13,14 @@ export const Container = styled.div`
   box-sizing: border-box;
   border-radius: 12px;
   box-shadow: 1px 3px 6px rgba(0,0,0,0.25);
+  width: 100%;
+
   
 
   header {
     padding: 2.5rem;
     height: 13rem;
-    border-radius: 12px;
+    border-radius: 12px;    
   }
 
   footer {

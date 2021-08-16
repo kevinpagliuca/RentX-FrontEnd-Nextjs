@@ -7,8 +7,9 @@ export default function Auth() {
   return (
     <Layout title="Login | RentX">
       <Container>
-        <Image src="/carroLogin.png" width={650} height={650} quality={100} />
-
+        <div className="imageContainer">
+          <Image src="/carroLogin.png" width={650} height={650} quality={100} />
+        </div>
         <SignInForm />
       </Container>
     </Layout>

@@ -16,7 +16,6 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   containerClassName?: string;
   startIcon?: ReactElement;
   endIcon?: ReactElement;
-  children?: ReactNode;
   error?: FieldError;
   // controlled?: boolean;
   id: string;
@@ -28,14 +27,13 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
     className,
     startIcon,
     endIcon,
-    children,
     id,
     error,
     // controlled = false,
     ...rest
   },
   ref
-) => { 
+) => {
   return (
     <Container className={containerClassName}>
       {!!startIcon &&

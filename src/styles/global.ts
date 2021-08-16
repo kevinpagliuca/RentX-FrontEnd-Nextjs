@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body, input, button, textarea, select {
-    font: 400 1rem 'Roboto', sans-serif;
+    font: 400 1rem 'Inter', sans-serif;
   }
 
   button {
@@ -50,6 +50,8 @@ export const GlobalStyle = createGlobalStyle`
     --gray-350:#AEAEB3;
     --gray-400:#7A7A80;
     --gray-500:#47474D;
+
+    --texts-lights: #41414D;
 
     --dark: #1B1B1F;
 
