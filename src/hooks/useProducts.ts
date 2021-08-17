@@ -1,12 +1,13 @@
 import { useQuery, UseQueryOptions } from "react-query";
 import { api } from "../services/api";
 
-type Product = {
+export type Product = {
   src: string;
   name: string;
   brand: string;
   type: string;
   value: number;
+  id: number;
 };
 
 export async function getAllProducts(): Promise<Product[]> {

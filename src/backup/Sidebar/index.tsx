@@ -1,5 +1,5 @@
 import { ButtonBase } from "@material-ui/core";
-import { FiUser } from "react-icons/fi";
+import { FiHome, FiUser } from "react-icons/fi";
 import { CarIcon, HomeIcon } from "../../assets/Icons";
 import { ActiveLink } from "./ActiveLink";
 import Link from "next/link";
@@ -9,13 +9,8 @@ import { SidebarContainer } from "./styles";
 
 export const Sidebar = () => {
   return (
-    <SidebarContainer>
-      <Link href="/" passHref>
-        <ButtonBase className="buttonLink">
-          <XLogoIcon />
-        </ButtonBase>
-      </Link>
-      <nav>
+    <SidebarContainer>      
+      <nav>    
         <ActiveLink activeClassName="active" href="/home">
           <ButtonBase>
             <HomeIcon />

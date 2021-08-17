@@ -1,28 +1,30 @@
 import { ReactNode } from "react";
 import Head from "next/head";
-import { Header } from "../Header";
-import { Sidebar } from "../Sidebar";
 
 interface LayoutProps {
   title?: string;
   children: ReactNode;
+  noHeader?: boolean;
 }
+import { Sidebar } from "../Sidebar";
+import { Header } from "../Header";
 
 import { Container, Content, Wrapper } from "./styles";
-export const Layout = ({ title, children }: LayoutProps) => {
+export const Layout = ({ title, children, noHeader }: LayoutProps) => {
   return (
-    <Container>
-      <Head>
-        <title>{title || "RentX"}</title>
-      </Head>
-      <Header />
-
-      <Wrapper>
+    <>
+      <Container>
+        <Head>
+          <title>{title || "RentX"}</title>
+        </Head>
         <Sidebar />
-        <Content>{children}</Content>
-      </Wrapper>
 
-      {/* <footer style={{ minHeight: "10000px", width: "100%", background: "#000" }}></footer> */}
-    </Container>
+        <Wrapper>
+          {!noHeader && <Header />}
+          <Content>{children}</Content>
+        </Wrapper>
+      </Container>
+      {/* <footer style={{ minHeight: "100vh", width: "100%", background: "#000" }}></footer> */}
+    </>
   );
 };

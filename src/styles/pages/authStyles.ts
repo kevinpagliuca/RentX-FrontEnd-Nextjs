@@ -5,6 +5,8 @@ export const Container = styled.div`
   grid-gap: 8rem;
   width: 100%;
   height: 100%;
+  max-width: 1200px;
+
 
   @media (max-width: 768px) {
     display:flex;

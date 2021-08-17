@@ -18,7 +18,7 @@ export default function Home() {
             </Link>
           </SideContainer>
           <MainContainer>
-            <Image src="/Component.png" width="600px" height="600px" quality={100} />
+            <Image src="/Component.png" width="600px" height="600px" quality={100} objectFit="cover" />
           </MainContainer>
         </Content>
       </Container>

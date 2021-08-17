@@ -216,3 +216,20 @@ export const EyeIcon = ({ size, ...rest }: IconsProps) => {
     </svg>
   );
 };
+
+export const GreenCheckIcon = ({ size, ...rest }: IconsProps) => {
+  return (
+    <svg
+      width={size || "78"}
+      height={size - 22 || "56"}
+      viewBox="0 0 78 56"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M29.5504 41.6902L70.9059 0L78 7.15238L29.5504 56L0 26.2069L7.09912 19.0545L29.5504 41.6902Z"
+        fill="#03B352"
+      />
+    </svg>
+  );
+};

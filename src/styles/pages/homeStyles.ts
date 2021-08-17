@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 1680px;
 `;
 
 export const ContainerItems = styled.div`
@@ -19,6 +20,12 @@ export const ContainerItems = styled.div`
 
   @media (max-width: 1100px) {
     grid-template-columns: repeat(1, 1fr);
+
+    
+  }
+
+  @media (min-width: 1680px) {
+    grid-template-columns: repeat(4, 1fr);
   }
 `;
 

@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { FiEye, FiEyeOff } from "react-icons/fi";
-import { EnvelopeIcon, LockIcon } from "../../assets/Icons";
+import { FiEye, FiEyeOff, FiUser } from "react-icons/fi";
+import { CarIcon, EnvelopeIcon, LockIcon } from "../../assets/Icons";
 
 import { Button } from "../Form/Button";
 import { Input } from "../Form/Input";
-import { CircularProgress } from "@material-ui/core";
 
 import { FormContainer } from "./styles";
 import { SubmitHandler } from "react-hook-form";
@@ -17,33 +15,40 @@ import { useMutation } from "react-query";
 import { queryClient } from "../../services/queryClient";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
+import { AccountCreateModal } from "../Modais/AccountCreate";
 
-type LoginCredentialsType = {
+type RegisterData = {
+  name: string;
   email: string;
+  CNH: string;
   password: string;
+  password_confirmation: string;
 };
 
 const loginFormSchema = yup.object().shape({
   email: yup.string().email().required(),
+  name: yup.string().required(),
+  CNH: yup.number().required(),
   password: yup.string().required().min(6).max(14),
+  password_confirmation: yup.string().oneOf([null, yup.ref("password")], "Passwords must match"),
 });
 
-export const SignInForm = () => {
-  const { formState, control, handleSubmit, watch } = useForm<LoginCredentialsType>({
+export const SignUpForm = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isVisiblePass, setIsVisiblePass] = useState(false);
+
+  const { formState, control, handleSubmit } = useForm<RegisterData>({
     resolver: yupResolver(loginFormSchema),
   });
-  const [isVisiblePass, setIsVisiblePass] = useState(false);
-  const watchEmail = watch("email");
-  const watchPassword = watch("password");
 
-  const isLoginValid = watchEmail && watchPassword !== "" && !formState.errors.email && !formState.errors.password ? false : true;
+  const isLoginValid = Object.keys(formState.errors).length !== 0;
 
   const userRegister = useMutation(
-    async (user: LoginCredentialsType) => {
+    async (user: RegisterData) => {
       try {
-        await api.post("/login", user);
-        toast.success("Logado com sucesso!");
-        // alert("Logado com sucesso!");
+        await api.post("/register", user);
+        toast.success("Registrado com sucesso!");
+        setModalIsOpen(true);
       } catch (error) {
         toast.error(error.message);
       }
@@ -55,18 +60,33 @@ export const SignInForm = () => {
     }
   );
 
-  const onSubmit: SubmitHandler<LoginCredentialsType> = async (values) => {
-    // alert(JSON.stringify(values));
+  const onSubmit: SubmitHandler<RegisterData> = async (values) => {
     await userRegister.mutateAsync(values);
   };
 
-  console.log(isLoginValid);
   return (
     <FormContainer autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
       <h1>Estamos quase lá.</h1>
       <p>Faça seu login para começar uma experiência incrível.</p>
-
       <div>
+        <Controller
+          control={control}
+          name="name"
+          render={({ field: { value = "", onChange, ref, name } }) => (
+            <Input
+              id="name"
+              placeholder="Nome"
+              startIcon={<FiUser size={24} />}
+              value={value}
+              name={name}
+              onChange={onChange}
+              ref={ref}
+              filled={!formState.errors.name && value !== ""}
+              error={formState.errors.name}
+            />
+          )}
+        />
+
         <Controller
           control={control}
           name="email"
@@ -82,6 +102,24 @@ export const SignInForm = () => {
               ref={ref}
               filled={!formState.errors.email && value !== ""}
               error={formState.errors.email}
+            />
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="CNH"
+          render={({ field: { value = "", onChange, ref, name } }) => (
+            <Input
+              id="cnh"
+              placeholder="CNH"
+              startIcon={<CarIcon />}
+              value={value}
+              name={name}
+              onChange={onChange}
+              ref={ref}
+              filled={!formState.errors.CNH && value !== ""}
+              error={formState.errors.CNH}
             />
           )}
         />
@@ -115,24 +153,37 @@ export const SignInForm = () => {
           )}
         />
 
-        <Link href="/forget-password">
-          <a className="forgetPassTxt">Esqueci minha senha</a>
-        </Link>
+        <Controller
+          control={control}
+          name="password_confirmation"
+          render={({ field: { value = "", onChange, ref, name } }) => (
+            <Input
+              id="password"
+              placeholder="Repetir senha"
+              type={isVisiblePass ? "text" : "password"}
+              required
+              autoComplete="off"
+              startIcon={<LockIcon />}
+              value={value}
+              name={name}
+              onChange={onChange}
+              ref={ref}
+              filled={!formState.errors.password_confirmation && value !== ""}
+              error={formState.errors.password_confirmation}
+            />
+          )}
+        />
 
         <Button
           disabled={isLoginValid}
-          containerClass="loginBtn"
+          containerClass="registerBtn"
           loading={formState.isSubmitting}
           loadingSize={25}
         >
-          Login
+          Cadastrar
         </Button>
-        <Link href="/register" passHref>
-          <a>
-            <Button variant="transparent">Criar conta gratuita</Button>
-          </a>
-        </Link>
       </div>
+      <AccountCreateModal modalIsOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} />
     </FormContainer>
   );
 };

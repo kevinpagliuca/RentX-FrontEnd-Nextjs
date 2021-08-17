@@ -4,24 +4,14 @@ export const SidebarContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   width: 100%;
   max-width: 5rem;
   min-width: 5rem;
   height: 100vh;
   position: sticky;
-  top: 0rem;
+  top: 5rem;
   z-index: 10;
   background: var(--dark);
-
-  .buttonLink {
-    background: var(--main);
-    color: var(--white);
-    width: 5rem;
-    height: 5rem;
-    position: absolute;
-    top: 0;
-  }
 
   nav {
     display: flex;
@@ -65,9 +55,7 @@ export const SidebarContainer = styled.div`
     max-height: 5rem;
     bottom: 0;
     background: var(--gray-50);
-    .buttonLink {
-      display: none;
-    }
+
     nav {
       flex-direction: row;
 

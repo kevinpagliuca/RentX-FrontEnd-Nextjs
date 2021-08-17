@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -49,7 +49,9 @@ export const GlobalStyle = createGlobalStyle`
 
     --gray-50:#F4F5F6;
     --gray-100:#EBEBF0;
+    --gray-200:#E5E5E5;
     --gray-300:#DEDEE3;
+
     --gray-350:#AEAEB3;
     --gray-400:#7A7A80;
     --gray-450: #41414D;
@@ -74,4 +76,12 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 0;
     background: var(--dark);
   }
+`;
+
+export const Test = styled.div`
+  width: 100%;
+  height: 1200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: yellow;
 `;

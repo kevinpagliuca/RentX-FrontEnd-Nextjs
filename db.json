@@ -6,7 +6,13 @@
       "name": "RS 5 Coupé",
       "brand": "Audi",
       "type": "leaf",
-      "value": 800
+      "value": 800,
+      "km": 300,
+      "startUp": 6.8,
+      "supply": "Hibrido",
+      "horsepower": "500HP",
+      "userCar": "5 Pessoas",
+      "description": "Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar."
     },
     {
       "id": 2,
@@ -14,7 +20,8 @@
       "name": "Corvette Z06",
       "brand": "chevrolet",
       "type": "water",
-      "value": 1200
+      "value": 1200,
+      "description": "Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar."
     },
     {
       "id": 3,
@@ -22,7 +29,8 @@
       "name": "Panamera",
       "brand": "PORCHE",
       "type": "lightning",
-      "value": 340
+      "value": 340,
+      "description": "Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar."
     },
     {
       "id": 4,
@@ -30,7 +38,8 @@
       "name": "Huracan",
       "brand": "LAMBORGHINI",
       "type": "water",
-      "value": 3600
+      "value": 3600,
+      "description": "Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar."
     },
     {
       "id": 5,
@@ -38,7 +47,8 @@
       "name": "Lancer Evo X",
       "brand": "Audi ",
       "type": "water",
-      "value": 640
+      "value": 640,
+      "description": "Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar."
     },
     {
       "id": 6,
@@ -46,7 +56,8 @@
       "name": "XC40",
       "brand": "VOLVO",
       "type": "leaf",
-      "value": 1200
+      "value": 1200,
+      "description": "Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar."
     }
   ],
   "users": [
@@ -54,6 +65,30 @@
       "email": "kevin.pagliuca@fasters.com.br",
       "password": "$2a$10$9wYBMzH3BPUq4nYgcdM64eA/9/BeBVR/DhpMqKCIEsofV0EgSdnDe",
       "id": 1
+    },
+    {
+      "email": "kevin.pagliuca2@fasters.com.br",
+      "password": "$2a$10$OiIz79x7O9ezb9O8iOeeXe3TBchwd99kmSEFe1LOAjHnJKdDJPg2a",
+      "password_confirmation": "123456",
+      "CNH": 40251443877,
+      "name": "Kevin Pagliuca",
+      "id": 2
+    },
+    {
+      "email": "erick@carro.com",
+      "password": "$2a$10$OIJYVmKiPRc3vjHtfSeOAuVqWTU7I6Jmhx5krrlnkY3FPt5g/MXuy",
+      "password_confirmation": "Ktiauu",
+      "CNH": 323223323,
+      "name": "Erick",
+      "id": 3
+    },
+    {
+      "email": "kaik@carro.com",
+      "password": "$2a$10$2w8Pnt4k3zp8DqIchtE67O3p37OXtrJvlhASBw1jvi/wc4Y0Vwj1m",
+      "password_confirmation": "kaik77",
+      "CNH": 777777777777,
+      "name": "Kaik",
+      "id": 4
     }
   ]
 }

@@ -4,14 +4,13 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   background: var(--dark);
   padding: 3rem;
 
   @media (max-width: 900px) {
     padding: 2rem;
-    text-align: center;
   }
 `;
 export const Content = styled.div`
@@ -27,6 +26,7 @@ export const SideContainer = styled.aside`
 
   svg {
     margin-bottom: 7.5rem;
+    text-align: center;
   }
 
   h1 {
@@ -51,6 +51,7 @@ export const SideContainer = styled.aside`
 
   .btnStart {
     max-width: 292px;
+    white-space: nowrap;
   }
 
   @media (max-width: 900px) {
@@ -65,18 +66,7 @@ export const MainContainer = styled.main`
   align-items: center;
   justify-content: center;
   width: 100%;
-
-  img {
-    object-fit: cover;
-    margin-left: 3rem;
-    width: 70%;
-  }
-
-  @media (min-width: 1120px) {
-    img {
-      width: 100%;
-    }
-  }
+  margin-left: 3rem;
 
   @media (max-width: 900px) {
     display: none;
