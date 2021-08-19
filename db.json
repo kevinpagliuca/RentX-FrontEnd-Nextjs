@@ -89,6 +89,14 @@
       "CNH": 777777777777,
       "name": "Kaik",
       "id": 4
+    },
+    {
+      "email": "Casa@Casa.com",
+      "password": "$2a$10$9U5YiG/3SXewn2gxD8iCru9tYKXYx7Qmz0WDjyhM2kcLb.Tk3VVM6",
+      "password_confirmation": "123456",
+      "CNH": 3123211231371,
+      "name": "Casarini",
+      "id": 5
     }
   ]
 }
