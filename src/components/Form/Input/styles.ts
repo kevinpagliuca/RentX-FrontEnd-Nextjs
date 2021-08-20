@@ -31,12 +31,12 @@ export const Container = styled.div<ContainerProps>`
       }
     `}
 
-
+ 
   .startIcon {
     position: absolute;
     left: 2rem;
     color: inherit;
-    & ~ input {
+    & ~ input { //proximo no mesmo nivel
       padding-left: 4rem;
     }
 
@@ -48,7 +48,7 @@ export const Container = styled.div<ContainerProps>`
     position: absolute;
     right: 2rem;
     color: inherit;
-    & ~ input {
+    & ~ input { //proximo no mesmo nivel
       padding-right: 4rem;
     }
   }

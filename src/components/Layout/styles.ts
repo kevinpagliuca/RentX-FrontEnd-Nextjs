@@ -18,6 +18,7 @@ export const Wrapper = styled.div`
   height: 100%;
   position: relative;
   background: var(--gray-50);
+  overflow: hidden;
 
   @media (max-width: 768px) {
     min-height: calc(100vh - 5rem);

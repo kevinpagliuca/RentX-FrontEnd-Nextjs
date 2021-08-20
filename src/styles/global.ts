@@ -75,13 +75,11 @@ export const GlobalStyle = createGlobalStyle`
   &::-webkit-scrollbar-track {
     border-radius: 0;
     background: var(--dark);
-  }
-`;
+  }  
 
-export const Test = styled.div`
-  width: 100%;
-  height: 1200px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  background: yellow;
+  .slick-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+  }
 `;

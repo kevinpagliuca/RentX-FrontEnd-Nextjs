@@ -16,7 +16,7 @@ export const LogoIcon = ({ size, ...rest }: IconsProps) => {
         xmlns="http://www.w3.org/2000/svg"
         {...rest}
       >
-        <g clip-path="url(#clip0)">
+        <g clipPath="url(#clip0)">
           <path
             fillRule="evenodd"
             clipRule="evenodd"
