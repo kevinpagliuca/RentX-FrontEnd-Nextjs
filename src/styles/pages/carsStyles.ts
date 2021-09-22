@@ -6,8 +6,9 @@ export const Container = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
+  max-width: 1200px;
+  min-height: 100vh;
   background: var(--gray-50);
-  overflow: hidden;
 `;
 
 export const Header = styled.header`
@@ -123,11 +124,38 @@ export const Content = styled.div`
 `;
 
 export const Aside = styled.aside`
+    padding: 0rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  background-color: blue;
-  height: 100%;
+
+
+  .buttonRent {
+    margin-top:7rem;
+  }
 `;
+
+export const NavigationContainer = styled.div `
+margin-top: 3rem;
+padding: 0rem 5.5rem;
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100%;
+border-bottom: 1px solid var(--gray-300);
+gap: 2rem;
+height: 2.5rem;
+button {
+  font: 400 1.25rem "Archivo", sans-serif;
+  transition: all 0.3s;
+  color: var(--gray-350);
+  height: 100%;
+  white-space: nowrap;
+
+  &.active {
+    font: 600 1.25rem "Archivo", sans-serif;
+    color: var(--gray-450);
+    height: 100%;
+    border-bottom: 2px solid var(--main);
+  }
+}`;

@@ -58,9 +58,6 @@ export const GlobalStyle = createGlobalStyle`
     --gray-500:#47474D;
     
     --dark: #1B1B1F;
-
-
-
   }
 
   &::-webkit-scrollbar {
