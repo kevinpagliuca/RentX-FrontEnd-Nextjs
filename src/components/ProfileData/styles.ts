@@ -1,5 +1,10 @@
 import styled, { css } from "styled-components";
 
+export const ContainerWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -19,14 +24,18 @@ export const ImageContainer = styled.div`
   border-radius: 50%;
   position: relative;
   margin: 0 auto;
-  img {
-    border-radius: 50%;
+
+  .userTxt span{
+    font-size: 2.5rem;
+    font-weight: 500;
   }
-  span {
+
+  span.photoIcon {
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--main);
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.25);
     width: 2.5rem;
     height: 2.5rem;
     position: absolute;
@@ -37,20 +46,21 @@ export const ImageContainer = styled.div`
 `;
 
 export const NavigationContainer = styled.div`
-  padding: 0rem 5.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   border-bottom: 1px solid var(--gray-300);
-  gap: 2rem;
+  gap: 0rem;
   height: 2.5rem;
+
   button {
     font: 400 1.25rem "Archivo", sans-serif;
     transition: all 0.3s;
     color: var(--gray-350);
     height: 100%;
     white-space: nowrap;
+    width: 100%;
 
     &.active {
       font: 600 1.25rem "Archivo", sans-serif;
@@ -66,9 +76,20 @@ export const DataContainer = styled.div`
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
-  button{
-       margin-top: 1rem;
-
+  button {
+    margin-top: 1rem;
   }
+`;
 
+export const DividerRow = styled.div`
+  height: 115%;
+  border: 1px solid var(--gray-300);
+`;
+
+export const ContentAside = styled.div`
+h1{
+  font: 600 1.25rem "Archivo", sans-serif;
+  color: var(--gray-500)
+}
+  
 `;

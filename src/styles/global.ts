@@ -60,6 +60,12 @@ export const GlobalStyle = createGlobalStyle`
     --dark: #1B1B1F;
   }
 
+  .customToast_dark {
+    background: var(--dark) !important;
+    color: var(--gray-100) !important;
+    font: 400 1rem "Inter", sans-serif !important;
+  }
+
   &::-webkit-scrollbar {
     width: 4px;
     height: 4px;

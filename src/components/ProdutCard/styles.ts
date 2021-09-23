@@ -5,7 +5,7 @@ export const Container = styled.div`
   font-family: "Archivo", sans-serif;
   font-style: normal;
   font-weight: 500;
-
+  cursor:pointer;
   max-width: 22.5rem;
   max-height: 18rem;
   background: var(--white);

@@ -17,6 +17,7 @@ import { useMutation } from "react-query";
 import { queryClient } from "../../services/queryClient";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
+import { useAuth } from "../../contexts/AuthContext";
 
 type LoginCredentialsType = {
   email: string;
@@ -29,6 +30,7 @@ const loginFormSchema = yup.object().shape({
 });
 
 export const SignInForm = () => {
+  const { signIn } = useAuth();
   const { formState, control, handleSubmit, watch } = useForm<LoginCredentialsType>({
     resolver: yupResolver(loginFormSchema),
   });
@@ -36,31 +38,17 @@ export const SignInForm = () => {
   const watchEmail = watch("email");
   const watchPassword = watch("password");
 
-  const isLoginValid = watchEmail && watchPassword !== "" && !formState.errors.email && !formState.errors.password ? false : true;
-
-  const userRegister = useMutation(
-    async (user: LoginCredentialsType) => {
-      try {
-        await api.post("/login", user);
-        toast.success("Logado com sucesso!");
-        // alert("Logado com sucesso!");
-      } catch (error) {
-        toast.error(error.message);
-      }
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("users");
-      },
-    }
-  );
+  const isLoginValid =
+    watchEmail && watchPassword !== "" && !formState.errors.email && !formState.errors.password
+      ? false
+      : true;
 
   const onSubmit: SubmitHandler<LoginCredentialsType> = async (values) => {
-    // alert(JSON.stringify(values));
-    await userRegister.mutateAsync(values);
+    // const toastId = toast.dark(`Success`, { autoClose: 2500});
+    // toast.update(toastId, {type: "default"});    
+    await signIn(values);
   };
 
-  console.log(isLoginValid);
   return (
     <FormContainer autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
       <h1>Estamos quase lá.</h1>

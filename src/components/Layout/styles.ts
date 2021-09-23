@@ -34,6 +34,7 @@ export const Content = styled.div`
   background: var(--gray-50);
   padding: 2.5rem 7.5rem;
   overflow: hidden;
+  min-height: 100vh;
 
   @media (max-width: 768px) {
     padding: 1rem 2rem;

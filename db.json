@@ -97,6 +97,14 @@
       "CNH": 3123211231371,
       "name": "Casarini",
       "id": 5
+    },
+    {
+      "email": "kevinpagliuca@fasters.com.br",
+      "password": "$2a$10$q9S4alo6Yzv8mkw29y/h0u2olNQquHagX8JTS9R48VXbIDZDu2TgW",
+      "password_confirmation": "12345678",
+      "CNH": 12345679912,
+      "name": "Kevin Pagliuca",
+      "id": 6
     }
   ]
 }
