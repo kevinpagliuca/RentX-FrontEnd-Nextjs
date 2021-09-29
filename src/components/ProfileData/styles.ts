@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const ContainerWrapper = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ export const ImageContainer = styled.div`
   position: relative;
   margin: 0 auto;
 
-  .userTxt span{
+  .userTxt span {
     font-size: 2.5rem;
     font-weight: 500;
   }
@@ -55,7 +55,7 @@ export const NavigationContainer = styled.div`
   height: 2.5rem;
 
   button {
-    font: 400 1.25rem "Archivo", sans-serif;
+    font: 400 1.25rem 'Archivo', sans-serif;
     transition: all 0.3s;
     color: var(--gray-350);
     height: 100%;
@@ -63,7 +63,7 @@ export const NavigationContainer = styled.div`
     width: 100%;
 
     &.active {
-      font: 600 1.25rem "Archivo", sans-serif;
+      font: 600 1.25rem 'Archivo', sans-serif;
       color: var(--gray-450);
       height: 100%;
       border-bottom: 2px solid var(--main);
@@ -87,9 +87,8 @@ export const DividerRow = styled.div`
 `;
 
 export const ContentAside = styled.div`
-h1{
-  font: 600 1.25rem "Archivo", sans-serif;
-  color: var(--gray-500)
-}
-  
+  h1 {
+    font: 600 1.25rem 'Archivo', sans-serif;
+    color: var(--gray-500);
+  }
 `;

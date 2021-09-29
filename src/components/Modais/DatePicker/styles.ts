@@ -5,9 +5,10 @@ export const ModalContent = styled.div`
   align-items: center;
   flex-direction: column;
   width: 850px;
-  height: 500px;
+  min-height: 500px;
   color: var(--gray-350);
   background: var(--white);
+  border-radius: 8px;
   transition: all 0.3s;
 `;
 
@@ -20,11 +21,12 @@ export const ModalHeader = styled.div`
   background: var(--dark);
   padding: 1.75rem 3rem;
   position: relative;
+  border-radius: 8px 8px 0 0;
 
   > span {
     color: var(--white);
   }
-  
+
   > button {
     position: absolute;
     right: 0;
@@ -32,17 +34,35 @@ export const ModalHeader = styled.div`
     height: 100%;
     font-size: 30px;
     transition: all 0.3s;
-
     &:hover {
       color: var(--main);
     }
   }
 `;
 
-
 export const ModalBody = styled.div`
   display: flex;
-  align-items: center;
+  max-height: 60vh;
   width: 100%;
   gap: 6rem;
+  overflow: auto;
+  border-radius: 0 0 8px 8px;
+  position: relative;
+`;
+
+export const DatePickerContainer = styled.div`
+  position: sticky;
+  top: 1rem;
+  bottom: 1rem;
+  * {
+    font-family: 'Inter';
+  }
+
+  .inputsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+    grid-gap: 1rem;
+  }
 `;

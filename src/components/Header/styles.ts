@@ -1,14 +1,12 @@
-import styled from "styled-components";
-import {darken} from "polished";
+import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const HeaderContainer = styled.div`
   display: flex;
   width: 100%;
-  position: sticky;
-  top: 0;
+  position: fixed;
   max-height: 5rem;
   height: 5rem;
-  width: 100%;
   background: var(--white);
   z-index: 100;
 
@@ -32,7 +30,7 @@ export const HeaderContent = styled.div`
   padding: 1.75rem 7.25rem;
   width: 100%;
   color: var(--gray-500);
-  border-bottom: 1px solid var(--gray-100);  
+  border-bottom: 1px solid var(--gray-100);
 
   div.userHeaderContainer {
     display: flex;
@@ -70,11 +68,11 @@ export const HeaderContent = styled.div`
       font-size: 1rem;
       color: var(--main);
       font-weight: 500;
-      font-family: "Archivo";
+      font-family: 'Archivo';
       transition: all 0.3s;
 
       &:hover {
-        color: ${`${darken(0.1, "#DC1637")}`};
+        color: ${`${darken(0.1, '#DC1637')}`};
       }
     }
   }

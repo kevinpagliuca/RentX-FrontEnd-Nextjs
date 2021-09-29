@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { ButtonBase } from '@material-ui/core';
+import { FiEye, FiEyeOff, FiUser } from 'react-icons/fi';
+import { Controller, useForm } from 'react-hook-form';
+import Avatar from 'react-avatar';
 import {
   Container,
   DataContainer,
@@ -6,25 +11,21 @@ import {
   ContainerWrapper,
   DividerRow,
   ContentAside,
-} from "./styles";
-import { CardCar } from "../CardCar";
-import Image from "next/image";
-import { ButtonBase } from "@material-ui/core";
-import { Input } from "../Form/Input";
-import { Button } from "../Form/Button";
-import { CarIcon, EnvelopeIcon, LockIcon, PhotoIcon } from "../../assets/Icons";
-import { NavigationContainer } from "./styles";
-import { FiEye, FiEyeOff, FiUser } from "react-icons/fi";
-import { Controller, useForm } from "react-hook-form";
-import Avatar from "react-avatar";
-import { useAuth } from "../../contexts/AuthContext";
+  NavigationContainer,
+} from './styles';
+import { CardCar } from '../CardCar';
+import { Input } from '../Form/Input';
+import { Button } from '../Form/Button';
+import { CarIcon, EnvelopeIcon, LockIcon, PhotoIcon } from '../../assets/Icons';
+import { useAuth } from '../../contexts/AuthContext';
+
 export const ProfileData = () => {
   const { user } = useAuth();
   const { control, formState } = useForm();
-  const [activeTab, setActiveTab] = useState<"data" | "changePass">("data");
+  const [activeTab, setActiveTab] = useState<'data' | 'changePass'>('data');
   const [isVisiblePass, setIsVisiblePass] = useState(false);
 
-  function toggleNavigation(tab: "data" | "changePass") {
+  function toggleNavigation(tab: 'data' | 'changePass') {
     setActiveTab(tab);
   }
 
@@ -34,7 +35,13 @@ export const ProfileData = () => {
       <ContainerWrapper>
         <Container>
           <ImageContainer>
-            <Avatar name={user?.name} round={true} size="180" color="var(--main)" className="userTxt" />
+            <Avatar
+              name={user?.name}
+              round
+              size="180"
+              color="var(--main)"
+              className="userTxt"
+            />
             {/* <Image src="/Lambo.png" width={180} height={180} objectFit="cover" /> */}
             <span className="photoIcon">
               <PhotoIcon />
@@ -43,25 +50,25 @@ export const ProfileData = () => {
 
           <NavigationContainer>
             <ButtonBase
-              className={activeTab === "data" ? "active" : undefined}
-              onClick={() => toggleNavigation("data")}
+              className={activeTab === 'data' ? 'active' : undefined}
+              onClick={() => toggleNavigation('data')}
             >
               Dados
             </ButtonBase>
             <ButtonBase
-              className={activeTab === "changePass" ? "active" : undefined}
-              onClick={() => toggleNavigation("changePass")}
+              className={activeTab === 'changePass' ? 'active' : undefined}
+              onClick={() => toggleNavigation('changePass')}
             >
               Trocar Senha
             </ButtonBase>
           </NavigationContainer>
           <DataContainer>
-            {activeTab === "data" ? (
+            {activeTab === 'data' ? (
               <>
                 <Controller
                   control={control}
                   name="name"
-                  render={({ field: { value = "", onChange, ref, name } }) => (
+                  render={({ field: { value = '', onChange, ref, name } }) => (
                     <Input
                       id="name"
                       placeholder="Nome"
@@ -70,7 +77,7 @@ export const ProfileData = () => {
                       name={name}
                       onChange={onChange}
                       ref={ref}
-                      filled={!formState.errors.name && value !== ""}
+                      filled={!formState.errors.name && value !== ''}
                       error={formState.errors.name}
                     />
                   )}
@@ -78,7 +85,7 @@ export const ProfileData = () => {
                 <Controller
                   control={control}
                   name="email"
-                  render={({ field: { value = "", onChange, ref, name } }) => (
+                  render={({ field: { value = '', onChange, ref, name } }) => (
                     <Input
                       id="email"
                       type="email"
@@ -88,7 +95,7 @@ export const ProfileData = () => {
                       name={name}
                       onChange={onChange}
                       ref={ref}
-                      filled={!formState.errors.email && value !== ""}
+                      filled={!formState.errors.email && value !== ''}
                       error={formState.errors.email}
                     />
                   )}
@@ -96,7 +103,7 @@ export const ProfileData = () => {
                 <Controller
                   control={control}
                   name="CNH"
-                  render={({ field: { value = "", onChange, ref, name } }) => (
+                  render={({ field: { value = '', onChange, ref, name } }) => (
                     <Input
                       id="cnh"
                       placeholder="CNH"
@@ -105,7 +112,7 @@ export const ProfileData = () => {
                       name={name}
                       onChange={onChange}
                       ref={ref}
-                      filled={!formState.errors.CNH && value !== ""}
+                      filled={!formState.errors.CNH && value !== ''}
                       error={formState.errors.CNH}
                     />
                   )}
@@ -114,16 +121,18 @@ export const ProfileData = () => {
               </>
             ) : (
               <>
-                {activeTab === "changePass" && (
+                {activeTab === 'changePass' && (
                   <>
                     <Controller
                       control={control}
                       name="password"
-                      render={({ field: { value = "", onChange, ref, name } }) => (
+                      render={({
+                        field: { value = '', onChange, ref, name },
+                      }) => (
                         <Input
                           id="current_password"
                           placeholder="Senha atual"
-                          type={"password"}
+                          type="password"
                           required
                           autoComplete="off"
                           startIcon={<LockIcon />}
@@ -131,7 +140,7 @@ export const ProfileData = () => {
                           name={name}
                           onChange={onChange}
                           ref={ref}
-                          filled={!formState.errors.password && value !== ""}
+                          filled={!formState.errors.password && value !== ''}
                           error={formState.errors.password}
                         />
                       )}
@@ -139,11 +148,13 @@ export const ProfileData = () => {
                     <Controller
                       control={control}
                       name="password"
-                      render={({ field: { value = "", onChange, ref, name } }) => (
+                      render={({
+                        field: { value = '', onChange, ref, name },
+                      }) => (
                         <Input
                           id="password"
                           placeholder="Nova senha"
-                          type={isVisiblePass ? "text" : "password"}
+                          type={isVisiblePass ? 'text' : 'password'}
                           required
                           autoComplete="off"
                           startIcon={<LockIcon />}
@@ -153,14 +164,14 @@ export const ProfileData = () => {
                               id="passwordIcon"
                               onClick={() => setIsVisiblePass(!isVisiblePass)}
                               isVisiblePass={isVisiblePass}
-                              style={{ cursor: "pointer" }}
+                              style={{ cursor: 'pointer' }}
                             />
                           }
                           value={value}
                           name={name}
                           onChange={onChange}
                           ref={ref}
-                          filled={!formState.errors.password && value !== ""}
+                          filled={!formState.errors.password && value !== ''}
                           error={formState.errors.password}
                         />
                       )}
@@ -169,11 +180,13 @@ export const ProfileData = () => {
                     <Controller
                       control={control}
                       name="password_confirmation"
-                      render={({ field: { value = "", onChange, ref, name } }) => (
+                      render={({
+                        field: { value = '', onChange, ref, name },
+                      }) => (
                         <Input
                           id="password_confirmation"
                           placeholder="Repetir senha"
-                          type={isVisiblePass ? "text" : "password"}
+                          type={isVisiblePass ? 'text' : 'password'}
                           required
                           autoComplete="off"
                           startIcon={<LockIcon />}
@@ -183,14 +196,17 @@ export const ProfileData = () => {
                               id="current_password"
                               onClick={() => setIsVisiblePass(!isVisiblePass)}
                               isVisiblePass={isVisiblePass}
-                              style={{ cursor: "pointer" }}
+                              style={{ cursor: 'pointer' }}
                             />
                           }
                           value={value}
                           name={name}
                           onChange={onChange}
                           ref={ref}
-                          filled={!formState.errors.password_confirmation && value !== ""}
+                          filled={
+                            !formState.errors.password_confirmation &&
+                            value !== ''
+                          }
                           error={formState.errors.password_confirmation}
                         />
                       )}

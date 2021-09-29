@@ -1,9 +1,9 @@
-import Image from "next/image";
+import Image from 'next/image';
 // import { Layout } from "../components/Layout";
-import { Layout } from "../components/Layout";
-import { SignUpForm } from "../components/SignUpForm";
+import { Layout } from '../components/Layout';
+import { SignUpForm } from '../components/SignUpForm';
 
-import { Container } from "../styles/pages/registerStyles";
+import { Container } from '../styles/pages/registerStyles';
 export default function RegisterPage() {
   return (
     <Layout title="Cadastro | RentX">

@@ -1,10 +1,16 @@
-import { AxiosError } from "axios";
-import router from "next/router";
-import { destroyCookie, parseCookies, setCookie } from "nookies";
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { api } from "../services/api";
-import { ToastifyCustomMessage } from "../styles/ToastifyCustomMessage";
+import { AxiosError } from 'axios';
+import router from 'next/router';
+import { destroyCookie, parseCookies, setCookie } from 'nookies';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import { toast } from 'react-toastify';
+import { api } from '../services/api';
+import { ToastifyCustomMessage } from '../styles/ToastifyCustomMessage';
 
 type User = {
   CNH: string;
@@ -42,9 +48,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     const {
-      "@rentX:token": token,
-      "@rentX:userId": userId,
-      "@rentX:userData": userData,
+      '@rentX:token': token,
+      '@rentX:userId': userId,
+      '@rentX:userData': userData,
     } = parseCookies();
 
     if (userData && token && userId) {
@@ -67,11 +73,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
           })
           .catch(() => {
             setUser(undefined);
-            destroyCookie(undefined, "@rentX:token");
+            destroyCookie(undefined, '@rentX:token');
           });
       } catch (err) {
         setUser(undefined);
-        destroyCookie(undefined, "@rentX:token");
+        destroyCookie(undefined, '@rentX:token');
         return;
       }
     }
@@ -79,14 +85,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const signIn = async (user: LoginCredentialsType) => {
     try {
-      const { data } = await api.post<SignInResponse>("/login", user);
-      setCookie(undefined, "@rentX:token", data.accessToken, {
+      const { data } = await api.post<SignInResponse>('/login', user);
+      setCookie(undefined, '@rentX:token', data.accessToken, {
         maxAge: 60 * 60 * 24 * 30, // 30 days
-        path: "/",
+        path: '/',
       });
-      setCookie(undefined, "@rentX:userId", String(data.user.id), {
+      setCookie(undefined, '@rentX:userId', String(data.user.id), {
         maxAge: 60 * 60 * 24 * 30, // 30 days
-        path: "/",
+        path: '/',
       });
       const userFormated = {
         CNH: data.user.CNH,
@@ -95,42 +101,45 @@ export function AuthProvider({ children }: AuthProviderProps) {
         id: data.user.id,
       };
       setUser(userFormated);
-      setCookie(undefined, "@rentX:userData", JSON.stringify(userFormated), {
+      setCookie(undefined, '@rentX:userData', JSON.stringify(userFormated), {
         maxAge: 60 * 60 * 24 * 30, // 30 days
-        path: "/",
+        path: '/',
       });
-      api.defaults.headers["Authorization"] = `Bearer ${data.accessToken}`;
-      toast.success(<ToastifyCustomMessage title="Login" message="Logado com sucesso!" />, {
-        autoClose: 2500,
-        className: "customToast_dark",
-      });
-      router.push("/profile");
+      api.defaults.headers['Authorization'] = `Bearer ${data.accessToken}`;
+      toast.success(
+        <ToastifyCustomMessage title="Login" message="Logado com sucesso!" />,
+        {
+          autoClose: 2500,
+          className: 'customToast_dark',
+        }
+      );
+      router.push('/profile');
     } catch (error) {
       let err = error as AxiosError;
       toast.error(`${err?.response?.data || err.message}`, {
         autoClose: 2500,
-        className: "customToast_dark",
+        className: 'customToast_dark',
       });
     }
   };
 
   const signOut = async () => {
     new Promise((resolve, reject) => {
-      destroyCookie(undefined, "@rentX:token");
-      destroyCookie(undefined, "@rentX:userId");
-      destroyCookie(undefined, "@rentX:userData");
+      destroyCookie(undefined, '@rentX:token');
+      destroyCookie(undefined, '@rentX:userId');
+      destroyCookie(undefined, '@rentX:userData');
 
-      const {"@rentX:token": token} = parseCookies();
-      if(!token) {
+      const { '@rentX:token': token } = parseCookies();
+      if (!token) {
         setUser(undefined);
-        router.push("/home");
+        router.push('/home');
         window.location.reload();
         resolve(true);
       } else {
-        reject({message: "Cannot delete cookies!"});
+        reject({ message: 'Cannot delete cookies!' });
       }
-    })
-  }
+    });
+  };
 
   return (
     <AuthContext.Provider

@@ -1,11 +1,11 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-import { Container } from "../styles/pages/authStyles";
-import { SignInForm } from "../components/SignInForm";
+import { Container } from '../styles/pages/authStyles';
+import { SignInForm } from '../components/SignInForm';
 
-import { Layout } from "../components/Layout";
-import { GetServerSideProps } from "next";
-import { parseCookies } from "nookies";
+import { Layout } from '../components/Layout';
+import { GetServerSideProps } from 'next';
+import { parseCookies } from 'nookies';
 export default function Auth() {
   return (
     <Layout title="Login | RentX">
@@ -20,16 +20,16 @@ export default function Auth() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const {"@rentX:token": token} = parseCookies(ctx);
+  const { '@rentX:token': token } = parseCookies(ctx);
 
-  if(!token) {
-    return { props: {} };    
+  if (!token) {
+    return { props: {} };
   }
-  
+
   return {
     redirect: {
-      destination: "/profile",
+      destination: '/profile',
       permanent: false,
-    }
-  }
+    },
+  };
 };

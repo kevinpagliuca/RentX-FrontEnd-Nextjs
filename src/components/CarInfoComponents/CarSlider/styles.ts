@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   img {
@@ -11,7 +11,7 @@ export const Container = styled.div`
     width: 100%;
   }
 
-  @media(max-width:1200px){
+  @media (max-width: 1200px) {
     img {
       width: 100% !important;
     }
@@ -60,7 +60,7 @@ export const SliderFooter = styled.div`
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background:  #aeaeb3;
+        background: #aeaeb3;
       }
     }
   }

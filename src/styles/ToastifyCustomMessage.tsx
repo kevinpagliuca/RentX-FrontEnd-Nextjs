@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 // import { Container } from './styles';
 interface ToastifyCustomMessageProps {
@@ -14,21 +14,22 @@ const Container = styled.div`
 
   strong {
     color: var(--gray-100);
-    font: 600 1rem "Inter", sans-serif !important;
+    font: 600 1rem 'Inter', sans-serif !important;
     margin-bottom: 4px;
   }
 
   p {
     color: var(--gray-100);
-    font: 400 1rem "Inter", sans-serif !important;
-  } 
+    font: 400 1rem 'Inter', sans-serif !important;
+  }
 `;
 
-export const ToastifyCustomMessage = ({ title, message }: ToastifyCustomMessageProps) => {
-  return (
-    <Container>
-      <strong>{title}</strong>
-      <p>{message}</p>
-    </Container>
-  );
-};
+export const ToastifyCustomMessage = ({
+  title,
+  message,
+}: ToastifyCustomMessageProps) => (
+  <Container>
+    <strong>{title}</strong>
+    <p>{message}</p>
+  </Container>
+);

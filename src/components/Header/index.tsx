@@ -1,14 +1,14 @@
-import { FiUser } from "react-icons/fi";
-import Link from "next/link";
-import { ButtonBase } from "@material-ui/core";
-import { HeaderContainer, HeaderContent } from "./styles";
-import { useAuth } from "../../contexts/AuthContext";
-import Avatar from "react-avatar";
+import { FiUser } from 'react-icons/fi';
+import Link from 'next/link';
+import { ButtonBase } from '@material-ui/core';
+import { HeaderContainer, HeaderContent } from './styles';
+import { useAuth } from '../../contexts/AuthContext';
+import Avatar from 'react-avatar';
 
 export const Header = () => {
   const { isAuthenticated, user, signOut } = useAuth();
   async function handleLogout() {
-    await signOut()
+    await signOut();
   }
   return (
     <HeaderContainer>
@@ -26,11 +26,11 @@ export const Header = () => {
         ) : (
           <div className="userHeaderContainer">
             <Link href="/profile">
-              <a className="userName">{user.name}</a>
+              <a className="userName">{user?.name}</a>
             </Link>
             <button onClick={handleLogout}>Sair</button>
             <Avatar
-              name={user.name}
+              name={user?.name}
               round={true}
               size="48"
               className="userTxt"

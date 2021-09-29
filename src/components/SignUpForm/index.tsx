@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import React, { useState } from 'react';
+import { Controller, useForm, SubmitHandler } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import { FiEye, FiEyeOff, FiUser } from "react-icons/fi";
-import { CarIcon, EnvelopeIcon, LockIcon } from "../../assets/Icons";
+import { FiEye, FiEyeOff, FiUser } from 'react-icons/fi';
+import { useMutation } from 'react-query';
+import { toast } from 'react-toastify';
+import { CarIcon, EnvelopeIcon, LockIcon } from '../../assets/Icons';
 
-import { Button } from "../Form/Button";
-import { Input } from "../Form/Input";
+import { Button } from '../Form/Button';
+import { Input } from '../Form/Input';
 
-import { FormContainer } from "./styles";
-import { SubmitHandler } from "react-hook-form";
-import { useMutation } from "react-query";
-import { queryClient } from "../../services/queryClient";
-import { api } from "../../services/api";
-import { toast } from "react-toastify";
-import { AccountCreateModal } from "../Modais/AccountCreate";
+import { FormContainer } from './styles';
+import { queryClient } from '../../services/queryClient';
+import { api } from '../../services/api';
+import { AccountCreateModal } from '../Modais/AccountCreate';
+import { AxiosError } from 'axios';
 
 type RegisterData = {
   name: string;
@@ -30,7 +30,9 @@ const loginFormSchema = yup.object().shape({
   name: yup.string().required(),
   CNH: yup.number().required(),
   password: yup.string().required().min(6).max(14),
-  password_confirmation: yup.string().oneOf([null, yup.ref("password")], "Passwords must match"),
+  password_confirmation: yup
+    .string()
+    .oneOf([null, yup.ref('password')], 'Passwords must match'),
 });
 
 export const SignUpForm = () => {
@@ -46,16 +48,16 @@ export const SignUpForm = () => {
   const userRegister = useMutation(
     async (user: RegisterData) => {
       try {
-        await api.post("/register", user);
-        toast.success("Registrado com sucesso!");
+        await api.post('/register', user);
+        toast.success('Registrado com sucesso!');
         setModalIsOpen(true);
-      } catch (error) {
+      } catch (error: any) {
         toast.error(error.message);
       }
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries("users");
+        queryClient.invalidateQueries('users');
       },
     }
   );
@@ -69,10 +71,11 @@ export const SignUpForm = () => {
       <h1>Estamos quase lá.</h1>
       <p>Faça seu login para começar uma experiência incrível.</p>
       <div>
+        <button onClick={() => setModalIsOpen(true)}>abrir modal</button>
         <Controller
           control={control}
           name="name"
-          render={({ field: { value = "", onChange, ref, name } }) => (
+          render={({ field: { value = '', onChange, ref, name } }) => (
             <Input
               id="name"
               placeholder="Nome"
@@ -81,7 +84,7 @@ export const SignUpForm = () => {
               name={name}
               onChange={onChange}
               ref={ref}
-              filled={!formState.errors.name && value !== ""}
+              filled={!formState.errors.name && value !== ''}
               error={formState.errors.name}
             />
           )}
@@ -90,7 +93,7 @@ export const SignUpForm = () => {
         <Controller
           control={control}
           name="email"
-          render={({ field: { value = "", onChange, ref, name } }) => (
+          render={({ field: { value = '', onChange, ref, name } }) => (
             <Input
               id="email"
               type="email"
@@ -100,7 +103,7 @@ export const SignUpForm = () => {
               name={name}
               onChange={onChange}
               ref={ref}
-              filled={!formState.errors.email && value !== ""}
+              filled={!formState.errors.email && value !== ''}
               error={formState.errors.email}
             />
           )}
@@ -109,7 +112,7 @@ export const SignUpForm = () => {
         <Controller
           control={control}
           name="CNH"
-          render={({ field: { value = "", onChange, ref, name } }) => (
+          render={({ field: { value = '', onChange, ref, name } }) => (
             <Input
               id="cnh"
               placeholder="CNH"
@@ -118,7 +121,7 @@ export const SignUpForm = () => {
               name={name}
               onChange={onChange}
               ref={ref}
-              filled={!formState.errors.CNH && value !== ""}
+              filled={!formState.errors.CNH && value !== ''}
               error={formState.errors.CNH}
             />
           )}
@@ -127,11 +130,11 @@ export const SignUpForm = () => {
         <Controller
           control={control}
           name="password"
-          render={({ field: { value = "", onChange, ref, name } }) => (
+          render={({ field: { value = '', onChange, ref, name } }) => (
             <Input
               id="password"
               placeholder="Senha"
-              type={isVisiblePass ? "text" : "password"}
+              type={isVisiblePass ? 'text' : 'password'}
               required
               autoComplete="off"
               startIcon={<LockIcon />}
@@ -147,7 +150,7 @@ export const SignUpForm = () => {
               name={name}
               onChange={onChange}
               ref={ref}
-              filled={!formState.errors.password && value !== ""}
+              filled={!formState.errors.password && value !== ''}
               error={formState.errors.password}
             />
           )}
@@ -156,11 +159,11 @@ export const SignUpForm = () => {
         <Controller
           control={control}
           name="password_confirmation"
-          render={({ field: { value = "", onChange, ref, name } }) => (
+          render={({ field: { value = '', onChange, ref, name } }) => (
             <Input
               id="password"
               placeholder="Repetir senha"
-              type={isVisiblePass ? "text" : "password"}
+              type={isVisiblePass ? 'text' : 'password'}
               required
               autoComplete="off"
               startIcon={<LockIcon />}
@@ -168,7 +171,7 @@ export const SignUpForm = () => {
               name={name}
               onChange={onChange}
               ref={ref}
-              filled={!formState.errors.password_confirmation && value !== ""}
+              filled={!formState.errors.password_confirmation && value !== ''}
               error={formState.errors.password_confirmation}
             />
           )}
@@ -183,7 +186,10 @@ export const SignUpForm = () => {
           Cadastrar
         </Button>
       </div>
-      <AccountCreateModal modalIsOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} />
+      <AccountCreateModal
+        modalIsOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+      />
     </FormContainer>
   );
 };

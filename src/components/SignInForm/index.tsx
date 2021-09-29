@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import Link from "next/link";
-import { Controller, useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { Controller, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import { FiEye, FiEyeOff } from "react-icons/fi";
-import { EnvelopeIcon, LockIcon } from "../../assets/Icons";
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { EnvelopeIcon, LockIcon } from '../../assets/Icons';
 
-import { Button } from "../Form/Button";
-import { Input } from "../Form/Input";
-import { CircularProgress } from "@material-ui/core";
+import { Button } from '../Form/Button';
+import { Input } from '../Form/Input';
+import { CircularProgress } from '@material-ui/core';
 
-import { FormContainer } from "./styles";
-import { SubmitHandler } from "react-hook-form";
-import { useMutation } from "react-query";
-import { queryClient } from "../../services/queryClient";
-import { api } from "../../services/api";
-import { toast } from "react-toastify";
-import { useAuth } from "../../contexts/AuthContext";
+import { FormContainer } from './styles';
+import { SubmitHandler } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import { queryClient } from '../../services/queryClient';
+import { api } from '../../services/api';
+import { toast } from 'react-toastify';
+import { useAuth } from '../../contexts/AuthContext';
 
 type LoginCredentialsType = {
   email: string;
@@ -31,21 +31,25 @@ const loginFormSchema = yup.object().shape({
 
 export const SignInForm = () => {
   const { signIn } = useAuth();
-  const { formState, control, handleSubmit, watch } = useForm<LoginCredentialsType>({
-    resolver: yupResolver(loginFormSchema),
-  });
+  const { formState, control, handleSubmit, watch } =
+    useForm<LoginCredentialsType>({
+      resolver: yupResolver(loginFormSchema),
+    });
   const [isVisiblePass, setIsVisiblePass] = useState(false);
-  const watchEmail = watch("email");
-  const watchPassword = watch("password");
+  const watchEmail = watch('email');
+  const watchPassword = watch('password');
 
   const isLoginValid =
-    watchEmail && watchPassword !== "" && !formState.errors.email && !formState.errors.password
+    watchEmail &&
+    watchPassword !== '' &&
+    !formState.errors.email &&
+    !formState.errors.password
       ? false
       : true;
 
   const onSubmit: SubmitHandler<LoginCredentialsType> = async (values) => {
     // const toastId = toast.dark(`Success`, { autoClose: 2500});
-    // toast.update(toastId, {type: "default"});    
+    // toast.update(toastId, {type: "default"});
     await signIn(values);
   };
 
@@ -58,7 +62,7 @@ export const SignInForm = () => {
         <Controller
           control={control}
           name="email"
-          render={({ field: { value = "", onChange, ref, name } }) => (
+          render={({ field: { value = '', onChange, ref, name } }) => (
             <Input
               id="email"
               type="email"
@@ -68,7 +72,7 @@ export const SignInForm = () => {
               name={name}
               onChange={onChange}
               ref={ref}
-              filled={!formState.errors.email && value !== ""}
+              filled={!formState.errors.email && value !== ''}
               error={formState.errors.email}
             />
           )}
@@ -77,11 +81,11 @@ export const SignInForm = () => {
         <Controller
           control={control}
           name="password"
-          render={({ field: { value = "", onChange, ref, name } }) => (
+          render={({ field: { value = '', onChange, ref, name } }) => (
             <Input
               id="password"
               placeholder="Senha"
-              type={isVisiblePass ? "text" : "password"}
+              type={isVisiblePass ? 'text' : 'password'}
               required
               autoComplete="off"
               startIcon={<LockIcon />}
@@ -97,19 +101,19 @@ export const SignInForm = () => {
               name={name}
               onChange={onChange}
               ref={ref}
-              filled={!formState.errors.password && value !== ""}
+              filled={!formState.errors.password && value !== ''}
               error={formState.errors.password}
             />
           )}
         />
 
-        <Link href="/forget-password">
+        <Link href="/forgotPassword">
           <a className="forgetPassTxt">Esqueci minha senha</a>
         </Link>
 
         <Button
           disabled={isLoginValid}
-          containerClass="loginBtn"
+          containerClass="sendBtn"
           loading={formState.isSubmitting}
           loadingSize={25}
         >

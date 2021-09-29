@@ -1,4 +1,4 @@
-import { SVGAttributes } from "react";
+import { SVGAttributes } from 'react';
 
 interface IconsProps extends SVGAttributes<SVGElement> {
   color?: string;
@@ -10,7 +10,7 @@ export const LogoIcon = ({ size, ...rest }: IconsProps) => {
   return (
     <>
       <svg
-        height={size ? size : "22"}
+        height={size ? size : '22'}
         viewBox="0 0 200 22"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -59,8 +59,8 @@ export const LogoIcon = ({ size, ...rest }: IconsProps) => {
 export const XLogoIcon = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      width={size ? size : "30"}
-      height={size ? size - 10 : "20"}
+      width={size ? size : '30'}
+      height={size ? size - 10 : '20'}
       viewBox="0 0 30 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -79,8 +79,8 @@ export const XLogoIcon = ({ size, ...rest }: IconsProps) => {
 export const HomeIcon = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      width={size ? size : "22"}
-      height={size ? size - 2 : "20"}
+      width={size ? size : '22'}
+      height={size ? size - 2 : '20'}
       viewBox="0 0 22 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -97,8 +97,8 @@ export const HomeIcon = ({ size, ...rest }: IconsProps) => {
 export const CarIcon = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      width={size || "20"}
-      height={size - 2 || "18"}
+      width={size || '20'}
+      height={size ? size - 2 : '18'}
       viewBox="0 0 20 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +115,7 @@ export const CarIcon = ({ size, ...rest }: IconsProps) => {
 export const LeafIcon = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      height={size || "26"}
+      height={size || '26'}
       viewBox="0 0 24 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +132,7 @@ export const LeafIcon = ({ size, ...rest }: IconsProps) => {
 export const LightningIcon = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      height={size || "32"}
+      height={size || '32'}
       viewBox="0 0 28 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -149,7 +149,7 @@ export const LightningIcon = ({ size, ...rest }: IconsProps) => {
 export const WaterIcon = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      height={size || "30"}
+      height={size || '30'}
       viewBox="0 0 24 30"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -166,8 +166,8 @@ export const WaterIcon = ({ size, ...rest }: IconsProps) => {
 export const EnvelopeIcon = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      width={size || "20"}
-      height={size - 2 || "18"}
+      width={size || '20'}
+      height={size ? size - 2 : '18'}
       viewBox="0 0 20 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -184,8 +184,8 @@ export const EnvelopeIcon = ({ size, ...rest }: IconsProps) => {
 export const LockIcon = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      width={size || "18"}
-      height={size + 3 || "21"}
+      width={size || '18'}
+      height={size ? size + 3 : '21'}
       viewBox="0 0 18 21"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -202,8 +202,8 @@ export const LockIcon = ({ size, ...rest }: IconsProps) => {
 export const EyeIcon = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      width={size || "22"}
-      height={size - 4 || "18"}
+      width={size || '22'}
+      height={size ? size - 4 : '18'}
       viewBox="0 0 22 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -220,8 +220,8 @@ export const EyeIcon = ({ size, ...rest }: IconsProps) => {
 export const GreenCheckIcon = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      width={size || "78"}
-      height={size - 22 || "56"}
+      width={size || '78'}
+      height={size ? size - 22 : '56'}
       viewBox="0 0 78 56"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -237,8 +237,8 @@ export const GreenCheckIcon = ({ size, ...rest }: IconsProps) => {
 export const VelocityIcon = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      width={size || "32"}
-      height={size || "32"}
+      width={size || '32'}
+      height={size || '32'}
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -255,8 +255,8 @@ export const VelocityIcon = ({ size, ...rest }: IconsProps) => {
 export const SeilType = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      width={size || "32"}
-      height={size || "32"}
+      width={size || '32'}
+      height={size || '32'}
       viewBox="0 0 24 28"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -273,8 +273,8 @@ export const SeilType = ({ size, ...rest }: IconsProps) => {
 export const Up = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      width={size || "32"}
-      height={size || "32"}
+      width={size || '32'}
+      height={size || '32'}
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -291,8 +291,8 @@ export const Up = ({ size, ...rest }: IconsProps) => {
 export const Exchange = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      width={size || "32"}
-      height={size || "32"}
+      width={size || '32'}
+      height={size || '32'}
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -310,8 +310,8 @@ export const Exchange = ({ size, ...rest }: IconsProps) => {
 export const Peaple = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      width={size || "32"}
-      height={size || "32"}
+      width={size || '32'}
+      height={size || '32'}
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -328,8 +328,8 @@ export const Peaple = ({ size, ...rest }: IconsProps) => {
 export const PowerHorse = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      width={size || "32"}
-      height={size || "32"}
+      width={size || '32'}
+      height={size || '32'}
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -346,8 +346,8 @@ export const PowerHorse = ({ size, ...rest }: IconsProps) => {
 export const PhotoIcon = ({ size, ...rest }: IconsProps) => {
   return (
     <svg
-      width={size || "24"}
-      height={size || "24"}
+      width={size || '24'}
+      height={size || '24'}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -1,8 +1,8 @@
-import CarDetails from "../../components/CarInfoComponents/CarDetails";
-import { CarSlider } from "../../components/CarInfoComponents/CarSlider";
-import { useRouter } from "next/router";
-import { FaChevronLeft } from "react-icons/fa";
-import { Layout } from "../../components/Layout";
+import CarDetails from '../../components/CarInfoComponents/CarDetails';
+import { CarSlider } from '../../components/CarInfoComponents/CarSlider';
+import { useRouter } from 'next/router';
+import { FaChevronLeft } from 'react-icons/fa';
+import { Layout } from '../../components/Layout';
 import {
   Container,
   Aside,
@@ -11,18 +11,20 @@ import {
   HeaderContent,
   NavigationContainer,
   ContentText,
-} from "../../styles/pages/carsStyles";
-import { DatePickerModal } from "../../components/Modais/DatePicker";
-import { ButtonBase } from "@material-ui/core";
-import { Button } from "../../components/Form/Button";
-import { useState } from "react";
+} from '../../styles/pages/carsStyles';
+import { DatePickerModal } from '../../components/Modais/DatePicker';
+import { ButtonBase } from '@material-ui/core';
+import { Button } from '../../components/Form/Button';
+import { useState } from 'react';
 
 export default function CarInfo() {
   const { back } = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const [activeTab, setActiveTab] = useState<"aboultCar" | "period">("aboultCar");
+  const [activeTab, setActiveTab] = useState<'aboultCar' | 'period'>(
+    'aboultCar'
+  );
 
-  function toggleNavigation(tab: "aboultCar" | "period") {
+  function toggleNavigation(tab: 'aboultCar' | 'period') {
     setActiveTab(tab);
   }
 
@@ -48,37 +50,44 @@ export default function CarInfo() {
             <CarDetails />
             <NavigationContainer>
               <ButtonBase
-                className={activeTab === "aboultCar" ? "active" : undefined}
-                onClick={() => toggleNavigation("aboultCar")}
+                className={activeTab === 'aboultCar' ? 'active' : undefined}
+                onClick={() => toggleNavigation('aboultCar')}
               >
                 SOBRE O CARRO
               </ButtonBase>
               <ButtonBase
-                className={activeTab === "period" ? "active" : undefined}
-                onClick={() => toggleNavigation("period")}
+                className={activeTab === 'period' ? 'active' : undefined}
+                onClick={() => toggleNavigation('period')}
               >
                 PERÍODO
               </ButtonBase>
             </NavigationContainer>
-            {activeTab === "aboultCar" && (
+            {activeTab === 'aboultCar' && (
               <ContentText>
                 <p>
-                  Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça
-                  Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar.
+                  Este é automóvel desportivo. Surgiu do lendário touro de lide
+                  indultado na praça Real Maestranza de Sevilla. É um belíssimo
+                  carro para quem gosta de acelerar.
                 </p>
               </ContentText>
             )}
-            {activeTab === "period" && (
+            {activeTab === 'period' && (
               <ContentText>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores sunt repudiandae
-                  ad, vitae eligendi quae dolores labore itaque odio necessitatibus voluptatem
-                  tenetur porro reiciendis corporis. Repellat tempora quaerat quisquam. Illum.
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Maiores sunt repudiandae ad, vitae eligendi quae dolores
+                  labore itaque odio necessitatibus voluptatem tenetur porro
+                  reiciendis corporis. Repellat tempora quaerat quisquam. Illum.
                 </p>
               </ContentText>
             )}
 
-            <Button onClick={() => setIsModalOpen(!isModalOpen)} containerClass="buttonRent">Escolher período do aluguel</Button>
+            <Button
+              onClick={() => setIsModalOpen(!isModalOpen)}
+              containerClass="buttonRent"
+            >
+              Escolher período do aluguel
+            </Button>
           </Aside>
         </Content>
       </Container>

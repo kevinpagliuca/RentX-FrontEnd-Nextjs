@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ export const Content = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  max-width: 1120px;
+  max-width: 1200px;
 `;
 
 export const SideContainer = styled.aside`
@@ -30,7 +30,7 @@ export const SideContainer = styled.aside`
   }
 
   h1 {
-    font-family: "Archivo", sans-serif;
+    font-family: 'Archivo', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 3rem;
@@ -40,7 +40,7 @@ export const SideContainer = styled.aside`
   }
 
   p {
-    font-family: "Inter", sans-serif;
+    font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 1.25rem;

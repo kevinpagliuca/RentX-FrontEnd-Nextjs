@@ -5,22 +5,23 @@ export const ModalContent = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  width: 400px;
+  width: 450px;
   height: 450px;
-  background: url('/imgCross.png') center no-repeat #29292E;
+  border-radius: 8px;
+  background: url('/imgCross.png') center no-repeat #29292e;
   color: var(--gray-350);
-  padding: 4rem 2.5rem; 
+  padding: 4rem 2.5rem;
   transition: all 0.3s;
 
-  h1 { 
+  h1 {
     color: var(--white);
-    font: 600 2.125rem "Archivo", sans-serif;
+    font: 600 2.125rem 'Archivo', sans-serif;
     line-height: 2.5rem;
   }
 
-  p { 
+  p {
     text-align: center;
-    font: 400 1.125rem "inter", sans-serif;
+    font: 400 1.125rem 'inter', sans-serif;
     line-height: 1.875rem;
     color: var(--gray-350);
     width: 100%;
@@ -38,3 +39,5 @@ export const ModalContent = styled.div`
     border: 0;
   }
 `;
+
+export const ModalBackdrop = styled.div``;

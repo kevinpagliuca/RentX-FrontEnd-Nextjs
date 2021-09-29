@@ -1,10 +1,9 @@
-import { Container, ContentFooter } from "./styles";
-import { LeafIcon, LightningIcon, WaterIcon } from "../../assets/Icons";
-import { formatToBRL } from "../../utils/formatToBRL";
-import Image from "next/image";
-import Link from "next/link";
-import { Product } from "../../hooks/useProducts";
-
+import { Container, ContentFooter } from './styles';
+import { LeafIcon, LightningIcon, WaterIcon } from '../../assets/Icons';
+import { formatToBRL } from '../../utils/formatToBRL';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Product } from '../../hooks/useProducts';
 
 interface ProdutsCardProps {
   product: Product;
@@ -27,9 +26,9 @@ export const ProdutCard = ({ product }: ProdutsCardProps) => {
             <h1 className="rentAmount">{formatToBRL(product.value)}</h1>
           </ContentFooter>
           <ContentFooter>
-            {product.type === "leaf" && <LeafIcon />}
-            {product.type === "lightning" && <LightningIcon />}
-            {product.type === "water" && <WaterIcon />}
+            {product.type === 'leaf' && <LeafIcon />}
+            {product.type === 'lightning' && <LightningIcon />}
+            {product.type === 'water' && <WaterIcon />}
           </ContentFooter>
         </footer>
       </Container>

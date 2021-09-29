@@ -1,21 +1,21 @@
-import { ReactNode } from "react";
-import Head from "next/head";
+import { ReactNode } from 'react';
+import Head from 'next/head';
 
 interface LayoutProps {
   title?: string;
   children: ReactNode;
   noHeader?: boolean;
 }
-import { Sidebar } from "../Sidebar";
-import { Header } from "../Header";
+import { Sidebar } from '../Sidebar';
+import { Header } from '../Header';
 
-import { Container, Content, Wrapper } from "./styles";
+import { Container, Content, Wrapper } from './styles';
 export const Layout = ({ title, children, noHeader }: LayoutProps) => {
   return (
     <>
       <Container>
         <Head>
-          <title>{title || "RentX"}</title>
+          <title>{title || 'RentX'}</title>
         </Head>
         <Sidebar />
 

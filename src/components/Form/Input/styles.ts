@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 interface ContainerProps {
   filled?: boolean;
@@ -31,12 +31,13 @@ export const Container = styled.div<ContainerProps>`
       }
     `}
 
- 
+
   .startIcon {
     position: absolute;
     left: 2rem;
     color: inherit;
-    & ~ input { //proximo no mesmo nivel
+    & ~ input {
+      //proximo no mesmo nivel
       padding-left: 4rem;
     }
 
@@ -48,13 +49,14 @@ export const Container = styled.div<ContainerProps>`
     position: absolute;
     right: 2rem;
     color: inherit;
-    & ~ input { //proximo no mesmo nivel
+    & ~ input {
+      //proximo no mesmo nivel
       padding-right: 4rem;
     }
   }
 
   label {
-    font: 400 1rem "Inter", sans-serif;
+    font: 400 1rem 'Inter', sans-serif;
     position: absolute;
     left: 1.5rem;
     color: var(--gray-350);
@@ -78,7 +80,7 @@ export const Container = styled.div<ContainerProps>`
     padding-bottom: 0.75rem;
     padding-right: 1.5rem;
     padding-left: 1.5rem;
-    font: 400 1rem "Inter", sans-serif;
+    font: 400 1rem 'Inter', sans-serif;
     line-height: 1rem;
     color: var(--gray-500);
     transition: all 0.3s;
@@ -87,7 +89,7 @@ export const Container = styled.div<ContainerProps>`
       padding-top: 1.25rem;
     }
 
-    &:not([value=""]) {
+    &:not([value='']) {
       padding-top: 1.25rem;
       & ~ label {
         transform: translateY(-0.75rem);
@@ -102,6 +104,6 @@ export const Container = styled.div<ContainerProps>`
     bottom: 0;
     left: 0;
     color: var(--main);
-    font: 500 .875rem "Archivo", sans-serif;
+    font: 500 0.875rem 'Archivo', sans-serif;
   }
 `;

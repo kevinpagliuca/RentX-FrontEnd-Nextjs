@@ -1,5 +1,17 @@
-import { Container, ContainerIcon, ContainerLabel, ContainerContent } from "./styles";
-import { VelocityIcon, SeilType, Exchange, Up, Peaple, PowerHorse } from "../../../assets/Icons";
+import {
+  Container,
+  ContainerIcon,
+  ContainerLabel,
+  ContainerContent,
+} from './styles';
+import {
+  VelocityIcon,
+  SeilType,
+  Exchange,
+  Up,
+  Peaple,
+  PowerHorse,
+} from '../../../assets/Icons';
 
 export default function CarDetails() {
   return (
@@ -51,7 +63,7 @@ export default function CarDetails() {
 
       <ContainerContent>
         <ContainerIcon>
-          <Exchange  />
+          <Exchange />
         </ContainerIcon>
         <ContainerLabel>
           <p>280 HP</p>

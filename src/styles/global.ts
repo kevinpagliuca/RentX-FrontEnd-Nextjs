@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -40,7 +40,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   :root {
-    --main: #DC1637; 
+    --main: #DC1637;
     --red-50: rgba(220,22,55,0.8);
 
     --green-500: #03B352;
@@ -56,7 +56,7 @@ export const GlobalStyle = createGlobalStyle`
     --gray-400:#7A7A80;
     --gray-450: #41414D;
     --gray-500:#47474D;
-    
+
     --dark: #1B1B1F;
   }
 
@@ -78,11 +78,38 @@ export const GlobalStyle = createGlobalStyle`
   &::-webkit-scrollbar-track {
     border-radius: 0;
     background: var(--dark);
-  }  
+  }
 
   .slick-center {
     display: flex;
     justify-content: center;
-    align-items: center;   
+    align-items: center;
+  }
+`;
+
+export const ModalStyleGlobal = createGlobalStyle`
+  .ReactModal__Overlay {
+    opacity: 0;
+    transition: all .3s;
+
+  &.ReactModal__Overlay--after-open {
+    opacity: 1;
+  }
+
+  }
+  .ReactModal__Content {
+    opacity: 1;
+    transform: translateY(100px);
+    transition: all .3s;
+  }
+
+  .modalContent {
+    margin: 0 auto;
+    width: fit-content;
+    height: fit-content;
+  }
+
+  .ReactModal__Content--after-open {
+    transform: translateY(0);
   }
 `;

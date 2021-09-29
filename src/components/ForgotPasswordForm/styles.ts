@@ -25,31 +25,9 @@ export const FormContainer = styled.form`
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    gap: 0.5rem;
+    gap: 1.5rem;
 
-    #passwordIcon {
-      transition: all 0.3s;
-
-      &:hover {
-        cursor: pointer;
-        color: var(--main);
-      }
-    }
-
-    a.forgetPassTxt {
-      font: 400 1rem 'Inter', sans-serif;
-      color: var(--gray-400);
-      margin: 1rem 0;
-      text-decoration: none;
-      transition: all 0.3s;
-
-      &:hover {
-        color: var(--main);
-        text-decoration: underline;
-      }
-    }
-
-    .loginBtn {
+    .sendBtn {
       margin-bottom: 0.5rem;
     }
   }
