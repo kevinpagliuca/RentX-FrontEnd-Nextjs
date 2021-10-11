@@ -1,10 +1,13 @@
-import { GetServerSideProps } from "next";
-import { ProdutCard } from "../components/ProdutCard";
-import { getAllProducts, useProducts } from "../hooks/useProducts";
-import { Container, TitleContainer, ContainerItems } from "../styles/pages/homeStyles";
-import { Product } from "../hooks/useProducts";
-import { Layout } from "../components/Layout";
-
+import { GetServerSideProps } from 'next';
+import { ProdutCard } from '../components/ProdutCard';
+import { getAllProducts, useProducts } from '../hooks/useProducts';
+import {
+  Container,
+  TitleContainer,
+  ContainerItems,
+} from '../styles/pages/homeStyles';
+import { Product } from '../hooks/useProducts';
+import { Layout } from '../components/Layout';
 
 interface ProdutsCardProps {
   product: Product[];
@@ -19,7 +22,7 @@ export default function Inicio({ product }: ProdutsCardProps) {
     <Layout title="Página Inicial | RentX">
       <Container>
         <TitleContainer>
-          {isFetching && "LOADING"}
+          {isFetching && 'LOADING'}
           <h1>Carros disponíveis</h1>
           <p>Total 12 carros</p>
         </TitleContainer>

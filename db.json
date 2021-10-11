@@ -63,40 +63,19 @@
   "users": [
     {
       "email": "kevin.pagliuca@fasters.com.br",
-      "password": "$2a$10$9wYBMzH3BPUq4nYgcdM64eA/9/BeBVR/DhpMqKCIEsofV0EgSdnDe",
+      "password": "$2a$10$I0QF0Q0dECJyiMrXWvnNju5YqqEhRKjsvD4LtOsWeVaJMH3lzoiAe",
+      "password_confirmation": "12345678",
+      "CNH": 12346787877,
+      "name": "Kevin Pagliuca",
       "id": 1
     },
     {
-      "email": "kevin.pagliuca2@fasters.com.br",
-      "password": "$2a$10$OiIz79x7O9ezb9O8iOeeXe3TBchwd99kmSEFe1LOAjHnJKdDJPg2a",
+      "email": "kaik@teste.com",
+      "password": "$2a$10$az5a3bE466HWHWV72heX0.Idz5No.Wl5AF28UBlhtn87L8vDzbl/q",
       "password_confirmation": "123456",
-      "CNH": 40251443877,
-      "name": "Kevin Pagliuca",
-      "id": 2
-    },
-    {
-      "email": "erick@carro.com",
-      "password": "$2a$10$OIJYVmKiPRc3vjHtfSeOAuVqWTU7I6Jmhx5krrlnkY3FPt5g/MXuy",
-      "password_confirmation": "Ktiauu",
-      "CNH": 323223323,
-      "name": "Erick",
-      "id": 3
-    },
-    {
-      "email": "kaik@carro.com",
-      "password": "$2a$10$2w8Pnt4k3zp8DqIchtE67O3p37OXtrJvlhASBw1jvi/wc4Y0Vwj1m",
-      "password_confirmation": "kaik77",
-      "CNH": 777777777777,
+      "CNH": 3213112123,
       "name": "Kaik",
-      "id": 4
-    },
-    {
-      "email": "Casa@Casa.com",
-      "password": "$2a$10$9U5YiG/3SXewn2gxD8iCru9tYKXYx7Qmz0WDjyhM2kcLb.Tk3VVM6",
-      "password_confirmation": "123456",
-      "CNH": 3123211231371,
-      "name": "Casarini",
-      "id": 5
+      "id": 2
     }
   ]
 }

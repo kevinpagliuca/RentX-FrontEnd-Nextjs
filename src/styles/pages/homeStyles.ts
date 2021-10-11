@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -20,8 +20,6 @@ export const ContainerItems = styled.div`
 
   @media (max-width: 1100px) {
     grid-template-columns: repeat(1, 1fr);
-
-    
   }
 
   @media (min-width: 1680px) {
@@ -38,7 +36,7 @@ export const TitleContainer = styled.div`
   border-bottom: 1px solid var(--gray-300);
 
   h1 {
-    font-family: "Archivo", sans-serif;
+    font-family: 'Archivo', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 2.25rem;
@@ -55,19 +53,19 @@ export const TitleContainer = styled.div`
     text-align: right;
     color: var(--gray-400);
   }
-  
+
   @media (max-width: 768px) {
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 
-   h1{
-     margin-bottom:1rem;
-   }
+    h1 {
+      margin-bottom: 1rem;
+    }
 
-   p{
-     margin-bottom: 1rem;
-   }
+    p {
+      margin-bottom: 1rem;
+    }
   }
 `;

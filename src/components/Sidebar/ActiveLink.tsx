@@ -1,6 +1,6 @@
-import Link, { LinkProps } from "next/link";
-import { useRouter } from "next/router";
-import { cloneElement, ReactElement } from "react";
+import Link, { LinkProps } from 'next/link';
+import { useRouter } from 'next/router';
+import { cloneElement, ReactElement } from 'react';
 
 interface ActiveLinkProps extends LinkProps {
   children: ReactElement;
@@ -31,7 +31,9 @@ export function ActiveLink({
 
   return (
     <Link {...rest}>
-      {cloneElement(children, { className: isActive ? activeClassName : undefined })}
+      {cloneElement(children, {
+        className: isActive ? activeClassName : undefined,
+      })}
     </Link>
   );
 }

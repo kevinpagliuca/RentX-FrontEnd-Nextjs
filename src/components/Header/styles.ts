@@ -1,13 +1,12 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const HeaderContainer = styled.div`
   display: flex;
   width: 100%;
-  position: sticky;
-  top: 0;
+  position: fixed;
   max-height: 5rem;
   height: 5rem;
-  width: 100%;
   background: var(--white);
   z-index: 100;
 
@@ -17,7 +16,6 @@ export const HeaderContainer = styled.div`
     border: 0;
     background: var(--main);
     color: var(--white);
-    
   }
 
   @media (max-width: 768px) {
@@ -34,14 +32,52 @@ export const HeaderContent = styled.div`
   color: var(--gray-500);
   border-bottom: 1px solid var(--gray-100);
 
-  h1 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    line-height: 1.625rem;
-    color: var(--gray-500);
+  div.userHeaderContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.25rem;
+    grid-gap: 0.5rem;
+
+    a.userName {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      font-size: 1rem;
+      font-weight: 600;
+      background: transparent;
+      color: var(--gray-500);
+      position: relative;
+      transition: all 0.3s;
+
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 0;
+      white-space: nowrap;
+      text-transform: uppercase;
+      font-size: 1rem;
+      color: var(--main);
+      font-weight: 500;
+      font-family: 'Archivo';
+      transition: all 0.3s;
+
+      &:hover {
+        color: ${`${darken(0.1, '#DC1637')}`};
+      }
+    }
   }
 
-  strong {
+  a.signInTxt {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,12 +88,6 @@ export const HeaderContent = styled.div`
     color: var(--gray-500);
     position: relative;
     transition: all 0.3s;
-
-    &:hover {
-      cursor: pointer;      
-      text-decoration: underline;
-    }
-   
 
     button {
       margin-left: 1rem;
@@ -73,7 +103,6 @@ export const HeaderContent = styled.div`
     }
   }
 `;
-
 
 export const WithOutHeaderContainer = styled.div`
   display: flex;
@@ -92,7 +121,6 @@ export const WithOutHeaderContainer = styled.div`
     border: 0;
     background: var(--main);
     color: var(--white);
-    
   }
 
   @media (max-width: 768px) {

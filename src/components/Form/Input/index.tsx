@@ -6,9 +6,9 @@ import {
   ReactElement,
   ReactNode,
   useState,
-} from "react";
-import { FieldError } from "react-hook-form";
-import { Container } from "./styles";
+} from 'react';
+import { FieldError } from 'react-hook-form';
+import { Container } from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
@@ -40,12 +40,12 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
     <Container className={containerClassName} filled={filled} error={!!error}>
       {!!startIcon &&
         cloneElement(startIcon, {
-          className: "startIcon",
+          className: 'startIcon',
         })}
 
       {!!endIcon &&
         cloneElement(endIcon, {
-          className: "endIcon",
+          className: 'endIcon',
         })}
 
       <input {...rest} ref={ref} id={id} />

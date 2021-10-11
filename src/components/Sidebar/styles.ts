@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SidebarContainer = styled.div`
   display: flex;
@@ -49,7 +49,7 @@ export const SidebarContainer = styled.div`
         color: var(--white);
 
         &::before {
-          content: "";
+          content: '';
           position: absolute;
           left: 0;
           width: 3px;

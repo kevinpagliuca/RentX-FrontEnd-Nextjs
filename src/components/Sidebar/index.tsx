@@ -1,11 +1,11 @@
-import { ButtonBase } from "@material-ui/core";
-import { FiUser } from "react-icons/fi";
-import { CarIcon, HomeIcon } from "../../assets/Icons";
-import { ActiveLink } from "./ActiveLink";
-import Link from "next/link";
-import { XLogoIcon } from "../../assets/Icons";
+import { ButtonBase } from '@material-ui/core';
+import { FiUser } from 'react-icons/fi';
+import { CarIcon, HomeIcon } from '../../assets/Icons';
+import { ActiveLink } from './ActiveLink';
+import Link from 'next/link';
+import { XLogoIcon } from '../../assets/Icons';
 
-import { SidebarContainer } from "./styles";
+import { SidebarContainer } from './styles';
 
 export const Sidebar = () => {
   return (

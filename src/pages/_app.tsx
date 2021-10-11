@@ -1,19 +1,26 @@
-import { GlobalStyle } from "../styles/global";
-import { QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import { queryClient } from "../services/queryClient";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { AppProps } from 'next/app';
+import { QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { ToastContainer, Flip } from 'react-toastify';
+import { GlobalStyle, ModalStyleGlobal } from '../styles/global';
+import { queryClient } from '../services/queryClient';
+import 'react-toastify/dist/ReactToastify.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { AuthProvider } from '../contexts/AuthContext';
 
-function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <GlobalStyle />
-      <ReactQueryDevtools />
-      <Component {...pageProps} />
-      <ToastContainer />
+      <AuthProvider>
+        {/* <ConfigProvider cache={cache}> */}
+        <GlobalStyle />
+        <ModalStyleGlobal />
+        <ReactQueryDevtools />
+        <Component {...pageProps} />
+        <ToastContainer newestOnTop transition={Flip} position="top-right" />
+        {/* </ConfigProvider> */}
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
-
-export default MyApp;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const FormContainer = styled.form`
   display: flex;
@@ -8,14 +8,14 @@ export const FormContainer = styled.form`
   width: 100%;
 
   h1 {
-    font: 600 2.25rem "Archivo", sans-serif;
+    font: 600 2.25rem 'Archivo', sans-serif;
     color: var(--gray-450);
     margin-bottom: 1.5rem;
   }
 
   p {
     max-width: 18.75rem;
-    font: 400 1rem "Inter", sans-serif;
+    font: 400 1rem 'Inter', sans-serif;
     color: var(--gray-400);
     margin-bottom: 2.5rem;
   }
@@ -37,7 +37,7 @@ export const FormContainer = styled.form`
     }
 
     a.forgetPassTxt {
-      font: 400 1rem "Inter", sans-serif;
+      font: 400 1rem 'Inter', sans-serif;
       color: var(--gray-400);
       margin: 1rem 0;
       text-decoration: none;

@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -40,7 +40,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   :root {
-    --main: #DC1637; 
+    --main: #DC1637;
     --red-50: rgba(220,22,55,0.8);
 
     --green-500: #03B352;
@@ -56,11 +56,14 @@ export const GlobalStyle = createGlobalStyle`
     --gray-400:#7A7A80;
     --gray-450: #41414D;
     --gray-500:#47474D;
-    
+
     --dark: #1B1B1F;
+  }
 
-
-
+  .customToast_dark {
+    background: var(--dark) !important;
+    color: var(--gray-100) !important;
+    font: 400 1rem "Inter", sans-serif !important;
   }
 
   &::-webkit-scrollbar {
@@ -76,12 +79,37 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 0;
     background: var(--dark);
   }
+
+  .slick-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
-export const Test = styled.div`
-  width: 100%;
-  height: 1200px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  background: yellow;
+export const ModalStyleGlobal = createGlobalStyle`
+  .ReactModal__Overlay {
+    opacity: 0;
+    transition: all .3s;
+
+  &.ReactModal__Overlay--after-open {
+    opacity: 1;
+  }
+
+  }
+  .ReactModal__Content {
+    opacity: 1;
+    transform: translateY(100px);
+    transition: all .3s;
+  }
+
+  .modalContent {
+    margin: 0 auto;
+    width: fit-content;
+    height: fit-content;
+  }
+
+  .ReactModal__Content--after-open {
+    transform: translateY(0);
+  }
 `;

@@ -1,41 +1,52 @@
-import router from "next/router";
-import React from "react";
+import router from 'next/router';
+import React from 'react';
 
-import { ButtonBase } from "@material-ui/core";
-import Modal, { Styles } from "react-modal";
+import { ButtonBase, Grow } from '@material-ui/core';
+import Modal, { Styles } from 'react-modal';
 
-import { GreenCheckIcon } from "../../../assets/Icons";
+import { GreenCheckIcon } from '../../../assets/Icons';
+
+import { ModalContent } from './styles';
 
 const customStyles: Styles = {
   content: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     zIndex: 1100,
-    height: "100%",
+    margin: '0 auto',
   },
   overlay: {
     zIndex: 1000,
-    background: "rgba(0, 0, 0, 0.4)",
+    background: 'rgba(0, 0, 0, 0.4)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 };
 
-Modal.setAppElement("#__next");
+Modal.setAppElement('#__next');
+interface ModalProps {
+  modalIsOpen: boolean;
+  onRequestClose: () => void;
+}
 
-import { ModalContent } from "./styles";
-export const AccountCreateModal = ({ modalIsOpen, onRequestClose }) => {
-
+export const AccountCreateModal = ({
+  modalIsOpen,
+  onRequestClose,
+}: ModalProps) => {
   function toggleOk() {
     onRequestClose();
-    router.push("/auth");
+    // router.push('/auth');
   }
   return (
     <Modal
       isOpen={modalIsOpen}
       onRequestClose={onRequestClose}
+      shouldCloseOnOverlayClick
       style={customStyles}
       bodyOpenClassName="modalOpen"
-      className="register_success"
+      className="modalContent"
     >
       <ModalContent>
         <GreenCheckIcon />

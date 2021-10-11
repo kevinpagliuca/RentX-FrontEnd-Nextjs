@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { darken } from "polished";
+import styled, { css } from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -11,14 +11,14 @@ export const Container = styled.div`
 `;
 
 type ButtonComponentProps = {
-  variant?: "transparent" | "red" | "green" | undefined;
+  variant?: 'transparent' | 'red' | 'green' | undefined;
 };
 
 export const ButtonComponent = styled.button<ButtonComponentProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  font: 500 1.125rem "Inter", sans-serif;
+  font: 500 1.125rem 'Inter', sans-serif;
   line-height: 1.375rem;
   padding: 1.325px 5rem;
   background: var(--main);
@@ -31,7 +31,7 @@ export const ButtonComponent = styled.button<ButtonComponentProps>`
   transition: all 0.3s;
 
   ${(props) =>
-    props.variant === "transparent" &&
+    props.variant === 'transparent' &&
     css`
       background: transparent;
       border-color: var(--gray-300);
@@ -54,6 +54,6 @@ export const ButtonComponent = styled.button<ButtonComponentProps>`
   }  mesmo nivel*/
 
   &:not(:disabled):hover {
-    background: ${darken(0.2, "#DC1637")};
+    background: ${darken(0.2, '#DC1637')};
   }
 `;
