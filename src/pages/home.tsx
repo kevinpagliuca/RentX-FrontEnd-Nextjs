@@ -37,7 +37,7 @@ export default function Inicio({ product }: ProdutsCardProps) {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   // const apiServer = setupAPI(ctx);
   // const response = await apiServer.get("products");
-  const res = await getAllProducts();
+  const res = await getAllProducts(ctx);
 
   return {
     props: {
