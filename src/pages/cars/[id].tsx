@@ -20,11 +20,9 @@ import { useState } from 'react';
 export default function CarInfo() {
   const { back } = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const [activeTab, setActiveTab] = useState<'aboultCar' | 'period'>(
-    'aboultCar'
-  );
+  const [activeTab, setActiveTab] = useState<'about' | 'period'>('about');
 
-  function toggleNavigation(tab: 'aboultCar' | 'period') {
+  function toggleNavigation(tab: 'about' | 'period') {
     setActiveTab(tab);
   }
 
@@ -50,8 +48,8 @@ export default function CarInfo() {
             <CarDetails />
             <NavigationContainer>
               <ButtonBase
-                className={activeTab === 'aboultCar' ? 'active' : undefined}
-                onClick={() => toggleNavigation('aboultCar')}
+                className={activeTab === 'about' ? 'active' : undefined}
+                onClick={() => toggleNavigation('about')}
               >
                 SOBRE O CARRO
               </ButtonBase>
@@ -62,7 +60,7 @@ export default function CarInfo() {
                 PERÍODO
               </ButtonBase>
             </NavigationContainer>
-            {activeTab === 'aboultCar' && (
+            {activeTab === 'about' && (
               <ContentText>
                 <p>
                   Este é automóvel desportivo. Surgiu do lendário touro de lide

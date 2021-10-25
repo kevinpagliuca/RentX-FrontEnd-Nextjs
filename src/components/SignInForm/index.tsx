@@ -14,8 +14,8 @@ import { CircularProgress } from '@material-ui/core';
 import { FormContainer } from './styles';
 import { SubmitHandler } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import { queryClient } from '../../services/queryClient';
-import { api } from '../../services/api';
+import { queryClient } from '../../services/reactQuery/queryClient';
+import { api } from '../../services/client';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../contexts/AuthContext';
 

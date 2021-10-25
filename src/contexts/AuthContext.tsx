@@ -9,7 +9,7 @@ import {
   useState,
 } from 'react';
 import { toast } from 'react-toastify';
-import { api } from '../services/api';
+import { api } from '../services/client';
 import { ToastifyCustomMessage } from '../styles/ToastifyCustomMessage';
 
 type User = {

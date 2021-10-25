@@ -42,6 +42,10 @@ export const TitleContainer = styled.div`
     font-size: 2.25rem;
     line-height: 2.438rem;
     color: var(--gray-500);
+
+    button {
+      margin-left: 1rem;
+    }
   }
 
   p {

@@ -44,10 +44,30 @@ export const ModalBody = styled.div`
   display: flex;
   max-height: 60vh;
   width: 100%;
-  gap: 6rem;
   overflow: auto;
   border-radius: 0 0 8px 8px;
   position: relative;
+  padding: 0 1rem;
+
+  /* .MuiButtonBase-root.MuiPickersDay-root.MuiDateRangePickerDay-day {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .MuiTypography-root.MuiTypography-caption {
+    width: 42px !important;
+    height: 42px !important;
+  } */
+
+  .rangeDateInput {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 256px;
+    margin-left: auto;
+  }
 `;
 
 export const DatePickerContainer = styled.div`

@@ -12,8 +12,8 @@ import { Button } from '../Form/Button';
 import { Input } from '../Form/Input';
 
 import { FormContainer } from './styles';
-import { queryClient } from '../../services/queryClient';
-import { api } from '../../services/api';
+import { queryClient } from '../../services/reactQuery/queryClient';
+import { api } from '../../services/client';
 import { AccountCreateModal } from '../Modais/AccountCreate';
 import { AxiosError } from 'axios';
 

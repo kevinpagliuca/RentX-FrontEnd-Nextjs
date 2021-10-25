@@ -7,14 +7,14 @@ export const CarContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 37.4rem;
+
   height: 12.5rem;
   background-color: var(--white);
   .divImg {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 300px;
+
     /* padding-left: 50px; */
   }
 `;
@@ -50,7 +50,7 @@ export const ContentBottom = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 37.5rem;
+
   height: 3, 5rem;
   border-color: var(--gray-400);
   background-color: var(--white);
@@ -65,8 +65,5 @@ export const ContentBottom = styled.div`
   #p {
     font: 500, 1.75rem 'Archivo', sans-serif;
     padding: 0.75rem;
-  }
-  .colorIcon {
-    color: #000;
   }
 `;

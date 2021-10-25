@@ -8,6 +8,7 @@ import {
   useState,
 } from 'react';
 import { FieldError } from 'react-hook-form';
+import { IconType } from 'react-icons';
 import { Container } from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {

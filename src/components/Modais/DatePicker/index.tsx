@@ -1,13 +1,11 @@
-import React from 'react';
-import TextField from '@material-ui/core/TextField';
-
-import StaticDateRangePicker from '@material-ui/lab/StaticDateRangePicker';
-import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
-import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
+import React, { useEffect, useState } from 'react';
 import Locale from 'date-fns/locale/pt-BR';
-import Modal, { Styles } from 'react-modal';
 
-import { ButtonBase } from '@material-ui/core';
+import { TextField, ButtonBase } from '@material-ui/core';
+import { StaticDateRangePicker, LocalizationProvider } from '@material-ui/lab';
+
+import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+
 import { FiX } from 'react-icons/fi';
 import {
   ModalContent,
@@ -15,6 +13,8 @@ import {
   ModalBody,
   DatePickerContainer,
 } from './styles';
+import Modal, { Styles } from 'react-modal';
+import { Button } from 'components/Form/Button';
 
 const customStyles: Styles = {
   content: {
@@ -44,7 +44,14 @@ export const DatePickerModal = ({
   modalIsOpen,
   onRequestClose,
 }: ModalProps) => {
-  const [value, setValue] = React.useState<any>([null, null]);
+  const [value, setValue] = useState<any>([null, null]);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+
+  useEffect(() => {
+    if (!!value[0]) setStartDate(new Date(value[0]).toLocaleDateString());
+    if (!!value[1]) setEndDate(new Date(value[1]).toLocaleDateString());
+  }, [value]);
 
   return (
     <Modal
@@ -67,19 +74,21 @@ export const DatePickerModal = ({
           <DatePickerContainer>
             <LocalizationProvider dateAdapter={AdapterDateFns} locale={Locale}>
               <StaticDateRangePicker
-                displayStaticWrapperAs="mobile"
+                displayStaticWrapperAs="desktop"
                 disablePast
                 startText="Início"
                 endText="Final"
-                toolbarTitle="Selecione as datas"
+                toolbarTitle="Selecione o período"
+                showToolbar
                 calendars={1}
+                // toolbarFormat="MM/yy"
                 value={value}
                 onChange={(newValue) => {
                   setValue(newValue);
                 }}
                 renderInput={(startProps, endProps) => (
                   <div className="inputsContainer">
-                    {console.log(startProps, endProps)}
+                    {console.log(startProps)}
                     <TextField {...startProps} />
                     <TextField {...endProps} />
                   </div>
@@ -88,53 +97,13 @@ export const DatePickerModal = ({
             </LocalizationProvider>
           </DatePickerContainer>
 
-          <div>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
-            <h1>teste</h1>
+          <div className="rangeDateInput">
+            <span>DE</span>
+            <TextField variant="filled" value={startDate} />
+            <span>ATÉ</span>
+            <TextField variant="filled" value={endDate} />
+
+            <Button>Confirmar</Button>
           </div>
         </ModalBody>
       </ModalContent>
