@@ -1,15 +1,17 @@
 import React from 'react';
+import { ProfileSchedules } from 'components/ProfileComponents/ProfileSchedules';
 import { Layout } from '../components/Layout';
-import { ProfileData } from '../components/ProfileData';
-import { Container } from '../styles/pages/profileStyles';
-//  import { Container } from './styles';
+import { ProfileUserData } from '../components/ProfileComponents/ProfileUserData';
+
+import * as S from '../styles/pages/profileStyles';
 
 export default function Profiles() {
   return (
     <Layout title="Profile | RentX">
-      <Container>
-        <ProfileData />
-      </Container>
+      <S.Container>
+        <ProfileUserData />
+        <ProfileSchedules />
+      </S.Container>
     </Layout>
   );
 }

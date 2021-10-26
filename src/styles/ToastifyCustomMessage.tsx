@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// import { Container } from './styles';
 interface ToastifyCustomMessageProps {
   title: string;
   message: string;

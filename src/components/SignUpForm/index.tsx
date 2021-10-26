@@ -15,7 +15,6 @@ import { FormContainer } from './styles';
 import { queryClient } from '../../services/reactQuery/queryClient';
 import { api } from '../../services/client';
 import { AccountCreateModal } from '../Modais/AccountCreate';
-import { AxiosError } from 'axios';
 
 type RegisterData = {
   name: string;
@@ -71,7 +70,6 @@ export const SignUpForm = () => {
       <h1>Estamos quase lá.</h1>
       <p>Faça seu login para começar uma experiência incrível.</p>
       <div>
-        <button onClick={() => setModalIsOpen(true)}>abrir modal</button>
         <Controller
           control={control}
           name="name"

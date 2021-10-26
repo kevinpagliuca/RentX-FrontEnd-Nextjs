@@ -6,6 +6,7 @@ import { FiUser } from 'react-icons/fi';
 type FormValues = {
   id: string;
   name: 'name' | 'email' | 'CNH';
+  type: 'text' | 'email';
   placeholder?: string;
   StartIcon: IconType;
   iconSize?: number;
@@ -17,6 +18,7 @@ export const formValues: FormValues[] = [
     name: 'name',
     placeholder: 'Nome completo',
     StartIcon: FiUser,
+    type: 'text',
     iconSize: 24,
   },
   {
@@ -24,11 +26,13 @@ export const formValues: FormValues[] = [
     name: 'email',
     placeholder: 'Email',
     StartIcon: EnvelopeIcon as IconType,
+    type: 'email',
   },
   {
     id: '3',
     name: 'CNH',
     placeholder: 'CNH',
+    type: 'text',
     StartIcon: CarIcon as IconType,
   },
 ];

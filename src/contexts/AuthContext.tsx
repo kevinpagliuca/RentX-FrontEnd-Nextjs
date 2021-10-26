@@ -1,6 +1,3 @@
-import { AxiosError } from 'axios';
-import router from 'next/router';
-import { destroyCookie, parseCookies, setCookie } from 'nookies';
 import {
   createContext,
   ReactNode,
@@ -8,7 +5,11 @@ import {
   useEffect,
   useState,
 } from 'react';
+import router from 'next/router';
+import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
+import { destroyCookie, parseCookies, setCookie } from 'nookies';
+
 import { api } from '../services/client';
 import { ToastifyCustomMessage } from '../styles/ToastifyCustomMessage';
 

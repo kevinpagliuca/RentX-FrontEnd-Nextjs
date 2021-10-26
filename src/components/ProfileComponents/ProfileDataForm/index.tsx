@@ -1,15 +1,32 @@
+import React, { useEffect } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from 'components/Form/Button';
 import { Input } from 'components/Form/Input';
+import { useAuth } from 'contexts/AuthContext';
 import { Controller, useForm } from 'react-hook-form';
+import { UpdateProfileSchema } from 'shared/validators';
 import { formValues } from './formValues';
 
 export const ProfileDataForm = () => {
+  const { user } = useAuth();
   const {
     control,
     formState: { errors },
-  } = useForm();
+    reset,
+  } = useForm({
+    resolver: yupResolver(UpdateProfileSchema),
+  });
+
+  useEffect(() => {
+    reset({
+      name: user?.name,
+      CNH: user?.CNH,
+      email: user?.email,
+    });
+  }, [user]);
+
   return (
-    <>
+    <React.Fragment>
       {formValues.map(({ StartIcon, ...item }) => (
         <Controller
           name={item.name}
@@ -18,7 +35,7 @@ export const ProfileDataForm = () => {
             <Input
               id={item.name}
               placeholder={item.placeholder}
-              type="text"
+              type={item.type}
               startIcon={<StartIcon size={item?.iconSize} />}
               value={value}
               onChange={onChange}
@@ -29,6 +46,6 @@ export const ProfileDataForm = () => {
         />
       ))}
       <Button>Salvar alterações</Button>
-    </>
+    </React.Fragment>
   );
 };

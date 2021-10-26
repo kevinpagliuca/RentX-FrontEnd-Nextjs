@@ -9,21 +9,21 @@ interface LayoutProps {
 import { Sidebar } from '../Sidebar';
 import { Header } from '../Header';
 
-import { Container, Content, Wrapper } from './styles';
+import * as S from './styles';
 export const Layout = ({ title, children, noHeader }: LayoutProps) => {
   return (
     <>
-      <Container>
+      <S.Container>
         <Head>
           <title>{title || 'RentX'}</title>
         </Head>
         <Sidebar />
 
-        <Wrapper>
+        <S.Wrapper>
           {!noHeader && <Header />}
-          <Content>{children}</Content>
-        </Wrapper>
-      </Container>
+          <S.Content>{children}</S.Content>
+        </S.Wrapper>
+      </S.Container>
       {/* <footer style={{ minHeight: "100vh", width: "100%", background: "#000" }}></footer> */}
     </>
   );
