@@ -5,7 +5,11 @@ import { HeaderContainer, HeaderContent } from './styles';
 import { useAuth } from '../../contexts/AuthContext';
 import Avatar from 'react-avatar';
 
-export const Header = () => {
+interface HeaderProps {
+  headerTitle?: string;
+}
+
+export const Header = ({ headerTitle }: HeaderProps) => {
   const { isAuthenticated, user, signOut } = useAuth();
   async function handleLogout() {
     await signOut();
@@ -13,7 +17,7 @@ export const Header = () => {
   return (
     <HeaderContainer>
       <HeaderContent>
-        <h1>Início</h1>
+        <h1>{headerTitle || 'Início'}</h1>
         {!isAuthenticated ? (
           <Link href="/auth">
             <a className="signInTxt">

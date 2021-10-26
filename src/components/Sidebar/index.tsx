@@ -1,15 +1,22 @@
-import { ButtonBase } from '@material-ui/core';
-import { FiUser } from 'react-icons/fi';
-import { CarIcon, HomeIcon } from '../../assets/Icons';
-import { ActiveLink } from './ActiveLink';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { XLogoIcon } from '../../assets/Icons';
+import { ButtonBase } from '@material-ui/core';
 
-import { SidebarContainer } from './styles';
+import { FiUser } from 'react-icons/fi';
+import { CarIcon, HomeIcon, XLogoIcon } from '../../assets/Icons';
+import { ActiveLink } from './ActiveLink';
+
+import * as S from './styles';
+import { useAuth } from 'contexts/AuthContext';
 
 export const Sidebar = () => {
+  const { asPath } = useRouter();
+  const { isAuthenticated } = useAuth();
+  const userPaths = ['/auth', '/register', '/profile'];
+
   return (
-    <SidebarContainer>
+    <S.SidebarContainer>
       <Link href="/" passHref>
         <ButtonBase className="buttonLink">
           <XLogoIcon />
@@ -26,12 +33,18 @@ export const Sidebar = () => {
             <CarIcon />
           </ButtonBase>
         </ActiveLink>
-        <ActiveLink activeClassName="active" href="/auth">
+        <ActiveLink
+          activeClassName="active"
+          aditionalClassName={
+            userPaths.includes(asPath) ? 'activated' : undefined
+          }
+          href={isAuthenticated ? '/profile' : '/auth'}
+        >
           <ButtonBase>
             <FiUser size={24} />
           </ButtonBase>
         </ActiveLink>
       </nav>
-    </SidebarContainer>
+    </S.SidebarContainer>
   );
 };

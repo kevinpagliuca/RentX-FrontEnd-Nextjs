@@ -3,6 +3,7 @@ import Head from 'next/head';
 
 interface LayoutProps {
   title?: string;
+  headerTitle?: string;
   children: ReactNode;
   noHeader?: boolean;
 }
@@ -10,7 +11,12 @@ import { Sidebar } from '../Sidebar';
 import { Header } from '../Header';
 
 import * as S from './styles';
-export const Layout = ({ title, children, noHeader }: LayoutProps) => {
+export const Layout = ({
+  title,
+  headerTitle,
+  children,
+  noHeader,
+}: LayoutProps) => {
   return (
     <>
       <S.Container>
@@ -20,11 +26,13 @@ export const Layout = ({ title, children, noHeader }: LayoutProps) => {
         <Sidebar />
 
         <S.Wrapper>
-          {!noHeader && <Header />}
+          {!noHeader && <Header headerTitle={headerTitle} />}
           <S.Content>{children}</S.Content>
         </S.Wrapper>
       </S.Container>
-      {/* <footer style={{ minHeight: "100vh", width: "100%", background: "#000" }}></footer> */}
+      {/* <footer
+        style={{ minHeight: '100vh', width: '100%', background: '#000' }}
+      /> */}
     </>
   );
 };

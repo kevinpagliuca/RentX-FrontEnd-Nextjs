@@ -42,6 +42,7 @@ export const GlobalStyle = createGlobalStyle`
   :root {
     --main: #DC1637;
     --red-50: rgba(220,22,55,0.8);
+    --light-red: #fdedef;
 
     --green-500: #03B352;
     --white:#FFFFFF;

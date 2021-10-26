@@ -44,7 +44,8 @@ export const SidebarContainer = styled.div`
         margin-top: 1rem;
       }
 
-      &.active {
+      &.active,
+      &.activated {
         background: var(--black);
         color: var(--white);
 

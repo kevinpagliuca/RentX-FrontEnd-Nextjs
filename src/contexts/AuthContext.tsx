@@ -134,7 +134,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       if (!token) {
         setUser(undefined);
         router.push('/home');
-        window.location.reload();
         resolve(true);
       } else {
         reject({ message: 'Cannot delete cookies!' });

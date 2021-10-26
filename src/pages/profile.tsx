@@ -4,6 +4,8 @@ import { Layout } from '../components/Layout';
 import { ProfileUserData } from '../components/ProfileComponents/ProfileUserData';
 
 import * as S from '../styles/pages/profileStyles';
+import { withSSRAuth } from 'utils/withSSRAuth';
+import { parseCookies } from 'nookies';
 
 export default function Profiles() {
   return (
@@ -15,3 +17,20 @@ export default function Profiles() {
     </Layout>
   );
 }
+
+export const getServerSideProps = withSSRAuth(async (ctx) => {
+  const { '@rentX:token': token } = parseCookies(ctx);
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/auth',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+});

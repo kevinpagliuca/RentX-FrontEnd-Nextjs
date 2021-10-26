@@ -6,12 +6,14 @@ interface ActiveLinkProps extends LinkProps {
   children: ReactElement;
   shouldMatchExactHref?: boolean;
   activeClassName: string;
+  aditionalClassName?: string;
 }
 
 export function ActiveLink({
   children,
   shouldMatchExactHref = false,
   activeClassName,
+  aditionalClassName,
   ...rest
 }: ActiveLinkProps) {
   let isActive = false;
@@ -32,7 +34,11 @@ export function ActiveLink({
   return (
     <Link {...rest}>
       {cloneElement(children, {
-        className: isActive ? activeClassName : undefined,
+        className: isActive
+          ? activeClassName
+          : aditionalClassName
+          ? aditionalClassName
+          : undefined,
       })}
     </Link>
   );

@@ -46,7 +46,7 @@ export const ModalBody = styled.div`
   overflow: auto;
   border-radius: 0 0 8px 8px;
   position: relative;
-  padding: 1rem 4rem 1rem 4rem;
+  padding: 1rem 2rem 1rem 2rem;
 
   /* .MuiButtonBase-root.MuiPickersDay-root.MuiDateRangePickerDay-day {
     width: 42px !important;
@@ -68,10 +68,6 @@ export const ModalBody = styled.div`
     margin-left: auto;
     margin-top: 1rem;
   }
-
-
-
-
 `;
 
 export const DatePickerContainer = styled.div`
@@ -90,31 +86,22 @@ export const DatePickerContainer = styled.div`
     grid-gap: 1rem;
   }
 
+  //Custom Calendar
 
-    //Custom Calendar
+  .Calendar__day.-ltr.-selectedStart {
+    border-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+  }
 
+  .Calendar__day.-ltr.-selectedEnd {
+    border-radius: 0px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
 
-
-    .Calendar__day.-ltr.-selectedStart{
-      border-radius: 0px !important;
-      border-top-right-radius:0px !important;
-      border-bottom-right-radius:0px !important;
-}
-
-.Calendar__day.-ltr.-selectedEnd{
-  border-radius: 0px !important;
-  border-top-right-radius:0 !important;
-      border-bottom-right-radius:0 !important;
-
-}
-
-
-/* .custom-today-day {
+  /* .custom-today-day {
   color: #DC1637 !important;
   border: 1px solid #DC1637 !important;
 } */
-
-
-
-
 `;
