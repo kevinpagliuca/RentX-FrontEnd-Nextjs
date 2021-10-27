@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+
 import { ChangePasswordForm } from 'components/ProfileComponents/ChangePasswordForm';
 import { ProfileDataForm } from 'components/ProfileComponents/ProfileDataForm';
 import { TabNavigation } from 'components/ProfileComponents/TabNavigation';
-
 import { UserAvatar } from 'components/ProfileComponents/UserAvatar';
 
 import * as S from './styles';

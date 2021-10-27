@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from 'components/Form/Button';
 import { Input } from 'components/Form/Input';
 import { useAuth } from 'contexts/AuthContext';
-import { Controller, useForm } from 'react-hook-form';
 import { UpdateProfileSchema } from 'shared/validators';
+
 import { formValues } from './formValues';
 
 export const ProfileDataForm = () => {
@@ -29,6 +31,7 @@ export const ProfileDataForm = () => {
     <React.Fragment>
       {formValues.map(({ StartIcon, ...item }) => (
         <Controller
+          key={item.id}
           name={item.name}
           control={control}
           render={({ field: { value, onChange } }) => (

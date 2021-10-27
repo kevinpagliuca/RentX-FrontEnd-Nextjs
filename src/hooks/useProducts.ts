@@ -1,4 +1,5 @@
 import { useQuery, UseQueryOptions } from 'react-query';
+
 import { api } from '../services/client';
 
 export type Product = {

@@ -1,23 +1,18 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { Controller, useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-
+import { SubmitHandler } from 'react-hook-form';
+import { IconBaseProps } from 'react-icons';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-import { EnvelopeIcon, LockIcon } from '../../assets/Icons';
 
+import { yupResolver } from '@hookform/resolvers/yup';
+import Link from 'next/link';
+import * as yup from 'yup';
+
+import { EnvelopeIcon, LockIcon } from '../../assets/Icons';
+import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../Form/Button';
 import { Input } from '../Form/Input';
-import { CircularProgress } from '@material-ui/core';
-
-import { FormContainer } from './styles';
-import { SubmitHandler } from 'react-hook-form';
-import { useMutation } from 'react-query';
-import { queryClient } from '../../services/reactQuery/queryClient';
-import { api } from '../../services/client';
-import { toast } from 'react-toastify';
-import { useAuth } from '../../contexts/AuthContext';
+import * as S from './styles';
 
 type LoginCredentialsType = {
   email: string;
@@ -47,7 +42,7 @@ export const SignInForm = () => {
   };
 
   return (
-    <FormContainer autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+    <S.FormContainer autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
       <h1>Estamos quase lá.</h1>
       <p>Faça seu login para começar uma experiência incrível.</p>
 
@@ -114,10 +109,14 @@ export const SignInForm = () => {
           </a>
         </Link>
       </div>
-    </FormContainer>
+    </S.FormContainer>
   );
 };
 
-const IconActive = ({ isVisiblePass, ...rest }: any) => {
+interface IconActiveProps extends IconBaseProps {
+  isVisiblePass: boolean;
+}
+
+const IconActive = ({ isVisiblePass, ...rest }: IconActiveProps) => {
   return isVisiblePass ? <FiEye {...rest} /> : <FiEyeOff {...rest} />;
 };

@@ -1,4 +1,5 @@
 import { ButtonBase } from '@material-ui/core';
+
 import * as S from './styles';
 
 type TabOptions = 'data' | 'changePass';

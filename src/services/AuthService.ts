@@ -1,12 +1,13 @@
+import { AxiosError } from 'axios';
 import {
   IUserSignInRequestDTO,
   IUserSignInResponseDTO,
   IUserSignUpRequestDTO,
   IUserSignUpResponseDTO,
 } from 'interfaces/auth';
-import { AxiosError } from 'axios';
-import { api } from './client';
 import { Error500 } from 'shared/errors';
+
+import { api } from './client';
 
 class AuthService {
   async setAuthorization(token: string) {

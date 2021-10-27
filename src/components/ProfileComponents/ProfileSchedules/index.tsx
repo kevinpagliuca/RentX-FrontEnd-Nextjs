@@ -1,4 +1,5 @@
 import { CardRentalCars } from 'components/CardRentalCars';
+
 import * as S from './styles';
 
 interface tmpData {

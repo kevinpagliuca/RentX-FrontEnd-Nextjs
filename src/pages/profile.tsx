@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { ProfileSchedules } from 'components/ProfileComponents/ProfileSchedules';
+import { parseCookies } from 'nookies';
+import { withSSRAuth } from 'utils/withSSRAuth';
+
 import { Layout } from '../components/Layout';
 import { ProfileUserData } from '../components/ProfileComponents/ProfileUserData';
-
 import * as S from '../styles/pages/profileStyles';
-import { withSSRAuth } from 'utils/withSSRAuth';
-import { parseCookies } from 'nookies';
 
 export default function Profiles() {
   return (

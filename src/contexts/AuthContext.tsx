@@ -5,9 +5,10 @@ import {
   useEffect,
   useState,
 } from 'react';
-import router from 'next/router';
-import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
+
+import { AxiosError } from 'axios';
+import router from 'next/router';
 import { destroyCookie, parseCookies, setCookie } from 'nookies';
 
 import { api } from '../services/client';
@@ -116,7 +117,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       );
       router.push('/profile');
     } catch (error) {
-      let err = error as AxiosError;
+      const err = error as AxiosError;
       toast.error(`${err?.response?.data || err.message}`, {
         autoClose: 2500,
         className: 'customToast_dark',

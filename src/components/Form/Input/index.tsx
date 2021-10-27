@@ -8,7 +8,7 @@ import {
 import { FieldError } from 'react-hook-form';
 import InputMask from 'react-input-mask';
 
-import { Container } from './styles';
+import * as S from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
@@ -37,7 +37,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   ref
 ) => {
   return (
-    <Container className={containerClassName} filled={filled} error={!!error}>
+    <S.Container className={containerClassName} filled={filled} error={!!error}>
       {!!startIcon &&
         cloneElement(startIcon, {
           className: 'startIcon',
@@ -54,7 +54,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
       )}
       {!!placeholder && <label htmlFor={id}>{placeholder}</label>}
       {!!error && <span className="error">{error.message}</span>}
-    </Container>
+    </S.Container>
   );
 };
 

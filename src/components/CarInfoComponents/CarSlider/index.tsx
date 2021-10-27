@@ -1,16 +1,17 @@
 import { useRef } from 'react';
-import Image from 'next/image';
-import Slider, { Settings, CustomArrowProps } from 'react-slick';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+import Slider, { Settings, CustomArrowProps } from 'react-slick';
 
 import { ButtonBase } from '@material-ui/core';
-import { Container, SliderFooter } from './styles';
+import Image from 'next/image';
+
+import * as S from './styles';
 
 type DotsWithArrows = {
   dots: React.ReactNode;
 };
 
-export function CarSlider() {
+export const CarSlider = () => {
   const sliderRef = useRef<Slider>(null);
 
   const settings: Settings = {
@@ -20,8 +21,6 @@ export function CarSlider() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    // nextArrow: <FaAngleRight color="#999" />,
-    // prevArrow: <FaAngleLeft color="#999" />,
     className: 'sliderCentered',
     appendDots: (dots) => <DotsWithArrows dots={dots} />,
   };
@@ -32,7 +31,7 @@ export function CarSlider() {
   }
 
   return (
-    <Container>
+    <S.Container>
       <Slider {...settings} ref={sliderRef}>
         <div className="carouselCarContent">
           <Image
@@ -62,12 +61,12 @@ export function CarSlider() {
           />
         </div>
       </Slider>
-    </Container>
+    </S.Container>
   );
 
-  function DotsWithArrows({ dots }: DotsWithArrows) {
+  const DotsWithArrows = ({ dots }: DotsWithArrows) => {
     return (
-      <SliderFooter>
+      <S.SliderFooter>
         <ButtonBase centerRipple>
           <FaAngleLeft color="#999" onClick={() => handleSlickAction('prev')} />
         </ButtonBase>
@@ -78,7 +77,7 @@ export function CarSlider() {
             onClick={() => handleSlickAction('next')}
           />
         </ButtonBase>
-      </SliderFooter>
+      </S.SliderFooter>
     );
-  }
-}
+  };
+};

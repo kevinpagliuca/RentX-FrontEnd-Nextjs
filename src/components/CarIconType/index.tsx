@@ -1,5 +1,6 @@
-import { IconsProps, LeafIcon, LightningIcon, WaterIcon } from 'assets/Icons';
 import React from 'react';
+
+import { IconsProps, LeafIcon, LightningIcon, WaterIcon } from 'assets/Icons';
 
 interface ICarIconTypeProps extends IconsProps {
   type: 'alcohol' | 'eletric' | 'gasoline';

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { format } from 'date-fns';
-
 import { Calendar, DayRange } from 'react-modern-calendar-datepicker';
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 
 import { Button } from 'components/Form/Button';
+import { format } from 'date-fns';
 
 import { myCustomLocale } from './customLocale';
 import { dateFormatter } from './helper/dateFormatter';

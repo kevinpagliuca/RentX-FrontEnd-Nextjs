@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-
+import { SubmitHandler } from 'react-hook-form';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-import { EnvelopeIcon } from '../../assets/Icons';
 
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+import { EnvelopeIcon } from '../../assets/Icons';
+import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../Form/Button';
 import { Input } from '../Form/Input';
-
-import { FormContainer } from './styles';
-import { SubmitHandler } from 'react-hook-form';
-import { useAuth } from '../../contexts/AuthContext';
+import * as S from './styles';
 
 type ForgotPasswordredentialsType = {
   email: string;
@@ -43,7 +42,7 @@ export const ForgotPasswordForm = () => {
   };
 
   return (
-    <FormContainer autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+    <S.FormContainer autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
       <h1>Recuperar senha</h1>
       <p>Insira seu e-mail para receber um link de recuperação</p>
 
@@ -76,7 +75,7 @@ export const ForgotPasswordForm = () => {
           Enviar
         </Button>
       </div>
-    </FormContainer>
+    </S.FormContainer>
   );
 };
 

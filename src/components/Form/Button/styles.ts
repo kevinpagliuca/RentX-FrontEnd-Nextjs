@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
 import { darken } from 'polished';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;

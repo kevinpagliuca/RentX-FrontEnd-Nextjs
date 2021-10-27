@@ -1,15 +1,17 @@
-import { AppProps } from 'next/app';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ToastContainer, Flip } from 'react-toastify';
-import { GlobalStyle, ModalStyleGlobal } from '../styles/global';
-import { queryClient } from '../services/reactQuery/queryClient';
+
 import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { AuthProvider } from '../contexts/AuthContext';
 import { ThemeProvider } from '@material-ui/core';
+import { AppProps } from 'next/app';
 import { theme } from 'styles/theme';
+
+import { AuthProvider } from '../contexts/AuthContext';
+import { queryClient } from '../services/reactQuery/queryClient';
+import { GlobalStyle, ModalStyleGlobal } from '../styles/global';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (

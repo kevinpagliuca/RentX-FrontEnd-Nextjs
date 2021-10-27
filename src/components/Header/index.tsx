@@ -1,9 +1,11 @@
-import { FiUser } from 'react-icons/fi';
-import Link from 'next/link';
-import { ButtonBase } from '@material-ui/core';
-import { HeaderContainer, HeaderContent } from './styles';
-import { useAuth } from '../../contexts/AuthContext';
 import Avatar from 'react-avatar';
+import { FiUser } from 'react-icons/fi';
+
+import { ButtonBase } from '@material-ui/core';
+import Link from 'next/link';
+
+import { useAuth } from '../../contexts/AuthContext';
+import * as S from './styles';
 
 interface HeaderProps {
   headerTitle?: string;
@@ -15,8 +17,8 @@ export const Header = ({ headerTitle }: HeaderProps) => {
     await signOut();
   }
   return (
-    <HeaderContainer>
-      <HeaderContent>
+    <S.HeaderContainer>
+      <S.HeaderContent>
         <h1>{headerTitle || 'Início'}</h1>
         {!isAuthenticated ? (
           <Link href="/auth">
@@ -42,7 +44,7 @@ export const Header = ({ headerTitle }: HeaderProps) => {
             />
           </div>
         )}
-      </HeaderContent>
-    </HeaderContainer>
+      </S.HeaderContent>
+    </S.HeaderContainer>
   );
 };

@@ -1,9 +1,10 @@
-import { Container, ContentFooter } from './styles';
-import { LeafIcon, LightningIcon, WaterIcon } from '../../assets/Icons';
-import { formatToBRL } from '../../utils/formatToBRL';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { LeafIcon, LightningIcon, WaterIcon } from '../../assets/Icons';
 import { Product } from '../../hooks/useProducts';
+import { formatToBRL } from '../../utils/formatToBRL';
+import { Container, ContentFooter } from './styles';
 
 interface ProdutsCardProps {
   product: Product;

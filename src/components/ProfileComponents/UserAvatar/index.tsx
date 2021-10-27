@@ -1,6 +1,8 @@
+import Avatar from 'react-avatar';
+
 import { PhotoIcon } from 'assets/Icons';
 import { useAuth } from 'contexts/AuthContext';
-import Avatar from 'react-avatar';
+
 import * as S from './styles';
 export const UserAvatar = () => {
   const { user } = useAuth();

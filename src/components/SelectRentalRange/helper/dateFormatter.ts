@@ -1,6 +1,7 @@
+import { DayRange } from 'react-modern-calendar-datepicker';
+
 import { add, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { DayRange } from 'react-modern-calendar-datepicker';
 
 export const dateFormatter = (dayRange: DayRange) => {
   let fromDateText = '';

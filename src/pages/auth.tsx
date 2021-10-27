@@ -1,9 +1,8 @@
 import Image from 'next/image';
 
-import { Container } from '../styles/pages/authStyles';
-import { SignInForm } from '../components/SignInForm';
-
 import { Layout } from '../components/Layout';
+import { SignInForm } from '../components/SignInForm';
+import { Container } from '../styles/pages/authStyles';
 export default function Auth() {
   return (
     <Layout title="Login | RentX">

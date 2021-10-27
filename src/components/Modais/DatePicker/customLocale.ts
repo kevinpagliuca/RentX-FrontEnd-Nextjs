@@ -1,4 +1,4 @@
-import { CalendarDigit, Day, Locale } from 'react-modern-calendar-datepicker';
+import { CalendarDigit, Day } from 'react-modern-calendar-datepicker';
 
 //Custom Locale
 export const myCustomLocale = {

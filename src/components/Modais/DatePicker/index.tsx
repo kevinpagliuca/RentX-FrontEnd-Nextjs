@@ -1,12 +1,11 @@
 import React from 'react';
+import { FiX } from 'react-icons/fi';
+import Modal, { Styles } from 'react-modal';
 
 import { ButtonBase } from '@material-ui/core';
-import 'react-modern-calendar-datepicker/lib/DatePicker.css';
-
-import { FiX } from 'react-icons/fi';
-import { ModalContent, ModalHeader, ModalBody } from './styles';
-import Modal, { Styles } from 'react-modal';
 import { SelectRentalRange } from 'components/SelectRentalRange';
+
+import { ModalContent, ModalHeader, ModalBody } from './styles';
 
 const customStyles: Styles = {
   content: {

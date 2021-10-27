@@ -48,16 +48,6 @@ export const ModalBody = styled.div`
   position: relative;
   padding: 1rem 2rem 1rem 2rem;
 
-  /* .MuiButtonBase-root.MuiPickersDay-root.MuiDateRangePickerDay-day {
-    width: 42px !important;
-    height: 42px !important;
-  }
-
-  .MuiTypography-root.MuiTypography-caption {
-    width: 42px !important;
-    height: 42px !important;
-  } */
-
   .rangeDateInput {
     display: flex;
     justify-content: center;
@@ -86,8 +76,6 @@ export const DatePickerContainer = styled.div`
     grid-gap: 1rem;
   }
 
-  //Custom Calendar
-
   .Calendar__day.-ltr.-selectedStart {
     border-radius: 0px !important;
     border-top-right-radius: 0px !important;
@@ -99,9 +87,4 @@ export const DatePickerContainer = styled.div`
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
   }
-
-  /* .custom-today-day {
-  color: #DC1637 !important;
-  border: 1px solid #DC1637 !important;
-} */
 `;

@@ -1,8 +1,14 @@
+import { useState } from 'react';
+import { FaChevronLeft } from 'react-icons/fa';
+
+import { ButtonBase } from '@material-ui/core';
+import { useRouter } from 'next/router';
+
 import CarDetails from '../../components/CarInfoComponents/CarDetails';
 import { CarSlider } from '../../components/CarInfoComponents/CarSlider';
-import { useRouter } from 'next/router';
-import { FaChevronLeft } from 'react-icons/fa';
+import { Button } from '../../components/Form/Button';
 import { Layout } from '../../components/Layout';
+import { DatePickerModal } from '../../components/Modais/DatePicker';
 import {
   Container,
   Aside,
@@ -12,10 +18,6 @@ import {
   NavigationContainer,
   ContentText,
 } from '../../styles/pages/carsStyles';
-import { DatePickerModal } from '../../components/Modais/DatePicker';
-import { ButtonBase } from '@material-ui/core';
-import { Button } from '../../components/Form/Button';
-import { useState } from 'react';
 
 export default function CarInfo() {
   const { back } = useRouter();

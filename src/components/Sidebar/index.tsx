@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import { ButtonBase } from '@material-ui/core';
-
 import { FiUser } from 'react-icons/fi';
+
+import { ButtonBase } from '@material-ui/core';
+import { useAuth } from 'contexts/AuthContext';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+
 import { CarIcon, HomeIcon, XLogoIcon } from '../../assets/Icons';
 import { ActiveLink } from './ActiveLink';
-
 import * as S from './styles';
-import { useAuth } from 'contexts/AuthContext';
 
 export const Sidebar = () => {
   const { asPath } = useRouter();

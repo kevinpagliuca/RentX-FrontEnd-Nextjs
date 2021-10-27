@@ -1,6 +1,7 @@
-import { CarIcon, EnvelopeIcon } from 'assets/Icons';
 import { IconType } from 'react-icons';
 import { FiUser } from 'react-icons/fi';
+
+import { CarIcon, EnvelopeIcon } from 'assets/Icons';
 
 type FormValues = {
   id: string;

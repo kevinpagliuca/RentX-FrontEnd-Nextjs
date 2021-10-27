@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import { CarIconType } from '../CarIconType';
 import { RightArrowIcon } from 'assets/Icons';
+import Image from 'next/image';
 
+import { CarIconType } from '../CarIconType';
 import * as S from './styles';
 export const CardRentalCars = () => {
   return (

@@ -1,74 +1,70 @@
 import {
-  Container,
-  ContainerIcon,
-  ContainerLabel,
-  ContainerContent,
-} from './styles';
-import {
   VelocityIcon,
   SeilType,
   Exchange,
   Up,
   Peaple,
   PowerHorse,
-} from '../../../assets/Icons';
+} from 'assets/Icons';
+
+import * as S from './styles';
 
 export default function CarDetails() {
   return (
-    <Container>
-      <ContainerContent>
-        <ContainerIcon>
+    <S.Container>
+      <S.ContainerContent>
+        <S.ContainerIcon>
           <VelocityIcon />
-        </ContainerIcon>
-        <ContainerLabel>
+        </S.ContainerIcon>
+        <S.ContainerLabel>
           <p>270km</p>
-        </ContainerLabel>
-      </ContainerContent>
+        </S.ContainerLabel>
+      </S.ContainerContent>
 
-      <ContainerContent>
-        <ContainerIcon>
+      <S.ContainerContent>
+        <S.ContainerIcon>
           <Up />
-        </ContainerIcon>
-        <ContainerLabel>
+        </S.ContainerIcon>
+        <S.ContainerLabel>
           <p>6.8s</p>
-        </ContainerLabel>
-      </ContainerContent>
+        </S.ContainerLabel>
+      </S.ContainerContent>
 
-      <ContainerContent>
-        <ContainerIcon>
+      <S.ContainerContent>
+        <S.ContainerIcon>
           <SeilType />
-        </ContainerIcon>
-        <ContainerLabel>
+        </S.ContainerIcon>
+        <S.ContainerLabel>
           <p>Gasolina</p>
-        </ContainerLabel>
-      </ContainerContent>
+        </S.ContainerLabel>
+      </S.ContainerContent>
 
-      <ContainerContent>
-        <ContainerIcon>
+      <S.ContainerContent>
+        <S.ContainerIcon>
           <PowerHorse />
-        </ContainerIcon>
-        <ContainerLabel>
+        </S.ContainerIcon>
+        <S.ContainerLabel>
           <p>Auto</p>
-        </ContainerLabel>
-      </ContainerContent>
+        </S.ContainerLabel>
+      </S.ContainerContent>
 
-      <ContainerContent>
-        <ContainerIcon>
+      <S.ContainerContent>
+        <S.ContainerIcon>
           <Peaple />
-        </ContainerIcon>
-        <ContainerLabel>
+        </S.ContainerIcon>
+        <S.ContainerLabel>
           <p>5 pessoas</p>
-        </ContainerLabel>
-      </ContainerContent>
+        </S.ContainerLabel>
+      </S.ContainerContent>
 
-      <ContainerContent>
-        <ContainerIcon>
+      <S.ContainerContent>
+        <S.ContainerIcon>
           <Exchange />
-        </ContainerIcon>
-        <ContainerLabel>
+        </S.ContainerIcon>
+        <S.ContainerLabel>
           <p>280 HP</p>
-        </ContainerLabel>
-      </ContainerContent>
-    </Container>
+        </S.ContainerLabel>
+      </S.ContainerContent>
+    </S.Container>
   );
 }

@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import { Controller, useForm, SubmitHandler } from 'react-hook-form';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 
+import { yupResolver } from '@hookform/resolvers/yup';
+import { api } from 'services/client';
+import { queryClient } from 'services/reactQuery/queryClient';
+import { ToastifyCustomMessage } from 'styles/ToastifyCustomMessage';
+import * as yup from 'yup';
+
 import { Button } from '../Form/Button';
 import { Input } from '../Form/Input';
-
-import { queryClient } from 'services/reactQuery/queryClient';
 import { AccountCreateModal } from '../Modais/AccountCreate';
 import { formValues } from './formValues';
-import { api } from 'services/client';
-
 import { FormContainer } from './styles';
-import { ToastifyCustomMessage } from 'styles/ToastifyCustomMessage';
+
 type RegisterData = {
   name: string;
   email: string;

@@ -1,9 +1,11 @@
-import { LockIcon } from 'assets/Icons';
-import { Button } from 'components/Form/Button';
-import { Input } from 'components/Form/Input';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+
+import { LockIcon } from 'assets/Icons';
+import { Button } from 'components/Form/Button';
+import { Input } from 'components/Form/Input';
+
 import { formValues } from './formValues';
 
 export const ChangePasswordForm = () => {
@@ -52,6 +54,7 @@ export const ChangePasswordForm = () => {
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const IconActive = ({ isVisiblePass, ...rest }: any) => {
   return isVisiblePass ? <FiEye {...rest} /> : <FiEyeOff {...rest} />;
 };

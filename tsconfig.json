@@ -19,14 +19,14 @@
     "jsx": "preserve",
     "baseUrl": "./src",
     "paths": {
-      "@utils": ["./src/utils"],
-      "@assets": ["./src/assets"],
-      "@hooks": ["./src/hooks"],
-      "@interfaces": ["./src/interfaces"],
-      "@shared": ["./src/shared"],
-      "@services": ["./src/services"],
-      "@styles": ["./src/styles"],
-      "@contexts": ["./src/contexts"],
+      "@utils/*": ["./src/utils/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@services/*": ["./src/services/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@contexts/*": ["./src/contexts/*"],
     }
   },
   "include": [

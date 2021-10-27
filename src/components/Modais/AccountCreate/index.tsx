@@ -1,11 +1,9 @@
-import router from 'next/router';
 import React from 'react';
-
-import { ButtonBase, Grow } from '@material-ui/core';
 import Modal, { Styles } from 'react-modal';
 
-import { GreenCheckIcon } from '../../../assets/Icons';
+import { ButtonBase } from '@material-ui/core';
 
+import { GreenCheckIcon } from '../../../assets/Icons';
 import { ModalContent } from './styles';
 
 const customStyles: Styles = {
@@ -26,6 +24,7 @@ const customStyles: Styles = {
 };
 
 Modal.setAppElement('#__next');
+
 interface ModalProps {
   modalIsOpen: boolean;
   onRequestClose: () => void;
