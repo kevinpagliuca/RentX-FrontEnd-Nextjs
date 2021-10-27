@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface ToastifyCustomMessageProps {
-  title: string;
+  title?: string;
   message: string;
 }
 
@@ -28,7 +28,7 @@ export const ToastifyCustomMessage = ({
   message,
 }: ToastifyCustomMessageProps) => (
   <Container>
-    <strong>{title}</strong>
+    {title && <strong>{title}</strong>}
     <p>{message}</p>
   </Container>
 );

@@ -119,7 +119,6 @@ export const HeaderContent = styled.header`
 export const Content = styled.div`
   display: grid;
   grid-template-columns: 650px 1fr;
-  gap: 0.3rem;
   margin-top: 2.5rem;
 `;
 

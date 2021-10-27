@@ -4,10 +4,10 @@
     "es2021": true
   },
   "extends": [
-    "airbnb",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:react-hooks/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -21,8 +21,8 @@
     "react",
     "@typescript-eslint",
     "react-hooks",
-    "prettier",
-    "import-helpers"
+    "eslint-plugin-import-helpers",
+    "prettier"
   ],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
@@ -33,6 +33,7 @@
     "react/props-types": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "prettier/prettier": "error",
+    "@typescript-eslint/no-unused-vars": "off",
     "react/prop-types": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "react/jsx-filename-extension": "off",
@@ -40,7 +41,7 @@
       "warn",
       {
         "newlinesBetween": "always",
-        "groups": ["/^react/", "module", ["parent", "sibling", "index"]],
+        "groups": ["/^react/", "module", "/^@shared/", ["parent", "sibling", "index"]],
         "alphabetize": { "order": "asc", "ignoreCase": true }
       }
     ]

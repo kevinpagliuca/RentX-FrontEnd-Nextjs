@@ -1,5 +1,4 @@
 import { CarIcon, EnvelopeIcon } from 'assets/Icons';
-import { ReactNode } from 'react';
 import { IconType } from 'react-icons';
 import { FiUser } from 'react-icons/fi';
 

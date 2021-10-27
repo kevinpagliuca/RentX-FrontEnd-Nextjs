@@ -31,25 +31,18 @@ const loginFormSchema = yup.object().shape({
 
 export const SignInForm = () => {
   const { signIn } = useAuth();
-  const { formState, control, handleSubmit, watch } =
-    useForm<LoginCredentialsType>({
-      resolver: yupResolver(loginFormSchema),
-    });
+  const {
+    formState: { errors, isSubmitting },
+    control,
+    handleSubmit,
+  } = useForm<LoginCredentialsType>({
+    resolver: yupResolver(loginFormSchema),
+  });
   const [isVisiblePass, setIsVisiblePass] = useState(false);
-  const watchEmail = watch('email');
-  const watchPassword = watch('password');
 
-  const isLoginValid =
-    watchEmail &&
-    watchPassword !== '' &&
-    !formState.errors.email &&
-    !formState.errors.password
-      ? false
-      : true;
+  const isLoginValid = !Object.keys(errors).length ? false : true;
 
   const onSubmit: SubmitHandler<LoginCredentialsType> = async (values) => {
-    // const toastId = toast.dark(`Success`, { autoClose: 2500});
-    // toast.update(toastId, {type: "default"});
     await signIn(values);
   };
 
@@ -62,18 +55,16 @@ export const SignInForm = () => {
         <Controller
           control={control}
           name="email"
-          render={({ field: { value = '', onChange, ref, name } }) => (
+          render={({ field: { value = '', onChange } }) => (
             <Input
               id="email"
               type="email"
               placeholder="E-mail"
               startIcon={<EnvelopeIcon />}
               value={value}
-              name={name}
               onChange={onChange}
-              ref={ref}
-              filled={!formState.errors.email && value !== ''}
-              error={formState.errors.email}
+              filled={!errors['email'] && value !== ''}
+              error={errors['email']}
             />
           )}
         />
@@ -81,7 +72,7 @@ export const SignInForm = () => {
         <Controller
           control={control}
           name="password"
-          render={({ field: { value = '', onChange, ref, name } }) => (
+          render={({ field: { value = '', onChange } }) => (
             <Input
               id="password"
               placeholder="Senha"
@@ -98,11 +89,9 @@ export const SignInForm = () => {
                 />
               }
               value={value}
-              name={name}
               onChange={onChange}
-              ref={ref}
-              filled={!formState.errors.password && value !== ''}
-              error={formState.errors.password}
+              filled={!errors['password'] && value !== ''}
+              error={errors['password']}
             />
           )}
         />
@@ -114,7 +103,7 @@ export const SignInForm = () => {
         <Button
           disabled={isLoginValid}
           containerClass="sendBtn"
-          loading={formState.isSubmitting}
+          loading={isSubmitting}
           loadingSize={25}
         >
           Login

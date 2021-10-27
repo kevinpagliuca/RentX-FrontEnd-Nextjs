@@ -1,5 +1,10 @@
 import { ReactNode } from 'react';
+
 import Head from 'next/head';
+
+import { Header } from '../Header';
+import { Sidebar } from '../Sidebar';
+import * as S from './styles';
 
 interface LayoutProps {
   title?: string;
@@ -7,10 +12,7 @@ interface LayoutProps {
   children: ReactNode;
   noHeader?: boolean;
 }
-import { Sidebar } from '../Sidebar';
-import { Header } from '../Header';
 
-import * as S from './styles';
 export const Layout = ({
   title,
   headerTitle,

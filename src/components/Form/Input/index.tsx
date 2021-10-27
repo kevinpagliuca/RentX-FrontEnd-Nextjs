@@ -4,11 +4,10 @@ import {
   ForwardRefRenderFunction,
   InputHTMLAttributes,
   ReactElement,
-  ReactNode,
-  useState,
 } from 'react';
 import { FieldError } from 'react-hook-form';
-import { IconType } from 'react-icons';
+import InputMask from 'react-input-mask';
+
 import { Container } from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -19,7 +18,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   endIcon?: ReactElement;
   error?: FieldError;
   filled?: boolean;
-  // controlled?: boolean;
+  mask?: string | Array<string | RegExp>;
   id: string;
 }
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
@@ -32,7 +31,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
     id,
     error,
     filled,
-    // controlled = false,
+    mask,
     ...rest
   },
   ref
@@ -48,8 +47,11 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
         cloneElement(endIcon, {
           className: 'endIcon',
         })}
-
-      <input {...rest} ref={ref} id={id} />
+      {mask ? (
+        <InputMask mask={mask} maskChar="" id={id} {...rest} />
+      ) : (
+        <input {...rest} ref={ref} id={id} />
+      )}
       {!!placeholder && <label htmlFor={id}>{placeholder}</label>}
       {!!error && <span className="error">{error.message}</span>}
     </Container>

@@ -76,6 +76,14 @@
       "CNH": 3213112123,
       "name": "Kaik",
       "id": 2
+    },
+    {
+      "email": "kevin.pagliuca@fasters.com",
+      "password": "$2a$10$/MsOHRIZhUvnh8gvKyY7feugfrVSolUNGS2rQxHScKgfOhKjRnHlm",
+      "name": "Kevin Pagliuca",
+      "driver_license": "12123123123",
+      "password_confirmation": "12345678",
+      "id": 3
     }
   ]
 }
