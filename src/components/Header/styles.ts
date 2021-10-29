@@ -36,14 +36,6 @@ export const HeaderContent = styled.div<HeaderContentProps>`
   color: var(--gray-500);
   border-bottom: 1px solid var(--gray-100);
 
-  ${({ custom }) =>
-    custom &&
-    css`
-      justify-content: center;
-      max-width: 1200px;
-      margin: 0 auto;
-    `}
-
   div.userHeaderContainer {
     display: flex;
     align-items: center;

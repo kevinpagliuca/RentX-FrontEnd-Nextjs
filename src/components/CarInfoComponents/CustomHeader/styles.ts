@@ -29,12 +29,14 @@ export const HeaderContent = styled.header`
   }
 
   div.titleName {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     p {
       font-style: normal;
       font-weight: 500;
       font-size: 0.875rem;
-      line-height: 0.938rem;
-      letter-spacing: 0.04em;
+      font-family: 'Archivo', sans-serif;
       text-transform: uppercase;
     }
 
@@ -42,17 +44,19 @@ export const HeaderContent = styled.header`
       font-style: normal;
       font-weight: 600;
       font-size: 2.25rem;
-      line-height: 2.438rem;
+      font-family: 'Archivo', sans-serif;
     }
   }
 
   div.titleValue {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     p {
       font-style: normal;
       font-weight: 500;
       font-size: 0.875rem;
-      line-height: 0.938rem;
-      letter-spacing: 0.04em;
+      font-family: 'Archivo', sans-serif;
       text-transform: uppercase;
     }
 
@@ -60,11 +64,8 @@ export const HeaderContent = styled.header`
       font-style: normal;
       font-weight: 600;
       font-size: 2.25rem;
-      line-height: 2.438rem;
-
-      &.titleValueRed {
-        color: var(--main);
-      }
+      font-family: 'Archivo', sans-serif;
+      color: var(--main);
     }
   }
 
