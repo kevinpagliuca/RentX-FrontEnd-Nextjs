@@ -1,5 +1,9 @@
 import { darken } from 'polished';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+interface HeaderContentProps {
+  custom?: boolean;
+}
 
 export const HeaderContainer = styled.div`
   display: flex;
@@ -23,7 +27,7 @@ export const HeaderContainer = styled.div`
   }
 `;
 
-export const HeaderContent = styled.div`
+export const HeaderContent = styled.div<HeaderContentProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -31,6 +35,14 @@ export const HeaderContent = styled.div`
   width: 100%;
   color: var(--gray-500);
   border-bottom: 1px solid var(--gray-100);
+
+  ${({ custom }) =>
+    custom &&
+    css`
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    `}
 
   div.userHeaderContainer {
     display: flex;

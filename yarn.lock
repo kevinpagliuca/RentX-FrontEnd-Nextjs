@@ -337,6 +337,13 @@
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.2.0.tgz#f3933a44e365864f4dad5db94158106d511e8131"
   integrity sha512-sqKVVVOe5ivCaXDWivIJYVSaEgdQK9ul7a4Kity5Iw7u9+wBAPbX1RMSnLLmp7O4Vzj0WOWwMAJsTL00xwaNug==
 
+"@hassanmojab/react-modern-calendar-datepicker@^3.1.7":
+  version "3.1.7"
+  resolved "https://registry.yarnpkg.com/@hassanmojab/react-modern-calendar-datepicker/-/react-modern-calendar-datepicker-3.1.7.tgz#e5b8a1a78e0bf9d8001cc46b5b722c47c68975b7"
+  integrity sha512-dX/FXGcvIW31dgA1fcFJkHmIx3k4AqX166SfCQ6weBb0ZLr6C/f5YzcXVop19ifX18ezEw11Xb+l02JGj4+R6g==
+  dependencies:
+    jalaali-js "^1.1.0"
+
 "@hookform/resolvers@^2.7.1":
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-2.7.1.tgz#691f02a82b44317dc30df44765463f2eb73abf09"
@@ -578,6 +585,11 @@
   integrity sha512-+PO/CKwVx7gDG5Pjr+UU/hL6/vFm1ppgW8cilV4AreLEpjbz0wiFvZ5Nld1VIRTr/RiB/KFmiyOzr8GboJfpqg==
   dependencies:
     nookies "*"
+
+"@types/nprogress@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@types/nprogress/-/nprogress-0.2.0.tgz#86c593682d4199212a0509cc3c4d562bbbd6e45f"
+  integrity sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -3994,13 +4006,6 @@ react-modal@^3.14.3:
     prop-types "^15.7.2"
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
-
-react-modern-calendar-datepicker@^3.1.6:
-  version "3.1.6"
-  resolved "https://registry.yarnpkg.com/react-modern-calendar-datepicker/-/react-modern-calendar-datepicker-3.1.6.tgz#46b1533eb387a4d93ae8217eb30c26a4174a138f"
-  integrity sha512-lnMqEMj9Wn32/sm119tjCl5lOkq4u9vJE7wggi7hdXV4s8rPdKlH56FVVehlBi0dfYeWQVZ9npY384Zprjn4WA==
-  dependencies:
-    jalaali-js "^1.1.0"
 
 react-query@*:
   version "3.28.0"

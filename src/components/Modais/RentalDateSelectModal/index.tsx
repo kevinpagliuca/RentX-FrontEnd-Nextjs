@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FiX } from 'react-icons/fi';
 import Modal, { Styles } from 'react-modal';
 
@@ -31,7 +31,7 @@ interface ModalProps {
   onRequestClose: () => void;
 }
 
-export const DatePickerModal = ({
+export const RentalDateSelectModal = ({
   modalIsOpen,
   onRequestClose,
 }: ModalProps) => {
@@ -51,9 +51,8 @@ export const DatePickerModal = ({
             <FiX />
           </ButtonBase>
         </ModalHeader>
-
         <ModalBody>
-          <SelectRentalRange />
+          <SelectRentalRange onRequestClose={onRequestClose} />
         </ModalBody>
       </ModalContent>
     </Modal>

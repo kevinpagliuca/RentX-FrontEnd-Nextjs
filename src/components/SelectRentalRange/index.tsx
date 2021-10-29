@@ -1,41 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { Calendar, DayRange } from 'react-modern-calendar-datepicker';
-import 'react-modern-calendar-datepicker/lib/DatePicker.css';
+import React, { useCallback, useEffect } from 'react';
 
+import { Calendar } from '@hassanmojab/react-modern-calendar-datepicker';
 import { Button } from 'components/Form/Button';
-import { format } from 'date-fns';
+import { useRentalDate } from 'contexts/RentalDateContext';
 
 import { myCustomLocale } from './customLocale';
-import { dateFormatter } from './helper/dateFormatter';
 import * as S from './styles';
 
-export const SelectRentalRange = () => {
-  const [dayRange, setDayRange] = useState<DayRange>({
-    from: null,
-    to: null,
-  });
+interface SelectRentalRangeProps {
+  onRequestClose?: () => void;
+}
 
-  const [toDayText, setToDayText] = useState('');
-  const [fromDayText, setFromDayText] = useState('');
+export const SelectRentalRange = ({
+  onRequestClose,
+}: SelectRentalRangeProps) => {
+  const {
+    dateRange,
+    setDateRange,
+    fromDayText,
+    toDayText,
+    todayDate,
+    isValidContinue,
+    toggleApply,
+  } = useRentalDate();
 
-  const todayDate = format(new Date(), 'yyyy-MM-dd').split('-');
+  const handleApply = useCallback(() => {
+    if (!!onRequestClose) {
+      onRequestClose();
+    }
+    toggleApply();
+  }, [onRequestClose, toggleApply]);
 
   useEffect(() => {
-    const formatedDates = dateFormatter(dayRange);
-    setToDayText(formatedDates.toDateText);
-    setFromDayText(formatedDates.fromDateText);
-  }, [dayRange]);
-
-  const handleConfirmSchedule = () => {
     return;
-  };
+  }, []);
 
   return (
     <S.Container>
       <S.DatePickerContainer>
         <Calendar
-          value={dayRange}
-          onChange={setDayRange}
+          value={dateRange}
+          onChange={setDateRange}
           locale={myCustomLocale}
           colorPrimary="var(--main)"
           colorPrimaryLight="var(--light-red)"
@@ -57,7 +62,7 @@ export const SelectRentalRange = () => {
           <span title="Até">ATÉ</span>
           {toDayText ? <strong>{toDayText}</strong> : <div />}
         </div>
-        <Button type="button" onClick={handleConfirmSchedule}>
+        <Button type="button" onClick={handleApply} disabled={!isValidContinue}>
           Confirmar
         </Button>
       </S.RangeInputsContainer>

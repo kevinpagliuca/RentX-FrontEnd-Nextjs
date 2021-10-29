@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  max-width: 44rem;
+  margin: 0 auto;
+  border-radius: 20px;
+
   img {
     padding: 0 3rem !important;
     height: 100%;
@@ -9,6 +13,7 @@ export const Container = styled.div`
   .carouselCarContent {
     display: inline-block;
     width: 100%;
+    max-width: 44rem;
   }
 
   @media (max-width: 1200px) {

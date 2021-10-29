@@ -7,8 +7,9 @@ import {
 } from 'react';
 import { toast } from 'react-toastify';
 
-import { AxiosError } from 'axios';
 import router from 'next/router';
+
+import { AxiosError } from 'axios';
 import { destroyCookie, parseCookies, setCookie } from 'nookies';
 
 import { api } from '../services/client';

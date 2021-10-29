@@ -1,6 +1,9 @@
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 import Head from 'next/head';
+
+import { Loader } from 'components/Loader';
+import { useLoader } from 'contexts/LoaderContext';
 
 import { Header } from '../Header';
 import { Sidebar } from '../Sidebar';
@@ -11,6 +14,8 @@ interface LayoutProps {
   headerTitle?: string;
   children: ReactNode;
   noHeader?: boolean;
+  whiteBackground?: boolean;
+  customHeader?: boolean;
 }
 
 export const Layout = ({
@@ -18,18 +23,25 @@ export const Layout = ({
   headerTitle,
   children,
   noHeader,
+  whiteBackground,
+  customHeader,
 }: LayoutProps) => {
+  const { customLoader } = useLoader();
   return (
     <>
-      <S.Container>
+      <S.Container whiteBackground={whiteBackground}>
         <Head>
           <title>{title || 'RentX'}</title>
         </Head>
         <Sidebar />
 
         <S.Wrapper>
-          {!noHeader && <Header headerTitle={headerTitle} />}
-          <S.Content>{children}</S.Content>
+          {!noHeader && !customHeader && <Header headerTitle={headerTitle} />}
+          {customHeader && <Header custom />}
+          <S.Content>
+            <Loader open={customLoader} />
+            {children}
+          </S.Content>
         </S.Wrapper>
       </S.Container>
       {/* <footer

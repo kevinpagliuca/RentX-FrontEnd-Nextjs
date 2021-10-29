@@ -1,11 +1,21 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+interface ContainerProps {
+  whiteBackground?: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   display: flex;
   width: 100%;
   min-height: 100vh;
   position: relative;
   background: var(--gray-50);
+
+  ${({ whiteBackground }) =>
+    whiteBackground &&
+    css`
+      background: var(--white);
+    `}
 
   @media (max-width: 768px) {
     flex-direction: column-reverse;
@@ -18,7 +28,6 @@ export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  background: var(--gray-50);
   overflow: hidden;
 
   @media (max-width: 768px) {
@@ -32,7 +41,6 @@ export const Content = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
-  background: var(--gray-50);
   padding: 7.5rem 7.5rem 0;
   overflow: hidden;
   min-height: 100vh;

@@ -1,100 +1,38 @@
-import { useState } from 'react';
-import { FaChevronLeft } from 'react-icons/fa';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { ButtonBase } from '@material-ui/core';
-import { useRouter } from 'next/router';
+import { TabNavigaton } from 'components/TabNavigaton';
 
 import CarDetails from '../../components/CarInfoComponents/CarDetails';
 import { CarSlider } from '../../components/CarInfoComponents/CarSlider';
-import { Button } from '../../components/Form/Button';
 import { Layout } from '../../components/Layout';
-import { DatePickerModal } from '../../components/Modais/DatePicker';
-import {
-  Container,
-  Aside,
-  Content,
-  Header,
-  HeaderContent,
-  NavigationContainer,
-  ContentText,
-} from '../../styles/pages/carsStyles';
+import * as S from '../../styles/pages/carsStyles';
 
 export default function CarInfo() {
-  const { back } = useRouter();
-  const [isModalOpen, setIsModalOpen] = useState(true);
-  const [activeTab, setActiveTab] = useState<'about' | 'period'>('about');
-
-  function toggleNavigation(tab: 'about' | 'period') {
-    setActiveTab(tab);
-  }
-
   return (
-    <Layout title="Informações | RentX" noHeader>
-      <Container>
-        <Header>
-          <HeaderContent>
-            <FaChevronLeft onClick={back} size={25} color="#47474D" />
-            <div className="titleName">
-              <p>Audi</p>
-              <h1>Q3 Baita Foda</h1>
-            </div>
-            <div className="titleValue">
-              <p>Ao dia</p>
-              <h1 className="titleValueRed">R$ 120</h1>
-            </div>
-          </HeaderContent>
-        </Header>
-        <Content>
+    <Layout title="Informações | RentX" noHeader whiteBackground customHeader>
+      <S.Container>
+        <S.Content>
           <CarSlider />
-          <Aside>
+          <S.Aside>
             <CarDetails />
-            <NavigationContainer>
-              <ButtonBase
-                className={activeTab === 'about' ? 'active' : undefined}
-                onClick={() => toggleNavigation('about')}
-              >
-                SOBRE O CARRO
-              </ButtonBase>
-              <ButtonBase
-                className={activeTab === 'period' ? 'active' : undefined}
-                onClick={() => toggleNavigation('period')}
-              >
-                PERÍODO
-              </ButtonBase>
-            </NavigationContainer>
-            {activeTab === 'about' && (
-              <ContentText>
-                <p>
-                  Este é automóvel desportivo. Surgiu do lendário touro de lide
-                  indultado na praça Real Maestranza de Sevilla. É um belíssimo
-                  carro para quem gosta de acelerar.
-                </p>
-              </ContentText>
-            )}
-            {activeTab === 'period' && (
-              <ContentText>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Maiores sunt repudiandae ad, vitae eligendi quae dolores
-                  labore itaque odio necessitatibus voluptatem tenetur porro
-                  reiciendis corporis. Repellat tempora quaerat quisquam. Illum.
-                </p>
-              </ContentText>
-            )}
-
-            <Button
-              onClick={() => setIsModalOpen(!isModalOpen)}
-              containerClass="buttonRent"
-            >
-              Escolher período do aluguel
-            </Button>
-          </Aside>
-        </Content>
-      </Container>
-      <DatePickerModal
-        modalIsOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(!isModalOpen)}
-      />
+            <TabNavigaton />
+          </S.Aside>
+        </S.Content>
+      </S.Container>
     </Layout>
   );
 }
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  };
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+    revalidate: 60 * 60 * 4, // 4 hours
+  };
+};
