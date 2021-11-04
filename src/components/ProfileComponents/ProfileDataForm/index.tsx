@@ -1,54 +1,72 @@
 import React, { useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from 'components/Form/Button';
 import { Input } from 'components/Form/Input';
 import { useAuth } from 'contexts/AuthContext';
-import { UpdateProfileSchema } from 'shared/validators';
+import { IUserUpdateRequestDTO } from 'interfaces/auth';
+import { updateProfileFormSchema } from 'shared/validators';
 
 import { formValues } from './formValues';
+import * as S from './styles';
 
 export const ProfileDataForm = () => {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
   const {
     control,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
-  } = useForm({
-    resolver: yupResolver(UpdateProfileSchema),
+    handleSubmit,
+  } = useForm<IUserUpdateRequestDTO>({
+    resolver: yupResolver(updateProfileFormSchema),
   });
 
   useEffect(() => {
     reset({
       name: user?.name,
-      CNH: user?.CNH,
+      driver_license: user?.driver_license,
       email: user?.email,
+      username: user?.username,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
+  const handleUpdateUser: SubmitHandler<IUserUpdateRequestDTO> = async (
+    values
+  ) => {
+    await updateUser(values);
+  };
+
   return (
-    <React.Fragment>
+    <S.FormContainer onSubmit={handleSubmit(handleUpdateUser)}>
       {formValues.map(({ StartIcon, ...item }) => (
         <Controller
           key={item.id}
           name={item.name}
           control={control}
-          render={({ field: { value, onChange } }) => (
+          render={({ field: { value = '', onChange } }) => (
             <Input
               id={item.name}
               placeholder={item.placeholder}
               type={item.type}
               startIcon={<StartIcon size={item?.iconSize} />}
               value={value}
-              onChange={onChange}
+              onChange={(e) =>
+                onChange(item.regex ? item.regex(e) : e.target.value)
+              }
+              onBlur={(e) => onChange(e.target.value.trim())}
+              maxLength={item.maxLength}
+              mask={item.mask}
               filled={!errors[item.name] && value !== ''}
               error={errors[item.name]}
             />
           )}
         />
       ))}
-      <Button>Salvar alterações</Button>
-    </React.Fragment>
+      <Button type="submit" loading={isSubmitting}>
+        Salvar alterações
+      </Button>
+    </S.FormContainer>
   );
 };

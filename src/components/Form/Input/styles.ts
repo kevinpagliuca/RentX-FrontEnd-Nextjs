@@ -97,6 +97,13 @@ export const Container = styled.div<ContainerProps>`
         line-height: 0.75rem;
       }
     }
+
+    &:-webkit-autofill {
+      background-clip: text;
+      -webkit-text-fill-color: var(--gray-500);
+      -webkit-box-shadow: 0 0 0 999rem var(--light-red) inset;
+      box-shadow: 0 0 0 999rem var(--light-red) inset;
+    }
   }
 
   span.error {

@@ -1,12 +1,9 @@
-import React from 'react';
-
+import { Layout } from 'components/Layout';
 import { ProfileSchedules } from 'components/ProfileComponents/ProfileSchedules';
+import { ProfileUserData } from 'components/ProfileComponents/ProfileUserData';
 import { parseCookies } from 'nookies';
+import * as S from 'styles/pages/profileStyles';
 import { withSSRAuth } from 'utils/withSSRAuth';
-
-import { Layout } from '../components/Layout';
-import { ProfileUserData } from '../components/ProfileComponents/ProfileUserData';
-import * as S from '../styles/pages/profileStyles';
 
 export default function Profiles() {
   return (

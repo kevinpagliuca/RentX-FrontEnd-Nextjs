@@ -15,7 +15,7 @@ export const Container = styled.div`
   transition: all 0.3s;
 
   &.open {
-    z-index: 99999999;
+    z-index: 2000;
     opacity: 1;
     visibility: visible;
   }

@@ -4,8 +4,9 @@ import { SubmitHandler } from 'react-hook-form';
 import { IconBaseProps } from 'react-icons';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
-import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
+
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { EnvelopeIcon, LockIcon } from '../../assets/Icons';
@@ -42,7 +43,7 @@ export const SignInForm = () => {
   };
 
   return (
-    <S.FormContainer autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+    <S.FormContainer onSubmit={handleSubmit(onSubmit)}>
       <h1>Estamos quase lá.</h1>
       <p>Faça seu login para começar uma experiência incrível.</p>
 
@@ -50,7 +51,7 @@ export const SignInForm = () => {
         <Controller
           control={control}
           name="email"
-          render={({ field: { value = '', onChange } }) => (
+          render={({ field: { value, onChange } }) => (
             <Input
               id="email"
               type="email"
@@ -67,13 +68,12 @@ export const SignInForm = () => {
         <Controller
           control={control}
           name="password"
-          render={({ field: { value = '', onChange } }) => (
+          render={({ field: { value, onChange } }) => (
             <Input
               id="password"
               placeholder="Senha"
               type={isVisiblePass ? 'text' : 'password'}
               required
-              autoComplete="off"
               startIcon={<LockIcon />}
               endIcon={
                 <IconActive

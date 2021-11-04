@@ -5,34 +5,17 @@ import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 
 import { yupResolver } from '@hookform/resolvers/yup';
+import { IUserRegisterFormData } from 'interfaces/forms';
 import { api } from 'services/client';
 import { queryClient } from 'services/reactQuery/queryClient';
+import { registerFormSchema } from 'shared/validators';
 import { ToastifyCustomMessage } from 'styles/ToastifyCustomMessage';
-import * as yup from 'yup';
 
 import { Button } from '../Form/Button';
 import { Input } from '../Form/Input';
 import { AccountCreateModal } from '../Modais/AccountCreate';
 import { formValues } from './formValues';
 import { FormContainer } from './styles';
-
-type RegisterData = {
-  name: string;
-  email: string;
-  driver_license: string;
-  password: string;
-  password_confirmation: string;
-};
-
-const loginFormSchema = yup.object().shape({
-  email: yup.string().email().required(),
-  name: yup.string().required(),
-  driver_license: yup.string().required(),
-  password: yup.string().required().min(6).max(14),
-  password_confirmation: yup
-    .string()
-    .oneOf([null, yup.ref('password')], 'Passwords must match'),
-});
 
 export const SignUpForm = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -42,22 +25,27 @@ export const SignUpForm = () => {
     formState: { errors, isSubmitting },
     control,
     handleSubmit,
-  } = useForm<RegisterData>({
-    resolver: yupResolver(loginFormSchema),
+  } = useForm<IUserRegisterFormData>({
+    resolver: yupResolver(registerFormSchema),
   });
 
   const isLoginValid = Object.keys(errors).length !== 0;
 
   const userRegister = useMutation(
-    async (user: RegisterData) => {
+    async (user: IUserRegisterFormData) => {
       try {
-        await api.post('/register', user);
+        await api.post('/users', user);
         toast.success(
-          <ToastifyCustomMessage message="Registrado com sucesso!" />
+          ToastifyCustomMessage({ message: 'Registrado com sucesso!' })
         );
         setModalIsOpen(true);
-      } catch (error: any) {
-        toast.error(<ToastifyCustomMessage message={error.message} />);
+      } catch (error) {
+        toast.error(
+          ToastifyCustomMessage({ message: error.response.data.message }),
+          {
+            className: 'customToast_dark',
+          }
+        );
       }
     },
     {
@@ -67,7 +55,7 @@ export const SignUpForm = () => {
     }
   );
 
-  const onSubmit: SubmitHandler<RegisterData> = async (values) => {
+  const onSubmit: SubmitHandler<IUserRegisterFormData> = async (values) => {
     await userRegister.mutateAsync(values);
   };
 
@@ -105,7 +93,11 @@ export const SignUpForm = () => {
                   )
                 }
                 value={value}
-                onChange={onChange}
+                onChange={(e) =>
+                  onChange(item.regex ? item.regex(e) : e.target.value)
+                }
+                onBlur={() => onChange(value.trim())}
+                maxLength={item.maxLength}
                 filled={!errors[item.name] && value !== ''}
                 error={errors[item.name]}
               />
@@ -129,6 +121,7 @@ export const SignUpForm = () => {
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const IconActive = ({ isVisiblePass, ...rest }: any) => {
   return isVisiblePass ? <FiEye {...rest} /> : <FiEyeOff {...rest} />;
 };

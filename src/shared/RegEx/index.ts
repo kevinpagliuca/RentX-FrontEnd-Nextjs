@@ -10,7 +10,22 @@ const noSpecialCaracteres = (event: ChangeEvent<HTMLInputElement>) => {
   return event.target.value.replace(noSpecialCaracteresRegex, '');
 };
 
+const usernameRegex = /[^a-zA-Z0-9._]*$/g;
+const usernameReplacer = (event: ChangeEvent<HTMLInputElement>) => {
+  return event.target.value
+    .normalize('NFD')
+    .replace(usernameRegex, '')
+    .toLowerCase();
+};
+
+const emailRegex = /[^a-zA-Z0-9._@]\S*$/g;
+const emailReplacer = (event: ChangeEvent<HTMLInputElement>) => {
+  return event.target.value.replace(emailRegex, '').toLowerCase();
+};
+
 export const TextMask = {
   noSpecialCaracteres,
   textWithAccentAndNumbers,
+  usernameReplacer,
+  emailReplacer,
 };

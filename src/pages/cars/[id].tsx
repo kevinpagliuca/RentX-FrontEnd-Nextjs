@@ -1,11 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 
+import CarDetails from 'components/CarInfoComponents/CarDetails';
+import { CarSlider } from 'components/CarInfoComponents/CarSlider';
+import { Layout } from 'components/Layout';
 import { TabNavigaton } from 'components/TabNavigaton';
-
-import CarDetails from '../../components/CarInfoComponents/CarDetails';
-import { CarSlider } from '../../components/CarInfoComponents/CarSlider';
-import { Layout } from '../../components/Layout';
-import * as S from '../../styles/pages/carsStyles';
+import * as S from 'styles/pages/carsStyles';
 
 export default function CarInfo() {
   return (

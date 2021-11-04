@@ -30,7 +30,7 @@
     "no-console": ["warn"],
     "no-use-before-define": "off",
     "react/react-in-jsx-scope": "off",
-    "react/props-types": "off",
+    "react/prop-types": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "prettier/prettier": "warn",
     "@typescript-eslint/no-unused-vars": "warn",

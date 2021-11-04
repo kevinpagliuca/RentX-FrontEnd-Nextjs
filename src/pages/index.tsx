@@ -1,14 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { LogoIcon } from '../assets/Icons';
-import { Button } from '../components/Form/Button';
+import { LogoIcon } from 'assets/Icons';
+import { Button } from 'components/Form/Button';
 import {
   Container,
   MainContainer,
   SideContainer,
   Content,
-} from '../styles/pages/landingStyles';
+} from 'styles/pages/landingStyles';
 export default function Home() {
   return (
     <div>

@@ -47,9 +47,12 @@ export const TitleContainer = styled.div`
     font-size: 2.25rem;
     line-height: 2.438rem;
     color: var(--gray-500);
+    display: flex;
+    align-items: center;
+    width: 100%;
 
     button {
-      margin-left: 1rem;
+      margin-left: auto;
     }
   }
 
@@ -70,10 +73,6 @@ export const TitleContainer = styled.div`
     text-align: center;
 
     h1 {
-      margin-bottom: 1rem;
-    }
-
-    p {
       margin-bottom: 1rem;
     }
   }

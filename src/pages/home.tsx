@@ -1,24 +1,25 @@
 import { useState } from 'react';
-import { AiOutlineReload } from 'react-icons/ai';
+import { FiRefreshCw } from 'react-icons/fi';
 
 import { GetServerSideProps } from 'next';
 
 import { ButtonBase, CircularProgress } from '@material-ui/core';
 import { FilterDrawer } from 'components/FilterDrawer';
+import { useGetAvailableCars } from 'hooks/useCars';
+import { RGetAllCars } from 'interfaces/cars';
+import CarsService from 'services/CarsService';
 import * as S from 'styles/pages/homeStyles';
 
+import { CardCar } from '../components/CardCar';
 import { Layout } from '../components/Layout';
-import { ProdutCard } from '../components/ProdutCard';
-import { Product } from '../hooks/useProducts';
-import { getAllProducts, useProducts } from '../hooks/useProducts';
 
 interface ProdutsCardProps {
-  product: Product[];
+  cars: RGetAllCars;
 }
 
-export default function Home({ product }: ProdutsCardProps) {
-  const { data, isLoading, isFetching, refetch } = useProducts({
-    initialData: product,
+export default function Home({ cars }: ProdutsCardProps) {
+  const { data, refetch, isFetching } = useGetAvailableCars({
+    initialData: cars,
   });
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -34,10 +35,11 @@ export default function Home({ product }: ProdutsCardProps) {
         <S.TitleContainer>
           <h1>
             Carros disponíveis
-            <ButtonBase centerRipple>
+            <ButtonBase centerRipple onClick={() => refetch()}>
               {!isFetching ? (
-                <AiOutlineReload size={24} />
+                <FiRefreshCw size={24} />
               ) : (
+                // <CircularProgress color="inherit" size={24} />
                 <CircularProgress color="inherit" size={24} />
               )}
             </ButtonBase>
@@ -45,8 +47,8 @@ export default function Home({ product }: ProdutsCardProps) {
         </S.TitleContainer>
 
         <S.ContainerItems>
-          {data?.map((item) => (
-            <ProdutCard key={item.id} product={item} />
+          {data?.cars.map((item) => (
+            <CardCar key={item.id} car={item} />
           ))}
         </S.ContainerItems>
       </S.Container>
@@ -54,12 +56,12 @@ export default function Home({ product }: ProdutsCardProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const res = await getAllProducts();
+export const getServerSideProps: GetServerSideProps = async () => {
+  const cars = await CarsService.getAll();
 
   return {
     props: {
-      product: res,
+      cars,
     },
   };
 };

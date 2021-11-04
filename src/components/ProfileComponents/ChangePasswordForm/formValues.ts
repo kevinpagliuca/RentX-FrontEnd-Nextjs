@@ -1,6 +1,6 @@
 type FormValues = {
   id: string;
-  name: string;
+  name: 'current_password' | 'new_password' | 'new_password_confirmation';
   type: 'select' | 'text' | 'password';
   placeholder?: string;
   withEndIcon?: boolean;
@@ -22,7 +22,7 @@ export const formValues: FormValues[] = [
   },
   {
     id: '3',
-    name: 'password_confirmation',
+    name: 'new_password_confirmation',
     type: 'password',
     placeholder: 'Repetir senha',
     withEndIcon: true,

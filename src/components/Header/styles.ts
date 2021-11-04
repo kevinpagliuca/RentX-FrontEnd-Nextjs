@@ -1,5 +1,5 @@
 import { darken } from 'polished';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 interface HeaderContentProps {
   custom?: boolean;
@@ -7,11 +7,13 @@ interface HeaderContentProps {
 
 export const HeaderContainer = styled.div`
   display: flex;
-  width: 100%;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 5rem);
   position: fixed;
-  max-height: 5rem;
   height: 5rem;
   background: var(--white);
+  border-bottom: 1px solid var(--gray-100);
   z-index: 100;
 
   > .buttonLink {
@@ -31,10 +33,10 @@ export const HeaderContent = styled.div<HeaderContentProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.75rem 7.25rem;
+  padding: 0rem 7.25rem;
+  height: 100%;
   width: 100%;
   color: var(--gray-500);
-  border-bottom: 1px solid var(--gray-100);
 
   div.userHeaderContainer {
     display: flex;

@@ -1,12 +1,13 @@
-import axios from 'axios';
 import { GetServerSidePropsContext } from 'next';
+
+import axios from 'axios';
 import { parseCookies } from 'nookies';
 
 export function setupAPI(ctx?: GetServerSidePropsContext) {
   const { '@rentX:token': token } = parseCookies(ctx);
 
   const api = axios.create({
-    baseURL: 'http://localhost:3333/',
+    baseURL: 'http://localhost:3333',
     headers: {
       Authorization: `Bearer ${token}` || '',
     },
@@ -16,3 +17,11 @@ export function setupAPI(ctx?: GetServerSidePropsContext) {
 }
 
 export const api = setupAPI();
+
+export const setAuthentication = (token: string) => {
+  api.defaults.headers.Authorization = `Bearer ${token}`;
+};
+
+export const removeAuthentication = () => {
+  api.defaults.headers.Authorization = '';
+};

@@ -1,8 +1,10 @@
 export interface IUser {
   id: string;
+  username: string;
   email: string;
-  fullName: string;
-  drive_license: string;
+  name: string;
+  driver_license: string;
+  isAdmin?: boolean;
 }
 
 export type IUserSignInRequestDTO = {
@@ -11,7 +13,14 @@ export type IUserSignInRequestDTO = {
 
 export type IUserSignUpRequestDTO = {
   password: string;
-} & Pick<IUser, 'email' | 'drive_license' | 'fullName'>;
+} & Pick<IUser, 'email' | 'driver_license' | 'name'>;
+
+export type IUserUpdateRequestDTO = Omit<IUser, 'id' | 'isAdmin'>;
+
+export type IUserChangePasswordDTO = {
+  current_password: string;
+  new_password: string;
+};
 
 export type IUserSignInResponseDTO = {
   user: IUser;

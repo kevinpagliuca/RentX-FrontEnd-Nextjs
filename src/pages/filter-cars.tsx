@@ -5,24 +5,26 @@ import { GetServerSideProps } from 'next';
 
 import { ButtonBase } from '@material-ui/core';
 import { CalendarIcon, FilterIcon } from 'assets/Icons';
+import { CardCar } from 'components/CardCar';
 import { FilterDrawer } from 'components/FilterDrawer';
 import { Layout } from 'components/Layout';
 import { RentalDateSelectModal } from 'components/Modais/RentalDateSelectModal';
-import { ProdutCard } from 'components/ProdutCard';
 import { SelectRentalRange } from 'components/SelectRentalRange';
 import { useRentalDate } from 'contexts/RentalDateContext';
 import { formatUSADateToBRDate } from 'helpers/dates';
-import { getAllProducts, Product, useProducts } from 'hooks/useProducts';
+import { useGetAvailableCars } from 'hooks/useCars';
+import { RGetAllCars } from 'interfaces/cars';
+import CarsService from 'services/CarsService';
 import * as S from 'styles/pages/filterCarsStyles';
 
 interface FilterCarsProps {
-  product: Product[];
+  cars: RGetAllCars;
 }
 
-export default function FilterCars({ product }: FilterCarsProps) {
+export default function FilterCars({ cars }: FilterCarsProps) {
   const { isSelected, toggleApply, fromDayDate, toDayDate } = useRentalDate();
-  const { data } = useProducts({
-    initialData: product,
+  const { data } = useGetAvailableCars({
+    initialData: cars,
   });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isDateRangeModalOpen, setIsDateRangeModalOpen] = useState(false);
@@ -39,7 +41,7 @@ export default function FilterCars({ product }: FilterCarsProps) {
           <h1>
             {!isSelected
               ? 'Escolha uma data de início e fim do aluguel '
-              : `${data?.length} carros encontrados`}
+              : `${data?.cars.length} carros encontrados`}
           </h1>
           {isSelected && (
             <S.SearchContainer>
@@ -70,8 +72,8 @@ export default function FilterCars({ product }: FilterCarsProps) {
           <SelectRentalRange />
         ) : (
           <S.ContainerItems>
-            {data?.map((item) => (
-              <ProdutCard key={item.id} product={item} />
+            {data?.cars.map((item) => (
+              <CardCar key={item.id} car={item} />
             ))}
             <RentalDateSelectModal
               modalIsOpen={isDateRangeModalOpen}
@@ -90,11 +92,10 @@ export default function FilterCars({ product }: FilterCarsProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await getAllProducts();
-
+  const cars = await CarsService.getAll();
   return {
     props: {
-      product: res,
+      cars,
     },
   };
 };

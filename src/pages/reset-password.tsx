@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
-import { ForgotPasswordForm } from '../components/ForgotPasswordForm';
-import { Layout } from '../components/Layout';
-import { Container } from '../styles/pages/authStyles';
+import { ForgotPasswordForm } from 'components/ForgotPasswordForm';
+import { Layout } from 'components/Layout';
+import { Container } from 'styles/pages/authStyles';
 
 export default function ResetPassword() {
   return (

@@ -6,7 +6,6 @@ import React, {
 } from 'react';
 
 import { CircularProgress } from '@material-ui/core';
-import { IntrinsicElementsKeys } from 'styled-components';
 
 import * as S from './styles';
 
@@ -15,7 +14,6 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   containerClass?: string;
   variant?: 'transparent' | 'red' | 'green' | undefined;
-  as?: IntrinsicElementsKeys;
   loading?: boolean;
   loadingSize?: number;
 }
@@ -25,7 +23,6 @@ const ButtonBase: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
     children,
     containerClass,
     variant,
-    as,
     loading,
     loadingSize,
     ...rest

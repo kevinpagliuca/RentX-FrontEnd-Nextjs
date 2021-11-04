@@ -1,6 +1,7 @@
 import {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -9,33 +10,23 @@ import { toast } from 'react-toastify';
 
 import router from 'next/router';
 
-import { AxiosError } from 'axios';
-import { destroyCookie, parseCookies, setCookie } from 'nookies';
+import {
+  IUser,
+  IUserChangePasswordDTO,
+  IUserSignInRequestDTO,
+  IUserUpdateRequestDTO,
+} from 'interfaces/auth';
+import { destroyCookie, parseCookies } from 'nookies';
+import AuthService from 'services/AuthService';
 
-import { api } from '../services/client';
 import { ToastifyCustomMessage } from '../styles/ToastifyCustomMessage';
 
-type User = {
-  CNH: string;
-  email: string;
-  id: number;
-  name: string;
-};
-
-interface SignInResponse {
-  accessToken: string;
-  user: User;
-}
-
-type LoginCredentialsType = {
-  email: string;
-  password: string;
-};
-
 interface AuthContextData {
-  user: User | undefined;
-  signIn: (user: LoginCredentialsType) => Promise<void>;
+  user: IUser | undefined;
+  signIn: (user: IUserSignInRequestDTO) => Promise<void>;
   signOut: () => Promise<void>;
+  updateUser: (user: Omit<IUser, 'id'>) => Promise<void>;
+  changePassword: (passwords: IUserChangePasswordDTO) => Promise<void>;
   isAuthenticated: boolean;
 }
 
@@ -46,92 +37,57 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<User | undefined>();
+  const [user, setUser] = useState<IUser | undefined>();
   const isAuthenticated = !!user;
 
   useEffect(() => {
-    const {
-      '@rentX:token': token,
-      '@rentX:userId': userId,
-      '@rentX:userData': userData,
-    } = parseCookies();
+    (async () => {
+      const { '@rentX:token': token, '@rentX:userData': userData } =
+        parseCookies();
 
-    if (userData && token && userId) {
-      const userFormated = JSON.parse(userData);
-      setUser(userFormated);
-    }
-
-    if (token && userId && !userData) {
-      try {
-        api
-          .get(`/users/${userId}`)
-          .then(({ data }) => {
-            const userFormated = {
-              CNH: data.CNH,
-              email: data.email,
-              name: data.name,
-              id: data.number,
-            };
-            setUser(userFormated);
-          })
-          .catch(() => {
-            setUser(undefined);
-            destroyCookie(undefined, '@rentX:token');
-          });
-      } catch (err) {
-        setUser(undefined);
-        destroyCookie(undefined, '@rentX:token');
-        return;
+      if (userData && token) {
+        const userFormated: IUser = JSON.parse(userData);
+        setUser(userFormated);
       }
-    }
+
+      if (token && !userData) {
+        try {
+          const data = await AuthService.getAuthUser(token);
+          setUser(data.user);
+        } catch (err) {
+          setUser(undefined);
+          destroyCookie(undefined, '@rentX:token');
+        }
+      }
+    })();
   }, []);
 
-  const signIn = async (user: LoginCredentialsType) => {
+  const signIn = useCallback(async (user: IUserSignInRequestDTO) => {
     try {
-      const { data } = await api.post<SignInResponse>('/login', user);
-      setCookie(undefined, '@rentX:token', data.accessToken, {
-        maxAge: 60 * 60 * 24 * 30, // 30 days
-        path: '/',
-      });
-      setCookie(undefined, '@rentX:userId', String(data.user.id), {
-        maxAge: 60 * 60 * 24 * 30, // 30 days
-        path: '/',
-      });
-      const userFormated = {
-        CNH: data.user.CNH,
-        email: data.user.email,
-        name: data.user.name,
-        id: data.user.id,
-      };
-      setUser(userFormated);
-      setCookie(undefined, '@rentX:userData', JSON.stringify(userFormated), {
-        maxAge: 60 * 60 * 24 * 30, // 30 days
-        path: '/',
-      });
-      api.defaults.headers['Authorization'] = `Bearer ${data.accessToken}`;
+      const data = await AuthService.signIn(user);
+      setUser(data.user);
       toast.success(
-        <ToastifyCustomMessage title="Login" message="Logado com sucesso!" />,
+        ToastifyCustomMessage({
+          title: 'Login',
+          message: 'Logado com sucesso!',
+        }),
         {
-          autoClose: 2500,
           className: 'customToast_dark',
         }
       );
       router.push('/profile');
     } catch (error) {
-      const err = error as AxiosError;
-      toast.error(`${err?.response?.data || err.message}`, {
-        autoClose: 2500,
+      toast.error(ToastifyCustomMessage({ message: error.message }), {
         className: 'customToast_dark',
       });
     }
-  };
+  }, []);
 
-  const signOut = async () => {
-    new Promise((resolve, reject) => {
+  const signOut = useCallback(async () => {
+    await new Promise((resolve, reject) => {
       destroyCookie(undefined, '@rentX:token');
       destroyCookie(undefined, '@rentX:userId');
       destroyCookie(undefined, '@rentX:userData');
-
       const { '@rentX:token': token } = parseCookies();
       if (!token) {
         setUser(undefined);
@@ -141,7 +97,43 @@ export function AuthProvider({ children }: AuthProviderProps) {
         reject({ message: 'Cannot delete cookies!' });
       }
     });
-  };
+  }, []);
+
+  const updateUser = useCallback(async (payload: IUserUpdateRequestDTO) => {
+    try {
+      const data = await AuthService.updateUser(payload);
+      setUser(data);
+      toast.success(
+        ToastifyCustomMessage({ message: 'Dados atualizados com sucesso!' }),
+        {
+          className: 'customToast_dark',
+        }
+      );
+    } catch (err) {
+      setUser(undefined);
+      destroyCookie(undefined, '@rentX:token');
+      router.push('/home');
+    }
+  }, []);
+
+  const changePassword = useCallback(
+    async (payload: IUserChangePasswordDTO) => {
+      try {
+        await AuthService.changePassword(payload);
+        toast.success(
+          ToastifyCustomMessage({ message: 'Senha alterada com sucesso' }),
+          {
+            className: 'customToast_dark',
+          }
+        );
+      } catch (err) {
+        toast.error(ToastifyCustomMessage({ message: err.message }), {
+          className: 'customToast_dark',
+        });
+      }
+    },
+    []
+  );
 
   return (
     <AuthContext.Provider
@@ -149,6 +141,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         user,
         signIn,
         signOut,
+        updateUser,
+        changePassword,
         isAuthenticated,
       }}
     >

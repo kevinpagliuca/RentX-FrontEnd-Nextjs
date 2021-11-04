@@ -25,7 +25,6 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   {
     placeholder,
     containerClassName = undefined,
-    className,
     startIcon,
     endIcon,
     id,
@@ -48,9 +47,9 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
           className: 'endIcon',
         })}
       {mask ? (
-        <InputMask mask={mask} maskChar="" id={id} {...rest} />
+        <InputMask mask={mask} maskChar="" id={id} {...rest} ref={ref} />
       ) : (
-        <input {...rest} ref={ref} id={id} />
+        <input {...rest} id={id} ref={ref} />
       )}
       {!!placeholder && <label htmlFor={id}>{placeholder}</label>}
       {!!error && <span className="error">{error.message}</span>}
