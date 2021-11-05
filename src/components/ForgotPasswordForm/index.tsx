@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import * as yup from 'yup';
 
 import { EnvelopeIcon } from '../../assets/Icons';

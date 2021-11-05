@@ -13,7 +13,6 @@ export const useGetAvailableCars = (options?: UseQueryOptions) => {
     },
     ...options,
   });
-
   const data = items as RGetAllCars;
   return { data, ...rest };
 };

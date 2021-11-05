@@ -4,7 +4,7 @@ export interface IUser {
   email: string;
   name: string;
   driver_license: string;
-  isAdmin?: boolean;
+  is_admin?: boolean;
 }
 
 export type IUserSignInRequestDTO = {
@@ -36,5 +36,8 @@ export interface IAuthContextData {
   user: IUser | undefined;
   signIn: (user: IUserSignInRequestDTO) => Promise<void>;
   signOut: () => Promise<void>;
+  updateUser: (user: Omit<IUser, 'id'>) => Promise<void>;
+  changePassword: (passwords: IUserChangePasswordDTO) => Promise<void>;
   isAuthenticated: boolean;
+  isAdmin?: boolean;
 }

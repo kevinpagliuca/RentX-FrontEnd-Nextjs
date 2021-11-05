@@ -8,11 +8,9 @@ export function setupAPI(ctx?: GetServerSidePropsContext) {
 
   const api = axios.create({
     baseURL: 'http://localhost:3333',
-    headers: {
-      Authorization: `Bearer ${token}` || '',
-    },
   });
 
+  if (token) api.defaults.headers.Authorization = `Bearer ${token}`;
   return api;
 }
 

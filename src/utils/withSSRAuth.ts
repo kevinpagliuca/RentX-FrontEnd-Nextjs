@@ -3,15 +3,16 @@ import {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
 } from 'next';
+
 import { destroyCookie, parseCookies } from 'nookies';
 
 export function withSSRAuth<P>(fn: GetServerSideProps<P>): GetServerSideProps {
   return async (
     ctx: GetServerSidePropsContext
   ): Promise<GetServerSidePropsResult<P>> => {
-    const cookies = parseCookies(ctx);
+    const { '@rentX:token': token } = parseCookies(ctx);
 
-    if (!cookies['@rentX:token']) {
+    if (!token) {
       destroyCookie(ctx, '@rentX:token');
       return {
         redirect: {

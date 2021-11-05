@@ -4,7 +4,7 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { IUserRegisterFormData } from 'interfaces/forms';
 import { api } from 'services/client';
 import { queryClient } from 'services/reactQuery/queryClient';

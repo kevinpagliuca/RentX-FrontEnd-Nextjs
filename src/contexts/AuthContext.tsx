@@ -15,22 +15,14 @@ import {
   IUserChangePasswordDTO,
   IUserSignInRequestDTO,
   IUserUpdateRequestDTO,
+  IAuthContextData,
 } from 'interfaces/auth';
 import { destroyCookie, parseCookies } from 'nookies';
 import AuthService from 'services/AuthService';
 
 import { ToastifyCustomMessage } from '../styles/ToastifyCustomMessage';
 
-interface AuthContextData {
-  user: IUser | undefined;
-  signIn: (user: IUserSignInRequestDTO) => Promise<void>;
-  signOut: () => Promise<void>;
-  updateUser: (user: Omit<IUser, 'id'>) => Promise<void>;
-  changePassword: (passwords: IUserChangePasswordDTO) => Promise<void>;
-  isAuthenticated: boolean;
-}
-
-export const AuthContext = createContext({} as AuthContextData);
+export const AuthContext = createContext({} as IAuthContextData);
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -39,6 +31,7 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<IUser | undefined>();
   const isAuthenticated = !!user;
+  const isAdmin = !!user?.is_admin;
 
   useEffect(() => {
     (async () => {
@@ -77,9 +70,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
       );
       router.push('/profile');
     } catch (error) {
-      toast.error(ToastifyCustomMessage({ message: error.message }), {
-        className: 'customToast_dark',
-      });
+      toast.error(
+        ToastifyCustomMessage({ message: error.message, title: 'Login' }),
+        {
+          className: 'customToast_dark',
+        }
+      );
     }
   }, []);
 
@@ -144,6 +140,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         updateUser,
         changePassword,
         isAuthenticated,
+        isAdmin,
       }}
     >
       {children}

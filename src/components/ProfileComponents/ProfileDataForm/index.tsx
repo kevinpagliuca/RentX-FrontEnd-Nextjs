@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { Button } from 'components/Form/Button';
 import { Input } from 'components/Form/Input';
 import { useAuth } from 'contexts/AuthContext';

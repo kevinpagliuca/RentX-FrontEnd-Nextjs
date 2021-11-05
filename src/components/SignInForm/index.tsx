@@ -6,7 +6,7 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 import Link from 'next/link';
 
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import * as yup from 'yup';
 
 import { EnvelopeIcon, LockIcon } from '../../assets/Icons';

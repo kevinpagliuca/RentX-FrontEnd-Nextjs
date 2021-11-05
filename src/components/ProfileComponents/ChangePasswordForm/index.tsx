@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { LockIcon } from 'assets/Icons';
 import { Button } from 'components/Form/Button';
 import { Input } from 'components/Form/Input';

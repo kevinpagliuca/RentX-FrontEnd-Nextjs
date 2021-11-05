@@ -13,23 +13,24 @@ import { Error500 } from 'shared/errors';
 
 import { api, setAuthentication } from './client';
 
-type AuthCookies = {
+type AuthCookiesProps = {
   token?: string;
   user?: IUser;
 };
 
-const setAuthCookies = ({ token, user }: AuthCookies) => {
+const setAuthCookies = ({ token, user }: AuthCookiesProps) => {
   if (token) {
     setCookie(undefined, '@rentX:token', token, {
       maxAge: 60 * 60 * 24 * 30, // 30 days
       path: '/',
     });
   }
-  delete user.isAdmin;
-  setCookie(undefined, '@rentX:userData', JSON.stringify(user), {
-    maxAge: 60 * 60 * 24 * 30, // 30 days
-    path: '/',
-  });
+  if (user) {
+    setCookie(undefined, '@rentX:userData', JSON.stringify(user), {
+      maxAge: 60 * 60 * 24 * 30, // 30 days
+      path: '/',
+    });
+  }
 };
 
 class AuthService {
@@ -87,9 +88,9 @@ class AuthService {
 
   async getAuthUser(token: string) {
     try {
+      setAuthCookies({ token });
       const { data } = await api.get<IUserSignInResponseDTO>('/me');
-      setAuthCookies({ token: data.token, user: data.user });
-      setAuthentication(token);
+      setAuthentication(data.token);
       return data;
     } catch (error) {
       const err = error as AxiosError;
@@ -110,7 +111,6 @@ class AuthService {
   async updateUser(payload: IUserUpdateRequestDTO) {
     try {
       const { data } = await api.put<IUser>(`/user/update`, payload);
-      setAuthCookies({ user: data });
       return data;
     } catch (error) {
       const err = error as AxiosError;
