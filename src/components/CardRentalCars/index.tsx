@@ -1,5 +1,6 @@
-import { RightArrowIcon } from 'assets/Icons';
 import Image from 'next/image';
+
+import { RightArrowIcon } from 'assets/Icons';
 
 import { CarIconType } from '../CarIconType';
 import * as S from './styles';
@@ -24,7 +25,6 @@ export const CardRentalCars = () => {
       </S.ContentContainer>
       <S.FooterContet>
         <h1>PERÍODO DO ALUGUEL</h1>
-
         <div>
           <span>18 Jul 2021</span>
           <RightArrowIcon />

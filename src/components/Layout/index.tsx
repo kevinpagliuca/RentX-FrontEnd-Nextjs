@@ -1,9 +1,10 @@
-import { ReactElement, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import Head from 'next/head';
 
 import { Loader } from 'components/Loader';
 import { useLoader } from 'contexts/LoaderContext';
+import { ICars } from 'interfaces/cars';
 
 import { Header } from '../Header';
 import { Sidebar } from '../Sidebar';
@@ -15,7 +16,7 @@ interface LayoutProps {
   children: ReactNode;
   noHeader?: boolean;
   whiteBackground?: boolean;
-  customHeader?: boolean;
+  customHeader?: ICars;
 }
 
 export const Layout = ({
@@ -37,7 +38,7 @@ export const Layout = ({
 
         <S.Wrapper>
           {!noHeader && !customHeader && <Header headerTitle={headerTitle} />}
-          {customHeader && <Header custom />}
+          {!!customHeader && <Header customHeader={customHeader} />}
           <S.Content>
             <Loader open={customLoader} />
             {children}

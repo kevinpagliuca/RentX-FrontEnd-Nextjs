@@ -1,41 +1,48 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 23.875rem;
-  height: 13rem;
   display: grid;
-  grid-template-columns: 0fr 0fr;
-  gap: 0.5rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
 `;
 
-export const ContainerContent = styled.div`
-  padding: 0rem 1rem 0rem 0rem;
+export const BoxContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  background: var(--gray-200);
-  width: 11.75rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: var(--gray-100);
   height: 4rem;
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
 `;
 
-export const ContainerIcon = styled.div`
+export const IconBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 4rem;
-  width: 4rem;
+  min-height: 4rem;
+  min-width: 4rem;
   border-right: 1px solid var(--white);
+  color: var(--gray-500);
 `;
 
-export const ContainerLabel = styled.div`
+export const DetailBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Inter', sans-serif;
-  font-size: 1.125rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 1.375rem;
-  letter-spacing: 0em;
-  color: var(--gray-500);
+  width: 100%;
+  padding: 0 1rem;
+  text-align: center;
+
+  p,
+  span {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.375rem;
+    color: var(--gray-400);
+  }
 `;

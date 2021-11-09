@@ -30,8 +30,19 @@ export const ButtonComponent = styled.button<ButtonComponentProps>`
   text-decoration: none;
   transition: all 0.3s;
 
-  ${(props) =>
-    props.variant === 'transparent' &&
+  &:disabled {
+    opacity: 0.5;
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+
+  &:not(:disabled):hover {
+    background: ${darken(0.2, '#DC1637')};
+  }
+
+  ${({ variant }) =>
+    variant === 'transparent' &&
     css`
       background: transparent;
       border-color: var(--gray-300);
@@ -41,19 +52,15 @@ export const ButtonComponent = styled.button<ButtonComponentProps>`
         background: var(--gray-300) !important;
       }
     `}
+  ${({ variant }) =>
+    variant === 'green' &&
+    css`
+      background: var(--green-500) !important;
+      background: transparent;
+      border-color: var(--green-500);
 
-  &:disabled {
-    opacity: 0.5;
-    &:hover {
-      cursor: not-allowed;
-    }
-  }
-
-  /* input:not([value=""]) ~ span {
-    top: 4px;
-  }  mesmo nivel*/
-
-  &:not(:disabled):hover {
-    background: ${darken(0.2, '#DC1637')};
-  }
+      &:hover {
+        filter: brightness(0.9);
+      }
+    `}
 `;

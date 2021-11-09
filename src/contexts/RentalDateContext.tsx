@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { DayRange } from '@hassanmojab/react-modern-calendar-datepicker';
 import { dateFormatter } from 'components/SelectRentalRange/helper/dateFormatter';
 import { format } from 'date-fns';
+import { diffDays } from 'helpers/dates';
 import { ToastifyCustomMessage } from 'styles/ToastifyCustomMessage';
 
 interface IRentalDateContextData {
@@ -18,6 +19,7 @@ interface IRentalDateContextData {
   setIsSelected: React.Dispatch<React.SetStateAction<boolean>>;
   toggleApply: () => void;
   isValidContinue: boolean;
+  diffDaysResult: number;
 }
 
 export const RentalDateContext = React.createContext(
@@ -44,6 +46,9 @@ export const RentalDateProvider = ({ children }: IRentalDateProviderProps) => {
 
   const [isSelected, setIsSelected] = React.useState(false);
 
+  const diffDaysResult =
+    toDayDate && fromDayDate ? diffDays(toDayDate, fromDayDate) : 0;
+
   React.useEffect(() => {
     const formatedDates = dateFormatter(dateRange);
     setToDayText(formatedDates.toDateText);
@@ -51,6 +56,7 @@ export const RentalDateProvider = ({ children }: IRentalDateProviderProps) => {
     setFromDayDate(formatedDates.fromDate);
     setToDayDate(formatedDates.toDate);
   }, [dateRange]);
+
   const isValidContinue = !!toDayDate && !!fromDayDate;
 
   const toggleApply = () => {
@@ -80,6 +86,7 @@ export const RentalDateProvider = ({ children }: IRentalDateProviderProps) => {
         setIsSelected,
         toggleApply,
         isValidContinue,
+        diffDaysResult,
       }}
     >
       {children}

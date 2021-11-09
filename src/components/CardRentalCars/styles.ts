@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Container = styled.article`
   display: flex;
   flex-direction: column;
-  max-width: 37.5rem;
   width: 100%;
 `;
 

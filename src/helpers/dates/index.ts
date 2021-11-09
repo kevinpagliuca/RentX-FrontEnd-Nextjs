@@ -7,3 +7,10 @@ export const formatUSADateToBRDate = (date: string) => {
     locale: ptBR,
   });
 };
+
+export const diffDays = (startDate: string, endDate: string) => {
+  const diff = Math.abs(
+    new Date(startDate).getTime() - new Date(endDate).getTime()
+  );
+  return Math.ceil(diff / (1000 * 3600 * 24));
+};

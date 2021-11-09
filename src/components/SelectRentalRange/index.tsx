@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 
 import { Calendar } from '@hassanmojab/react-modern-calendar-datepicker';
 import { Button } from 'components/Form/Button';
@@ -30,10 +30,6 @@ export const SelectRentalRange = ({
     }
     toggleApply();
   }, [onRequestClose, toggleApply]);
-
-  useEffect(() => {
-    return;
-  }, []);
 
   return (
     <S.Container>

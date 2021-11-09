@@ -2,21 +2,42 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 
 import CarDetails from 'components/CarInfoComponents/CarDetails';
 import { CarSlider } from 'components/CarInfoComponents/CarSlider';
+import { TabNavigaton } from 'components/CarInfoComponents/TabNavigaton';
 import { Layout } from 'components/Layout';
-import { TabNavigaton } from 'components/TabNavigaton';
+import { useGetCarById } from 'hooks/useCars';
+import { ICars } from 'interfaces/cars';
+import CarsService from 'services/CarsService';
+import { nextRedirect } from 'shared/redirect';
 import * as S from 'styles/pages/carsStyles';
 
-export default function CarInfo() {
+interface CarInfoProps {
+  car: ICars;
+  carId: string;
+}
+
+export default function CarInfo({ car, carId }: CarInfoProps) {
+  const { data } = useGetCarById({
+    id: carId,
+    options: {
+      initialData: car,
+    },
+  });
+
   return (
-    <Layout title="Informações | RentX" noHeader whiteBackground customHeader>
+    <Layout
+      title="Informações | RentX"
+      noHeader
+      whiteBackground
+      customHeader={data}
+    >
       <S.Container>
-        <S.Content>
+        <S.ContentContainer>
           <CarSlider />
-          <S.Aside>
-            <CarDetails />
-            <TabNavigaton />
-          </S.Aside>
-        </S.Content>
+          <S.CarDetailsContainer>
+            <CarDetails details={data} />
+            <TabNavigaton details={data} />
+          </S.CarDetailsContainer>
+        </S.ContentContainer>
       </S.Container>
     </Layout>
   );
@@ -29,9 +50,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  if (!ctx.params.id) nextRedirect();
+  const car = await CarsService.getById(ctx.params.id as string);
   return {
-    props: {},
-    revalidate: 60 * 60 * 4, // 4 hours
+    props: {
+      car,
+      carId: ctx.params.id,
+    },
+    revalidate: 60 * 60 * 2, // 2 hours
   };
 };

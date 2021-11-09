@@ -5,23 +5,24 @@ import Link from 'next/link';
 
 import { ButtonBase } from '@material-ui/core';
 import { CustomHeader } from 'components/CarInfoComponents/CustomHeader';
+import { ICars } from 'interfaces/cars';
 
 import { useAuth } from '../../contexts/AuthContext';
 import * as S from './styles';
 
 interface HeaderProps {
   headerTitle?: string;
-  custom?: boolean;
+  customHeader?: ICars;
 }
 
-export const Header = ({ headerTitle, custom }: HeaderProps) => {
+export const Header = ({ headerTitle, customHeader }: HeaderProps) => {
   const { isAuthenticated, user, signOut } = useAuth();
   async function handleLogout() {
     await signOut();
   }
   return (
     <S.HeaderContainer>
-      {!custom ? (
+      {!customHeader ? (
         <S.HeaderContent>
           <h1>{headerTitle || 'Início'}</h1>
           {!isAuthenticated ? (
@@ -51,7 +52,7 @@ export const Header = ({ headerTitle, custom }: HeaderProps) => {
         </S.HeaderContent>
       ) : (
         <S.HeaderContent custom>
-          <CustomHeader />
+          <CustomHeader details={customHeader} />
         </S.HeaderContent>
       )}
     </S.HeaderContainer>

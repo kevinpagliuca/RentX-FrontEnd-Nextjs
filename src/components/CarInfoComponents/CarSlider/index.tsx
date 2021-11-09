@@ -2,8 +2,6 @@ import { useRef } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import Slider, { Settings, CustomArrowProps } from 'react-slick';
 
-import Image from 'next/image';
-
 import { ButtonBase } from '@material-ui/core';
 
 import * as S from './styles';
@@ -35,31 +33,13 @@ export const CarSlider = () => {
     <S.Container>
       <Slider {...settings} ref={sliderRef}>
         <div className="carouselCarContent">
-          <Image
-            src="/Lambo.png"
-            width={650}
-            height={430}
-            quality={100}
-            className=""
-          />
+          <img src="/Lambo.png" />
         </div>
         <div className="carouselCarContent">
-          <Image
-            src="/Lambo.png"
-            width={650}
-            height={430}
-            quality={100}
-            className=""
-          />
+          <img src="/Lambo.png" />
         </div>
         <div className="carouselCarContent">
-          <Image
-            src="/Lambo.png"
-            width={650}
-            height={430}
-            quality={100}
-            className=""
-          />
+          <img src="/Lambo.png" />
         </div>
       </Slider>
     </S.Container>

@@ -1,19 +1,34 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  max-width: 44rem;
-  margin: 0 auto;
-  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 12px;
+  max-width: 600px;
+  gap: 1.5rem;
+  height: fit-content;
+  background: var(--gray-50);
+  border: 2px solid var(--gray-100);
 
-  img {
-    padding: 0 3rem !important;
-    height: 100%;
+  > div {
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+
+    .carouselCarContent {
+      padding: 0 1rem;
+    }
   }
 
-  .carouselCarContent {
-    display: inline-block;
+  img {
+    padding: 5rem 2rem;
+    object-fit: contain;
+    height: 100%;
     width: 100%;
-    max-width: 44rem;
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   @media (max-width: 1200px) {
@@ -24,12 +39,12 @@ export const Container = styled.div`
 `;
 
 export const SliderFooter = styled.div`
-  gap: 3rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 3rem;
+  justify-content: space-between;
+  gap: 3rem;
+  padding: 1rem;
+  border-top: 2px solid var(--gray-100);
 
   > button {
     position: relative;
