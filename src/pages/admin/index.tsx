@@ -1,10 +1,13 @@
+import { NavigationHeader } from 'components/AdminComponents/NavigationHeader';
 import { Layout } from 'components/Layout';
+import * as S from 'styles/pages/adminStyles';
 import { withSSRAdmin } from 'utils/withSSRAdmin';
-
 export default function Dashboard() {
   return (
     <Layout title="Dashboard | RentX">
-      <h1>Dashboard</h1>
+      <S.Container>
+        <NavigationHeader />
+      </S.Container>
     </Layout>
   );
 }

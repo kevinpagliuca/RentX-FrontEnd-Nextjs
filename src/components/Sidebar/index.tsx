@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
 import { FiUser } from 'react-icons/fi';
+import { RiShieldUserLine } from 'react-icons/ri';
+
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { ButtonBase } from '@material-ui/core';
 import { useAuth } from 'contexts/AuthContext';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 import { CarIcon, HomeIcon, XLogoIcon } from '../../assets/Icons';
 import { ActiveLink } from './ActiveLink';
@@ -12,7 +13,7 @@ import * as S from './styles';
 
 export const Sidebar = () => {
   const { asPath } = useRouter();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isAdmin } = useAuth();
   const userPaths = ['/auth', '/register', '/profile'];
 
   return (
@@ -28,7 +29,13 @@ export const Sidebar = () => {
             <HomeIcon />
           </ButtonBase>
         </ActiveLink>
-        <ActiveLink activeClassName="active" href="/filter-cars">
+        <ActiveLink
+          activeClassName="active"
+          href="/filter-cars"
+          aditionalClassName={
+            asPath.includes('/cars/') ? 'activated' : undefined
+          }
+        >
           <ButtonBase>
             <CarIcon />
           </ButtonBase>
@@ -44,6 +51,14 @@ export const Sidebar = () => {
             <FiUser size={24} />
           </ButtonBase>
         </ActiveLink>
+
+        {isAdmin && (
+          <ActiveLink activeClassName="active" href="/admin">
+            <ButtonBase>
+              <RiShieldUserLine size={28} />
+            </ButtonBase>
+          </ActiveLink>
+        )}
       </nav>
     </S.SidebarContainer>
   );

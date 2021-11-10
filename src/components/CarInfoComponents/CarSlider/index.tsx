@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
-import Slider, { Settings, CustomArrowProps } from 'react-slick';
+import Slider, { Settings } from 'react-slick';
 
 import { ButtonBase } from '@material-ui/core';
 

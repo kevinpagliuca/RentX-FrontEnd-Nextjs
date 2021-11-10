@@ -1,8 +1,6 @@
-import { useState } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
 
 import { CalendarIcon } from 'assets/Icons';
-import { RentalDateSelectModal } from 'components/Modais/RentalDateSelectModal';
 import { useRentalDate } from 'contexts/RentalDateContext';
 import { ICars } from 'interfaces/cars';
 
@@ -10,11 +8,11 @@ import * as S from './styles';
 
 interface PeriodTabProps {
   details: ICars;
+  openDateRangeModal: () => void;
 }
 
-export const PeriodTab = ({ details }: PeriodTabProps) => {
+export const PeriodTab = ({ details, openDateRangeModal }: PeriodTabProps) => {
   const { fromDayText, toDayText, diffDaysResult } = useRentalDate();
-  const [isDateRangeModalOpen, setIsDateRangeModalOpen] = useState(false);
 
   return (
     <S.Container>
@@ -35,15 +33,11 @@ export const PeriodTab = ({ details }: PeriodTabProps) => {
           {toDayText ? <strong>{toDayText}</strong> : <p>Não selecionado</p>}
         </S.DateItemContainer>
 
-        <S.CalendarIconContainer onClick={() => setIsDateRangeModalOpen(true)}>
+        <S.CalendarIconContainer onClick={openDateRangeModal}>
           <CalendarIcon color="var(--main)" />
         </S.CalendarIconContainer>
       </S.RangeDateContainer>
 
-      <RentalDateSelectModal
-        modalIsOpen={isDateRangeModalOpen}
-        onRequestClose={() => setIsDateRangeModalOpen(false)}
-      />
       <S.TotalPrice>
         <div>
           <span>TOTAL</span>

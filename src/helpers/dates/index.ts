@@ -8,6 +8,12 @@ export const formatUSADateToBRDate = (date: string) => {
   });
 };
 
+export const formatDateToDateText = (date: Date) => {
+  return format(add(new Date(date), { days: 1 }), 'dd MMM yyyy', {
+    locale: ptBR,
+  });
+};
+
 export const diffDays = (startDate: string, endDate: string) => {
   const diff = Math.abs(
     new Date(startDate).getTime() - new Date(endDate).getTime()

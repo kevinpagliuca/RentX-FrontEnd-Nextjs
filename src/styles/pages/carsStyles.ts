@@ -12,11 +12,11 @@ export const Container = styled.div`
 export const ContentContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: auto 0;
   gap: 2rem;
   width: 100%;
   overflow: hidden;
   position: relative;
-  margin: auto 0;
 `;
 
 export const CarDetailsContainer = styled.div`

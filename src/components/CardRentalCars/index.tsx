@@ -1,22 +1,29 @@
 import Image from 'next/image';
 
 import { RightArrowIcon } from 'assets/Icons';
+import { formatDateToDateText } from 'helpers/dates';
+import { IRental } from 'interfaces/rentals';
 
 import { CarIconType } from '../CarIconType';
 import * as S from './styles';
-export const CardRentalCars = () => {
+
+interface CardRentalCarsProps {
+  rental: IRental;
+}
+
+export const CardRentalCars = ({ rental }: CardRentalCarsProps) => {
   return (
     <S.Container>
       <S.ContentContainer>
         <S.CarInformationsContainer>
           <S.InfoGroup>
-            <h1>AUDI</h1>
-            <strong>RS 5 Coupé</strong>
+            <h1>{rental.car.brand}</h1>
+            <strong>{rental.car.name}</strong>
           </S.InfoGroup>
           <S.InfoGroup>
             <h1>AO DIA</h1>
-            <strong className="red">R$ 340</strong>
-            <CarIconType type="alcohol" className="iconType" />
+            <strong className="red">R$ {rental.car.daily_rate}</strong>
+            <CarIconType type={rental.car.fuel_type} className="iconType" />
           </S.InfoGroup>
         </S.CarInformationsContainer>
         <S.CarImageContainer>
@@ -26,9 +33,9 @@ export const CardRentalCars = () => {
       <S.FooterContet>
         <h1>PERÍODO DO ALUGUEL</h1>
         <div>
-          <span>18 Jul 2021</span>
+          <span>{formatDateToDateText(rental.start_date)}</span>
           <RightArrowIcon />
-          <span>20 Jul 2021</span>
+          <span>{formatDateToDateText(rental.end_date)}</span>
         </div>
       </S.FooterContet>
     </S.Container>

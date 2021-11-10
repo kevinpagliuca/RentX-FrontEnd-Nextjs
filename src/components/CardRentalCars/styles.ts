@@ -28,6 +28,7 @@ export const InfoGroup = styled.div`
   flex-direction: column;
   justify-content: center;
   position: relative;
+  padding-right: 2rem;
 
   h1 {
     font-size: 0.875rem;
@@ -58,7 +59,7 @@ export const CarImageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 4rem;
+  margin-left: auto;
   max-height: 10rem;
   flex: 1;
   position: relative;

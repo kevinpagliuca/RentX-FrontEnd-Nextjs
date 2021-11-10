@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { ButtonBase } from '@material-ui/core';
 import { Button } from 'components/Form/Button';
+import { RentalDateSelectModal } from 'components/Modais/RentalDateSelectModal';
 import { useRentalDate } from 'contexts/RentalDateContext';
 import { ICars } from 'interfaces/cars';
 
@@ -14,17 +15,16 @@ interface TabNavigatonProps {
 
 export const TabNavigaton = ({ details }: TabNavigatonProps) => {
   const [activeTab, setActiveTab] = useState<'about' | 'period'>('about');
-  const [tabHeight, setTabHeight] = useState(0);
   const { fromDayDate, toDayDate } = useRentalDate();
-  const tabRef = useRef<HTMLDivElement>(null);
+  const [isDateRangeModalOpen, setIsDateRangeModalOpen] = useState(false);
 
   function toggleNavigation(tab: 'about' | 'period') {
     setActiveTab(tab);
   }
 
-  useEffect(() => {
-    setTabHeight(tabRef.current?.clientHeight);
-  }, [activeTab]);
+  const handleOpenModal = useCallback(() => {
+    setIsDateRangeModalOpen(true);
+  }, []);
 
   return (
     <React.Fragment>
@@ -43,17 +43,22 @@ export const TabNavigaton = ({ details }: TabNavigatonProps) => {
         </ButtonBase>
       </S.NavigationContainer>
 
-      <S.TabsContent ref={tabRef} height={tabHeight}>
+      <S.TabsContent>
         <div className={activeTab === 'about' ? 'show' : 'hide'}>
           <p>{details?.description || 'Nenhuma informação'}</p>
         </div>
-        <div className={activeTab === 'period' ? 'show' : 'hide'}>
-          <PeriodTab details={details} />
+        <div className={activeTab === 'period' ? 'show period' : 'hide period'}>
+          <PeriodTab details={details} openDateRangeModal={handleOpenModal} />
         </div>
       </S.TabsContent>
 
+      <RentalDateSelectModal
+        modalIsOpen={isDateRangeModalOpen}
+        onRequestClose={() => setIsDateRangeModalOpen(false)}
+      />
+
       <Button
-        // onClick={() => setIsModalOpen(!isModalOpen)}
+        onClick={!fromDayDate && !toDayDate ? handleOpenModal : () => null}
         containerClass="buttonRent"
         variant={fromDayDate && toDayDate ? 'green' : 'red'}
       >

@@ -4,10 +4,6 @@ type NavigationContainerProps = {
   activeTab: 'about' | 'period';
 };
 
-type TabsContentProps = {
-  height: number;
-};
-
 export const NavigationContainer = styled.div<NavigationContainerProps>`
   margin-top: 3rem;
   display: flex;
@@ -53,13 +49,9 @@ export const NavigationContainer = styled.div<NavigationContainerProps>`
   }
 `;
 
-export const TabsContent = styled.div<TabsContentProps>`
+export const TabsContent = styled.div`
   width: 100%;
-  flex: 1;
-  ${({ height }) =>
-    css`
-      height: ${height ? height : 0} !important;
-    `};
+  margin: auto;
   transition: all 0.3s;
 
   > div {
@@ -68,21 +60,25 @@ export const TabsContent = styled.div<TabsContentProps>`
     color: var(--gray-400);
     font-family: 'Inter', sans-serif;
     font-size: 1rem;
-    overflow: hidden;
+    overflow: hidden auto;
+    max-height: 12.5rem;
     transition: all 0.3s;
 
     &.hide {
-      height: 0px;
+      height: 0;
     }
 
     &.show {
       visibility: visible;
       opacity: 1;
       padding: 1rem 0;
-      ${({ height }) =>
-        css`
-          height: ${height ? height : 0} !important;
-        `};
+      height: 12.5rem;
+
+      &.period {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
   }
 `;

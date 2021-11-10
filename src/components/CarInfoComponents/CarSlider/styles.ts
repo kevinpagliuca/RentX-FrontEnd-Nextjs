@@ -8,6 +8,7 @@ export const Container = styled.div`
   max-width: 600px;
   gap: 1.5rem;
   height: fit-content;
+  margin: auto 0;
   background: var(--gray-50);
   border: 2px solid var(--gray-100);
 

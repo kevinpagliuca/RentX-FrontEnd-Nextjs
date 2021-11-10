@@ -5,6 +5,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin: auto 0;
 `;
 
 export const RangeDateContainer = styled.div`
