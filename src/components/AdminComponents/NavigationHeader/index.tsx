@@ -1,40 +1,43 @@
-import { useEffect, useState } from 'react';
-
-import { useRouter } from 'next/router';
+import { Dispatch, memo, SetStateAction, useEffect, useState } from 'react';
 
 import { ButtonBase } from '@material-ui/core';
 
-import { ActiveLink } from './ActiveLink';
 import { linksValues } from './linksValues';
 import * as S from './styles';
 
-export const NavigationHeader = () => {
-  const { asPath } = useRouter();
+interface NavigationHeaderProps {
+  tabActive: 'cars' | 'categories' | undefined;
+  setTabActive: Dispatch<SetStateAction<'cars' | 'categories' | undefined>>;
+}
+
+const NavigationHeaderBase = ({
+  tabActive,
+  setTabActive,
+}: NavigationHeaderProps) => {
   const [translateX, setTranslateX] = useState(0);
 
   useEffect(() => {
-    asPath === '/admin' && setTranslateX(0);
-    asPath === '/admin?cars' && setTranslateX(100);
-    asPath === '/admin?categories' && setTranslateX(200);
-  }, [asPath]);
+    !tabActive && setTranslateX(0);
+    tabActive === 'cars' && setTranslateX(100);
+    tabActive === 'categories' && setTranslateX(200);
+  }, [tabActive]);
 
   return (
     <S.Container>
       <S.ContentContainer translateX={translateX}>
         {linksValues.map(({ Icon, ...link }) => (
-          <ActiveLink
+          <ButtonBase
             key={link.id}
-            activeClassName={link.activeClassName}
-            href={link.link}
-            shouldMatchExactHref={link.shouldMatchExactHref}
+            onClick={() => setTabActive(link.tab)}
+            className={tabActive === link.tab ? 'active' : undefined}
           >
-            <ButtonBase>
-              <Icon size={link.iconSize} />
-              {link.name}
-            </ButtonBase>
-          </ActiveLink>
+            <Icon size={link.iconSize} />
+            {link.name}
+          </ButtonBase>
         ))}
       </S.ContentContainer>
     </S.Container>
   );
 };
+
+export const NavigationHeader = memo(NavigationHeaderBase);

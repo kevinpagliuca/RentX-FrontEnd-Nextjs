@@ -6,36 +6,30 @@ import { CarIcon } from 'assets/Icons';
 interface ILinksValues {
   id: string;
   name: 'Dashboard' | 'Carros' | 'Categorias';
-  link: '/admin' | '/admin/cars' | '/admin/categories';
-  activeClassName: 'active';
+  tab: undefined | 'cars' | 'categories';
   Icon?: IconType;
   iconSize?: number;
-  shouldMatchExactHref?: boolean;
 }
 
 export const linksValues: ILinksValues[] = [
   {
     id: '1',
     name: 'Dashboard',
-    link: '/admin',
-    activeClassName: 'active',
+    tab: undefined,
     Icon: AiOutlinePieChart,
     iconSize: 32,
-    shouldMatchExactHref: true,
   },
   {
     id: '2',
     name: 'Carros',
-    link: '/admin/cars',
-    activeClassName: 'active',
+    tab: 'cars',
     Icon: CarIcon,
     iconSize: 28,
   },
   {
     id: '3',
     name: 'Categorias',
-    link: '/admin/categories',
-    activeClassName: 'active',
+    tab: 'categories',
     Icon: AiOutlineAppstore,
     iconSize: 32,
   },

@@ -26,7 +26,7 @@ export const ContentContainer = styled.div<ContentContainerProps>`
     width: 33.33%;
     height: 3px;
     background: var(--main);
-    transition: all 0.15s;
+    transition: all 1s;
   }
 
   ${({ translateX }) => css`
