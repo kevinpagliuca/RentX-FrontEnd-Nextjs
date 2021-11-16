@@ -6,6 +6,7 @@ import { RiSearchLine } from 'react-icons/ri';
 import { CardUser } from 'components/AdminComponents/CardUser';
 import { AdminInput } from 'components/AdminComponents/Input';
 import { AdminLayout } from 'components/AdminComponents/Layout';
+import { ModalUserCreate } from 'components/AdminComponents/Users/ModalUserCreate';
 import { ModalUserEdit } from 'components/AdminComponents/Users/ModalUserEdit';
 import { IUser } from 'interfaces/auth';
 import { usersService } from 'services/UsersService';
@@ -15,6 +16,7 @@ export default function AdminUsers() {
   const [users, setUsers] = useState<IUser[]>([]);
   const [userSelected, setUserSelected] = useState<IUser>();
   const [editUserModalOpen, setEditUserModalOpen] = useState(false);
+  const [createUserModalOpen, setCreateUserModalOpen] = useState(false);
   const { control } = useForm();
 
   useEffect(() => {
@@ -60,7 +62,7 @@ export default function AdminUsers() {
               />
             </S.SearchContainer>
 
-            <button>
+            <button onClick={() => setCreateUserModalOpen(true)}>
               <FiUserPlus size={32} />
             </button>
           </S.ContentHeader>
@@ -72,6 +74,11 @@ export default function AdminUsers() {
               toggleModal={handleOpenEditUserModal}
             />
           ))}
+
+          <ModalUserCreate
+            modalIsOpen={createUserModalOpen}
+            onRequestClose={() => setCreateUserModalOpen(false)}
+          />
 
           <ModalUserEdit
             modalIsOpen={editUserModalOpen}
