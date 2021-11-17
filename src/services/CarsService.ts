@@ -29,6 +29,15 @@ class CarsService {
       throw new Error('Erro ao criar o carro!');
     }
   }
+
+  async getAllByAdmin() {
+    try {
+      const { data } = await api.get<RGetAllCars>('/cars/list/all');
+      return data;
+    } catch {
+      throw new Error('Erro ao listar carros.');
+    }
+  }
 }
 
 export default new CarsService();

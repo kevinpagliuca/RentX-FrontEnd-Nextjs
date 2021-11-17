@@ -43,7 +43,6 @@ export default function AdminUsers() {
       <S.Container>
         <S.ContentContainer>
           <h1>Usuários</h1>
-
           <S.ContentHeader>
             <S.SearchContainer>
               <Controller
