@@ -8,12 +8,6 @@ export const Container = styled.div`
   margin: 0 auto 2.5rem;
 `;
 
-export const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-`;
-
 export const ContentHeader = styled.div`
   display: flex;
   align-items: center;
@@ -41,4 +35,10 @@ export const SearchContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+`;
+
+export const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 `;

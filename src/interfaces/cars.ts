@@ -5,6 +5,20 @@ type CarCategory = {
   created_at: string;
 };
 
+export enum FuelTypes {
+  GASOLINE = 'Gasolina',
+  ALCOHOL = 'Álcool',
+  DIESEL = 'Diesel',
+  ELECTRIC = 'Elétrico',
+  HYBRID = 'Híbrido',
+  FLEX = 'Flex',
+}
+
+export enum TransmissionsType {
+  MANUAL = 'Manual',
+  AUTOMATIC = 'Automático',
+}
+
 export interface ICars {
   id: string;
   available: boolean;
@@ -17,8 +31,8 @@ export interface ICars {
   category: CarCategory;
   seats: number;
   max_velocity?: number;
-  fuel_type: 'Gasolina' | 'Álcool' | 'Híbrido' | 'Flex' | 'Elétrico';
-  transmission_type: 'Manual' | 'Automático';
+  fuel_type: FuelTypes;
+  transmission_type: TransmissionsType;
   horse_power?: number;
   created_at: string;
 }

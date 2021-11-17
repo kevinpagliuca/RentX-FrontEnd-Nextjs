@@ -9,15 +9,11 @@ export const Container = styled.div`
   gap: 1.5rem;
 `;
 
-export const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 export const ContentHeader = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2rem;
 
   > button {
     display: flex;
@@ -39,5 +35,12 @@ export const SearchContainer = styled.div`
   max-width: 20rem;
   display: flex;
   align-items: center;
+  width: 100%;
+`;
+
+export const ContentContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem;
   width: 100%;
 `;

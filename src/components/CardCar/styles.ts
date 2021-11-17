@@ -9,6 +9,7 @@ export const Container = styled.div`
   max-height: 18rem;
   background: var(--white);
   border: 1px solid var(--gray-100);
+  border-radius: 8px;
   box-sizing: border-box;
 
   box-shadow: 1px 3px 6px rgb(0 0 0 / 5%);

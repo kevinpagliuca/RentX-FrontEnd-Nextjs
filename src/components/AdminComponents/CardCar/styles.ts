@@ -8,11 +8,9 @@ export const Container = styled.div`
   max-width: 22.5rem;
   max-height: 18rem;
   background: var(--gray-500);
-  border: 1px solid var(--gray-400);
   border-radius: 8px;
   box-sizing: border-box;
 
-  box-shadow: 0px 0px 8px rgb(255, 255, 255, 0.25);
   width: 100%;
 
   header {
