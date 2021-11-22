@@ -1,11 +1,8 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
-import { LeafIcon, LightningIcon, WaterIcon } from 'assets/Icons';
-import { formatToBRL } from 'helpers/formatToBRL';
 import { ICars } from 'interfaces/cars';
 
-import { Container, ContentFooter } from './styles';
+import * as S from './styles';
 
 interface CardCarProps {
   car: ICars;
@@ -13,27 +10,18 @@ interface CardCarProps {
 
 export const AdminCardCar = ({ car }: CardCarProps) => {
   return (
-    <Link href={`/cars/${car.id}`}>
-      <Container>
-        <header>
-          <Image src="/Lambo.png" height={150} width={300} />
-        </header>
-        <footer>
-          <ContentFooter>
-            <p>{car.brand}</p>
-            <h1>{car.name}</h1>
-          </ContentFooter>
-          <ContentFooter>
-            <p>Ao dia</p>
-            <h1 className="rentAmount">{formatToBRL(car.daily_rate)}</h1>
-          </ContentFooter>
-          <ContentFooter>
-            {car.fuel_type === 'Álcool' && <LeafIcon />}
-            {car.fuel_type === 'Elétrico' && <LightningIcon />}
-            {car.fuel_type === 'Gasolina' && <WaterIcon />}
-          </ContentFooter>
-        </footer>
-      </Container>
-    </Link>
+    <S.Container>
+      <span className="carImage">
+        <Image
+          src="/Lambo.png"
+          height={150}
+          width={150}
+          quality={100}
+          objectFit="cover"
+        />
+      </span>
+
+      <S.ContentContainer></S.ContentContainer>
+    </S.Container>
   );
 };

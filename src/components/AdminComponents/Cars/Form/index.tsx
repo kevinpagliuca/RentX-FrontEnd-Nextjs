@@ -8,6 +8,7 @@ import {
 } from 'react-hook-form';
 
 import { AdminInput } from 'components/AdminComponents/Input';
+import { AdminSelect } from 'components/AdminComponents/Select';
 import { Switcher } from 'components/Switcher';
 
 import { formValues } from './formValues';
@@ -39,12 +40,14 @@ export const CarsForm = ({ control, errors }: UserFormProps) => {
               );
             } else if (item.type === 'select') {
               return (
-                <Switcher
-                  label={item.placeholder}
+                <AdminSelect
+                  placeholder={item.placeholder}
                   id={item.name}
                   onChange={onChange}
                   value={value}
-                  placement="right"
+                  filled={value !== ''}
+                  options={item.options}
+                  error={errors[item.name]}
                 />
               );
             } else if (item.type === 'boolean') {

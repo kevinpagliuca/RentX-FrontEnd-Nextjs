@@ -14,6 +14,7 @@ interface FormValues {
     | 'description';
   placeholder?: string;
   type: 'text' | 'select' | 'boolean' | 'textarea';
+  options?: string[];
 }
 
 export const formValues: FormValues[] = [
@@ -52,18 +53,21 @@ export const formValues: FormValues[] = [
     name: 'fuel_type',
     placeholder: 'Tipo de combustível',
     type: 'select',
+    options: ['Flex', 'Gasolina', 'Alcool', 'Elétrico', 'Híbrido'],
   },
   {
     id: '7',
     name: 'transmission_type',
     placeholder: 'Transmissão',
     type: 'select',
+    options: ['Manual', 'Automática'],
   },
   {
     id: '8',
     name: 'category_id',
     placeholder: 'Categoria',
     type: 'select',
+    options: ['Hatch', 'Sedan', 'SUV'],
   },
   {
     id: '9',
