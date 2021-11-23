@@ -36,7 +36,7 @@ const setAuthCookies = ({ token, user }: AuthCookiesProps) => {
 class AuthService {
   async signIn({ email, password }: IUserSignInRequestDTO) {
     try {
-      const { data } = await api.post<IUserSignInResponseDTO>('/auth', {
+      const { data } = await api.post<IUserSignInResponseDTO>('/user/auth', {
         email,
         password,
       });
