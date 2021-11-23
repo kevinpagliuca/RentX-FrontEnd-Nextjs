@@ -4,6 +4,8 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 
+import { useRouter } from 'next/router';
+
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { IUserRegisterFormData } from 'interfaces/forms';
 import { api } from 'services/client';
@@ -20,10 +22,12 @@ import { FormContainer } from './styles';
 export const SignUpForm = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isVisiblePass, setIsVisiblePass] = useState(false);
+  const { push } = useRouter();
 
   const {
     formState: { errors, isSubmitting },
     control,
+    reset,
     handleSubmit,
   } = useForm<IUserRegisterFormData>({
     resolver: yupResolver(registerFormSchema),
@@ -34,11 +38,13 @@ export const SignUpForm = () => {
   const userRegister = useMutation(
     async (user: IUserRegisterFormData) => {
       try {
-        await api.post('/users', user);
+        await api.post('/user/register', user);
         toast.success(
           ToastifyCustomMessage({ message: 'Registrado com sucesso!' })
         );
         setModalIsOpen(true);
+        reset();
+        push('/auth');
       } catch (error) {
         toast.error(
           ToastifyCustomMessage({ message: error.response.data.message }),
