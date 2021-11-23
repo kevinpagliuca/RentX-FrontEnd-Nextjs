@@ -26,28 +26,16 @@ export const CategoryForm = ({ control, errors }: UserFormProps) => {
           name={item.name}
           control={control}
           render={({ field: { value, onChange } }) => {
-            if (item.name !== 'is_admin') {
-              return (
-                <AdminInput
-                  id={item.name}
-                  placeholder={item.placeholder}
-                  value={value}
-                  onChange={onChange}
-                  filled={value !== ''}
-                  error={errors[item.name]}
-                />
-              );
-            } else {
-              return (
-                <Switcher
-                  label="Administrador"
-                  id="is_admin"
-                  onChange={onChange}
-                  value={value}
-                  placement="right"
-                />
-              );
-            }
+            return (
+              <AdminInput
+                id={item.name}
+                placeholder={item.placeholder}
+                value={value}
+                onChange={onChange}
+                filled={value !== ''}
+                error={errors[item.name]}
+              />
+            );
           }}
         />
       ))}
