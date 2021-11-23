@@ -1,5 +1,4 @@
-import { DayRange } from 'react-modern-calendar-datepicker';
-
+import { DayRange } from '@hassanmojab/react-modern-calendar-datepicker';
 import { add, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 

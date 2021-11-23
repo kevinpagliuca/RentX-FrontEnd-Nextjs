@@ -31,6 +31,7 @@ export interface ICars {
   category: CarCategory;
   seats: number;
   max_velocity?: number;
+  // fuel_type: 'Gasolina' | 'Álcool' | 'Híbrido' | 'Flex' | 'Elétrico';
   fuel_type: FuelTypes;
   transmission_type: TransmissionsType;
   horse_power?: number;

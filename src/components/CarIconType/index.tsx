@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { IconsProps, LeafIcon, LightningIcon, WaterIcon } from 'assets/Icons';
+import { FuelTypes } from 'interfaces/cars';
 
 interface ICarIconTypeProps extends IconsProps {
-  type: 'Gasolina' | 'Álcool' | 'Híbrido' | 'Flex' | 'Elétrico';
+  type: FuelTypes;
 }
 
 export const CarIconType = ({ type, ...rest }: ICarIconTypeProps) => {

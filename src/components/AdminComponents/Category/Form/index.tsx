@@ -8,7 +8,6 @@ import {
 } from 'react-hook-form';
 
 import { AdminInput } from 'components/AdminComponents/Input';
-import { Switcher } from 'components/Switcher';
 
 import { formValues } from './formValues';
 
