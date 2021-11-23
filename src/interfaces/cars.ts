@@ -1,4 +1,4 @@
-type CarCategory = {
+export type CarCategory = {
   id: string;
   name: string;
   description: string;
