@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FiX } from 'react-icons/fi';
 import Modal, { Styles } from 'react-modal';
 
+import { AdminSelect } from 'components/AdminComponents/Select';
 import { Button } from 'components/Form/Button';
 
 import { CarsForm } from '../Form';
