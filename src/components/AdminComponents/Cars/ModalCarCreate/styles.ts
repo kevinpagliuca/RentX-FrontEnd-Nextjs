@@ -36,7 +36,7 @@ export const ModalHeader = styled.div`
   }
 `;
 
-export const ModalContent = styled.div`
+export const ModalContent = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;

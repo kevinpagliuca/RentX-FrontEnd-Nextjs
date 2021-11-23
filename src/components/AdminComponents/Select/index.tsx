@@ -1,98 +1,94 @@
-import {
-  cloneElement,
-  forwardRef,
-  ForwardRefRenderFunction,
-  InputHTMLAttributes,
-  MouseEvent,
-  ReactElement,
-  useState,
-} from 'react';
+import { ReactElement, useEffect, useRef, useState } from 'react';
 import { FieldError } from 'react-hook-form';
+import { FiChevronDown } from 'react-icons/fi';
 
-import { Fade } from '@material-ui/core';
+import { ClickAwayListener } from '@material-ui/core';
 
 import * as S from './styles';
 
-interface SelectProps extends InputHTMLAttributes<HTMLInputElement> {
+interface SelectProps {
   placeholder?: string;
   groupClassName?: string;
-  containerClassName?: string;
   startIcon?: ReactElement;
   endIcon?: ReactElement;
   error?: FieldError;
-  filled?: boolean;
+  onChange: (value: string | number | readonly string[]) => void;
+  value: string | number | readonly string[];
   id: string;
   options: string[];
+  defaultValue?: string | number | readonly string[];
 }
-const SelectBase: ForwardRefRenderFunction<HTMLInputElement, SelectProps> = (
-  {
-    placeholder,
-    containerClassName = undefined,
-    startIcon,
-    endIcon,
-    id,
-    error,
-    filled,
-    options,
-    ...rest
-  },
-  ref
-) => {
+
+export const AdminSelect = ({
+  placeholder,
+  startIcon,
+  error,
+  options,
+  onChange,
+  ...rest
+}: SelectProps) => {
+  const menuRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const [isOpen, setIsOpen] = useState(false);
   const [optionSelected, setOptionSelected] = useState(rest.defaultValue || '');
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = !!anchorEl;
 
-  const handleClick = (event: MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const [isReverse, setIsReverse] = useState(false);
 
-  const handleSelectItem = (item: string) => {
-    setOptionSelected(item);
-    handleClose();
-  };
+  useEffect(() => {
+    const onScroll = (e) => {
+      const topOffset = containerRef?.current?.offsetTop;
+      const relativeOffset = topOffset - e.target?.scrollTop;
+      const windowHeight = window?.innerHeight;
+      if (relativeOffset > windowHeight / 2.5) {
+        setIsReverse(true);
+      } else {
+        setIsReverse(false);
+      }
+    };
+    window.addEventListener('scroll', onScroll, true);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    onChange(optionSelected);
+  }, [optionSelected, onChange]);
 
   return (
-    <S.Container className={containerClassName} filled={filled} error={!!error}>
-      {!!startIcon &&
-        cloneElement(startIcon, {
-          className: 'startIcon',
-        })}
-
-      {!!endIcon &&
-        cloneElement(endIcon, {
-          className: 'endIcon',
-        })}
-      <input hidden ref={ref} value={rest.value} />
-      <div onClick={handleClick} id={id}>
-        {optionSelected && (
-          <span className="optionSelected">{optionSelected}</span>
-        )}
-      </div>
-
-      {options && (
-        <S.SelectMenu
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          parentWidth={anchorEl?.clientWidth}
-          PopoverClasses={{ paper: 'menuItem' }}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-          TransitionComponent={Fade}
+    <S.Container ref={containerRef}>
+      <ClickAwayListener onClickAway={() => setIsOpen(false)}>
+        <S.ContentContainer
+          optionSelected={!!optionSelected}
+          onClick={() => setIsOpen(!isOpen)}
         >
-          {options.map((item) => (
-            <S.SelectMenuItem key={item} onClick={() => handleSelectItem(item)}>
-              {item}
-            </S.SelectMenuItem>
-          ))}
-        </S.SelectMenu>
-      )}
-      {!!placeholder && <label htmlFor={id}>{placeholder}</label>}
+          {!!startIcon && startIcon}
+          <span>{placeholder}</span>
+          {optionSelected && <p>{optionSelected}</p>}
+          <FiChevronDown className="select-icon" size={20} />
+        </S.ContentContainer>
+      </ClickAwayListener>
       {!!error && <span className="error">{error.message}</span>}
+
+      <S.MenuOptionsContainer
+        isOpen={isOpen}
+        isReverse={isReverse}
+        ref={menuRef}
+      >
+        {options.map((item) => (
+          <S.MenuItem
+            key={item}
+            isSelected={item === optionSelected}
+            onClick={() => setOptionSelected(item)}
+          >
+            {item}
+          </S.MenuItem>
+        ))}
+        {optionSelected && (
+          <S.ClearMenuItemSelected onClick={() => setOptionSelected('')}>
+            Limpar
+          </S.ClearMenuItemSelected>
+        )}
+      </S.MenuOptionsContainer>
     </S.Container>
   );
 };
-
-export const AdminSelect = forwardRef(SelectBase);

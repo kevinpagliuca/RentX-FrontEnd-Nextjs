@@ -45,7 +45,6 @@ export const CarsForm = ({ control, errors }: UserFormProps) => {
                   id={item.name}
                   onChange={onChange}
                   value={value}
-                  filled={value !== ''}
                   options={item.options}
                   error={errors[item.name]}
                 />
