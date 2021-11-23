@@ -91,6 +91,7 @@ export const Container = styled.div<ContainerProps>`
 
     &:not([value='']) {
       padding-top: 1.25rem;
+
       & ~ label {
         transform: translateY(-0.75rem);
         font-size: 0.75rem;

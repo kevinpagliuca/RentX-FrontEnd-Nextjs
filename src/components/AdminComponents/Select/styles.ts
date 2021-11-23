@@ -1,125 +1,66 @@
-import { Menu, MenuItem } from '@material-ui/core';
 import styled, { css } from 'styled-components';
 
-interface ContainerProps {
-  filled?: boolean;
-  error?: boolean;
+interface ContentContainerProps {
+  optionSelected: boolean;
 }
 
-interface SelectMenuProps {
-  parentWidth: number;
+interface MenuOptionsContainerProps {
+  isOpen: boolean;
+  isReverse: boolean;
 }
 
-export const Container = styled.div<ContainerProps>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+interface MenuItemProps {
+  isSelected: boolean;
+}
+
+export const Container = styled.div`
   width: 100%;
-  position: relative;
-  color: var(--gray-400);
+  border: 2px solid var(--gray-500);
+  background: var(--gray-450);
+  color: var(--gray-100);
+  border-radius: 4px;
   transition: all 0.3s;
+  position: relative;
+`;
 
-  ${(props) =>
-    props.filled &&
-    css`
-      .startIcon {
-        color: var(--main) !important;
-      }
-    `}
+export const ContentContainer = styled.div<ContentContainerProps>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem 1.5rem;
+  font: 400 1rem 'Archivo', sans-serif;
+  line-height: 1rem;
+  height: 3.5rem !important;
+  position: relative;
+  width: 100%;
+  color: var(--gray-350);
+  cursor: pointer;
 
-  ${(props) =>
-    props.error &&
-    css`
-      padding-bottom: 1.25rem;
-      > div {
-        border-color: var(--main) !important;
-      }
-    `}
-
-
-  .startIcon {
-    position: absolute;
-    left: 1rem;
-    color: inherit;
-
-    & ~ div {
-      padding-left: 3rem;
-    }
-
-    & ~ label {
-      left: 3rem;
-    }
-  }
-  .endIcon {
-    position: absolute;
-    right: 1rem;
-    color: inherit;
-    & ~ div {
-      //proximo no mesmo nivel
-      padding-right: 3rem;
-    }
-  }
-
-  label {
-    font: 400 1rem 'Inter', sans-serif;
-    position: absolute;
-    left: 1.6rem;
-    color: var(--gray-350);
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-    user-select: none;
-  }
-
-  &:focus-within {
-    label {
-      transform: translateY(-0.75rem);
-      font-size: 10px;
-      line-height: 10px;
-      font-weight: 500;
-    }
-  }
-
-  > div {
-    width: 100%;
-    border: 2px solid var(--gray-500);
-    background: var(--gray-450);
-    color: var(--gray-100);
-    border-radius: 4px;
-    height: 3.5rem;
-    padding: 0.5rem 1.5rem;
-    font: 400 1rem 'Archivo', sans-serif;
-    line-height: 1rem;
-    position: relative;
-    cursor: pointer;
+  > span {
     transition: all 0.3s;
+    font-size: 1rem;
+    line-height: 1rem;
+    position: absolute;
+  }
 
-    .optionSelected {
-      font: 400 1rem 'Archivo', sans-serif;
-      display: flex;
-      align-items: center;
-      width: 100%;
-      padding-top: 0.25rem;
-    }
+  > p {
+    padding: 1rem 0 0;
+    color: var(--gray-100);
+  }
 
-    &:focus {
-      padding-top: 1.25rem;
-    }
-
-    &:not([value='']) {
-      padding-top: 1.25rem;
-      & ~ label {
+  ${({ optionSelected }) =>
+    optionSelected &&
+    css`
+      > span {
         transform: translateY(-0.75rem);
         font-size: 0.75rem;
         line-height: 0.75rem;
       }
-    }
+    `}
 
-    &:-webkit-autofill {
-      background-clip: text;
-      -webkit-text-fill-color: var(--gray-500);
-      -webkit-box-shadow: 0 0 0 999rem var(--light-red) inset;
-      box-shadow: 0 0 0 999rem var(--light-red) inset;
-    }
+  .select-icon {
+    position: absolute;
+    right: 0.25rem;
   }
 
   span.error {
@@ -131,33 +72,76 @@ export const Container = styled.div<ContainerProps>`
   }
 `;
 
-export const SelectMenu = styled(Menu)<SelectMenuProps>`
-  .menuItem {
-    background: var(--gray-450);
-    color: var(--gray-100);
-    margin: 0.5rem 0;
-    border: 2px solid var(--gray-500);
+export const MenuOptionsContainer = styled.div<MenuOptionsContainerProps>`
+  ${({ isOpen, isReverse }) => css`
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    ${isReverse ? 'bottom: calc(100% + 0.5rem);' : 'top: calc(100% + 0.5rem);'}
+    width: 100%;
+    padding: 0.5rem 0;
+
+    background: var(--gray-500);
+    color: var(--gray-200);
+    border-radius: 5px;
+
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-0.5rem);
     transition: all 0.3s;
-    ${({ parentWidth }) => css`
-      width: ${parentWidth + 4}px;
-    `};
 
-    ul {
-      padding: 0;
-      li {
-        padding: 0.5rem 1rem;
-        transition: all 0.3s;
-
-        & + li {
-          border-top: 1px solid var(--gray-400);
-        }
-
-        &:hover {
-          background: var(--gray-500);
-        }
-      }
-    }
-  }
+    ${isOpen &&
+    css`
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    `}
+  `}
 `;
 
-export const SelectMenuItem = styled(MenuItem)``;
+export const MenuItem = styled.div<MenuItemProps>`
+  ${({ isSelected }) => css`
+    display: flex;
+    align-items: center;
+    line-height: 2.25rem;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Archivo', sans-serif;
+    color: var(--gray-100);
+    padding: 0 1rem;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s;
+
+    ${isSelected &&
+    css`
+      background: var(--gray-500);
+      color: var(--gray-100);
+    `}
+
+    &:hover {
+      background: var(--gray-350);
+      color: var(--gray-100);
+    }
+  `}
+`;
+
+export const ClearMenuItemSelected = styled.div`
+  display: flex;
+  align-items: center;
+  line-height: 2.25rem;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Archivo', sans-serif;
+  color: var(--main);
+  padding: 0 1rem;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s;
+
+  &:hover {
+    background: var(--gray-350);
+  }
+`;

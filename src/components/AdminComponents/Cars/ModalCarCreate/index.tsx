@@ -37,6 +37,7 @@ export const ModalCarCreate = ({ modalIsOpen, onRequestClose }: ModalProps) => {
   const {
     control,
     formState: { errors },
+    handleSubmit,
   } = useForm();
 
   return (
@@ -54,10 +55,10 @@ export const ModalCarCreate = ({ modalIsOpen, onRequestClose }: ModalProps) => {
           <FiX size={32} onClick={onRequestClose} />
         </S.ModalHeader>
 
-        <S.ModalContent>
+        <S.ModalContent onSubmit={handleSubmit((data) => console.log(data))}>
           <CarsForm control={control} errors={errors} />
           <S.ButtonsContainer>
-            <Button onClick={() => null}>Cadastrar</Button>
+            <Button type="submit">Cadastrar</Button>
           </S.ButtonsContainer>
         </S.ModalContent>
       </S.ModalContainer>
