@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { FiPlus } from 'react-icons/fi';
 import { RiSearchLine } from 'react-icons/ri';
@@ -10,13 +10,11 @@ import { AdminInput } from 'components/AdminComponents/Input';
 import { AdminLayout } from 'components/AdminComponents/Layout';
 import { useGetCategories } from 'hooks/useCategory';
 import { CarCategory } from 'interfaces/cars';
-import CategoryService from 'services/CategoryService';
 import { setupAPI } from 'services/client';
 import * as S from 'styles/pages/adminCategoryStyles';
 import { withSSRAdmin } from 'utils/withSSRAdmin';
 
 export default function AdminCategories({ categories }) {
-  const [category, setCategory] = useState<CarCategory[]>([]);
   const [categorySelected, setCategorySelected] = useState<CarCategory>();
   const [editCategoryModalOpen, setEditCategoryModalOpen] = useState(false);
   const [createCategoryModalOpen, setCreateCategoryModalOpen] = useState(false);

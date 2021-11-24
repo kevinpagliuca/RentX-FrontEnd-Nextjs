@@ -1,10 +1,15 @@
 import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { FiX } from 'react-icons/fi';
 import Modal, { Styles } from 'react-modal';
+import { toast } from 'react-toastify';
 
 import { Button } from 'components/Form/Button';
+import { useGetCategories } from 'hooks/useCategory';
 import { CarCategory } from 'interfaces/cars';
+import { IUpdateCategoryDTO } from 'interfaces/cars';
+import categoryService from 'services/CategoryService';
+import { ToastifyCustomMessage } from 'styles/ToastifyCustomMessage';
 
 import { CategoryForm } from '../Form';
 import * as S from './styles';
@@ -41,19 +46,40 @@ export const ModalCategoryEdit = ({
 }: ModalProps) => {
   const {
     control,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
+    handleSubmit,
   } = useForm();
 
   useEffect(() => {
     if (categoryDetails) {
       reset({
         name: categoryDetails.name,
-        email: categoryDetails.description,
+        description: categoryDetails.description,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryDetails]);
+
+  const { refetch } = useGetCategories();
+
+  const handleEditCategory: SubmitHandler<IUpdateCategoryDTO> = async (
+    values
+  ) => {
+    try {
+      await categoryService.updateCategory(values, categoryDetails.id);
+      toast.success(
+        ToastifyCustomMessage({ message: 'Atualizado com sucesso!' })
+      );
+      reset();
+      onRequestClose();
+      refetch();
+    } catch (error) {
+      toast.error(ToastifyCustomMessage({ message: error.message }), {
+        className: 'customToast_dark',
+      });
+    }
+  };
 
   return (
     <Modal
@@ -70,10 +96,12 @@ export const ModalCategoryEdit = ({
           <FiX size={32} onClick={onRequestClose} />
         </S.ModalHeader>
 
-        <S.ModalContent>
+        <S.ModalContent onSubmit={handleSubmit(handleEditCategory)}>
           <CategoryForm control={control} errors={errors} />
           <S.ButtonsContainer>
-            <Button onClick={() => null}>Salvar</Button>
+            <Button loading={isSubmitting} type="submit">
+              Salvar
+            </Button>
           </S.ButtonsContainer>
         </S.ModalContent>
       </S.ModalContainer>

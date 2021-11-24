@@ -17,6 +17,6 @@ export const useGetCategories = (options?: UseQueryOptions) => {
       ...options,
     }
   );
-  const data = items as CarCategory;
+  const data = items as CarCategory[];
   return { data, ...rest };
 };

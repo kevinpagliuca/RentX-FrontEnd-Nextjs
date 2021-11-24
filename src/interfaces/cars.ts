@@ -10,6 +10,11 @@ export type ICreateCategoryDTO = {
   description: string;
 };
 
+export type IUpdateCategoryDTO = {
+  name: string;
+  description: string;
+};
+
 export enum FuelTypes {
   GASOLINE = 'Gasolina',
   ALCOHOL = 'Álcool',

@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { CarCategory } from 'interfaces/cars';
-import { ICreateCategoryDTO } from 'interfaces/cars';
+import { ICreateCategoryDTO, IUpdateCategoryDTO } from 'interfaces/cars';
 import { Error500 } from 'shared/errors';
 
 import { api } from './client';
@@ -37,16 +37,16 @@ class CategoryService {
     }
   }
 
-  async updateCategory({ id }) {
+  async updateCategory(values: IUpdateCategoryDTO, id: string) {
     try {
-      const { data } = await api.put<CarCategory>(`/categories/${id}`);
+      const { data } = await api.put<CarCategory>(`/categories/${id}`, values);
       return data;
     } catch (err) {
       throw new Error('Erro ao criar as categorias disponíveis!');
     }
   }
 
-  async deleteCategory({ id }) {
+  async deleteCategory(id: string) {
     try {
       const { data } = await api.delete<CarCategory>(`/categories/${id}`);
       return data;
