@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { FiX } from 'react-icons/fi';
 import Modal, { Styles } from 'react-modal';
+import { toast } from 'react-toastify';
 
 import { Button } from 'components/Form/Button';
+import { useUpdateCar } from 'hooks/useCars';
 import { ICars } from 'interfaces/cars';
+import { ToastifyCustomMessage } from 'styles/ToastifyCustomMessage';
 
 import { CarsForm } from '../Form';
 import * as S from './styles';
@@ -43,14 +46,24 @@ export const ModalCarEdit = ({
     control,
     formState: { errors },
     reset,
+    handleSubmit,
   } = useForm();
 
   useEffect(() => {
-    if (carDetails) {
-      reset(carDetails);
-    }
+    carDetails && reset(carDetails);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carDetails]);
+
+  const { mutateAsync } = useUpdateCar();
+
+  const handleUpdateCar: SubmitHandler<ICars> = async (data) => {
+    try {
+      await mutateAsync({ id: carDetails.id, payload: data });
+      onRequestClose();
+    } catch (error) {
+      toast.error(ToastifyCustomMessage({ message: 'Erro ao editar carro.' }));
+    }
+  };
 
   return (
     <Modal
@@ -63,14 +76,16 @@ export const ModalCarEdit = ({
     >
       <S.ModalContainer>
         <S.ModalHeader>
-          <h1>Editar usuário</h1>
+          <h1>
+            Editando carro: <span>{carDetails?.name}</span>
+          </h1>
           <FiX size={32} onClick={onRequestClose} />
         </S.ModalHeader>
 
-        <S.ModalContent>
+        <S.ModalContent onSubmit={handleSubmit(handleUpdateCar)}>
           <CarsForm control={control} errors={errors} />
           <S.ButtonsContainer>
-            <Button onClick={() => null}>Salvar</Button>
+            <Button type="submit">Salvar</Button>
           </S.ButtonsContainer>
         </S.ModalContent>
       </S.ModalContainer>

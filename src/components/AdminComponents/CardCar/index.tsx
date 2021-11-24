@@ -8,9 +8,15 @@ import * as S from './styles';
 
 interface CardCarProps {
   car: ICars;
+  toggleEdit: (car: ICars) => void;
+  toggleDelete: (car: ICars) => void;
 }
 
-export const AdminCardCar = ({ car }: CardCarProps) => {
+export const AdminCardCar = ({
+  car,
+  toggleEdit,
+  toggleDelete,
+}: CardCarProps) => {
   return (
     <S.Container>
       <span className="carImage">
@@ -57,11 +63,11 @@ export const AdminCardCar = ({ car }: CardCarProps) => {
         </S.ItemsGroup>
 
         <S.ButtonsActions>
-          <button onClick={() => null}>
+          <button onClick={() => toggleEdit(car)}>
             <FiSettings size={24} />
           </button>
 
-          <button>
+          <button onClick={() => toggleDelete(car)}>
             <FiTrash size={24} />
           </button>
         </S.ButtonsActions>

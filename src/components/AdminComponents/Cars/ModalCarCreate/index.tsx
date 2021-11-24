@@ -1,10 +1,11 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { FiX } from 'react-icons/fi';
 import Modal, { Styles } from 'react-modal';
 
-import { AdminSelect } from 'components/AdminComponents/Select';
 import { Button } from 'components/Form/Button';
+import { useCreateCar } from 'hooks/useCars';
+import { ICreateCarsDTO } from 'interfaces/cars';
 
 import { CarsForm } from '../Form';
 import * as S from './styles';
@@ -40,6 +41,17 @@ export const ModalCarCreate = ({ modalIsOpen, onRequestClose }: ModalProps) => {
     handleSubmit,
   } = useForm();
 
+  const { mutateAsync } = useCreateCar();
+
+  const handleCreateCar: SubmitHandler<ICreateCarsDTO> = async (data) => {
+    try {
+      await mutateAsync(data);
+      onRequestClose();
+    } catch (error) {
+      return;
+    }
+  };
+
   return (
     <Modal
       isOpen={modalIsOpen}
@@ -55,7 +67,7 @@ export const ModalCarCreate = ({ modalIsOpen, onRequestClose }: ModalProps) => {
           <FiX size={32} onClick={onRequestClose} />
         </S.ModalHeader>
 
-        <S.ModalContent onSubmit={handleSubmit((data) => console.log(data))}>
+        <S.ModalContent onSubmit={handleSubmit(handleCreateCar)}>
           <CarsForm control={control} errors={errors} />
           <S.ButtonsContainer>
             <Button type="submit">Cadastrar</Button>

@@ -1,39 +1,27 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { FiPlus } from 'react-icons/fi';
 import { RiSearchLine } from 'react-icons/ri';
-import { toast } from 'react-toastify';
 
 import { AdminCardCar } from 'components/AdminComponents/CardCar';
 import { ModalCarCreate } from 'components/AdminComponents/Cars/ModalCarCreate';
+import { ModalCarDelete } from 'components/AdminComponents/Cars/ModalCarDelete';
 import { ModalCarEdit } from 'components/AdminComponents/Cars/ModalCarEdit';
 import { AdminInput } from 'components/AdminComponents/Input';
 import { AdminLayout } from 'components/AdminComponents/Layout';
+import { useGetCarsByAdmin } from 'hooks/useCars';
 import { ICars } from 'interfaces/cars';
-import CarsService from 'services/CarsService';
 import * as S from 'styles/pages/adminCarsStyles';
-import { ToastifyCustomMessage } from 'styles/ToastifyCustomMessage';
 import { withSSRAdmin } from 'utils/withSSRAdmin';
 
 export default function AdminCars() {
-  const [cars, setCars] = useState<ICars[]>([]);
+  const { data } = useGetCarsByAdmin();
+
   const [carSelected, setCarSelected] = useState<ICars>();
   const [editCarModalOpen, setEditCarModalOpen] = useState(false);
   const [createCarModalOpen, setCreateCarModalOpen] = useState(false);
+  const [deleteCarModalOpen, setDeleteCarModalOpen] = useState(false);
   const { control } = useForm();
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = await CarsService.getAllByAdmin();
-        setCars(data.cars);
-      } catch (error) {
-        toast.error(
-          ToastifyCustomMessage({ message: 'Erro ao buscar os carros.' })
-        );
-      }
-    })();
-  }, []);
 
   const handleOpenEditCarModal = useCallback((car: ICars) => {
     setCarSelected(car);
@@ -43,6 +31,16 @@ export default function AdminCars() {
   const handleCloseEditCarModal = useCallback(() => {
     setCarSelected(undefined);
     setEditCarModalOpen(false);
+  }, []);
+
+  const handleOpenDeleteCarModal = useCallback((car: ICars) => {
+    setCarSelected(car);
+    setDeleteCarModalOpen(true);
+  }, []);
+
+  const handleCloseDeleteCarModal = useCallback(() => {
+    setCarSelected(undefined);
+    setDeleteCarModalOpen(false);
   }, []);
 
   return (
@@ -72,8 +70,13 @@ export default function AdminCars() {
           </button>
         </S.ContentHeader>
         <S.ContentContainer>
-          {cars.map((car) => (
-            <AdminCardCar key={car.id} car={car} />
+          {data?.cars?.map((car) => (
+            <AdminCardCar
+              key={car.id}
+              car={car}
+              toggleEdit={handleOpenEditCarModal}
+              toggleDelete={handleOpenDeleteCarModal}
+            />
           ))}
         </S.ContentContainer>
 
@@ -85,6 +88,12 @@ export default function AdminCars() {
         <ModalCarEdit
           modalIsOpen={editCarModalOpen}
           onRequestClose={handleCloseEditCarModal}
+          carDetails={carSelected}
+        />
+
+        <ModalCarDelete
+          modalIsOpen={deleteCarModalOpen}
+          onRequestClose={handleCloseDeleteCarModal}
           carDetails={carSelected}
         />
       </S.Container>

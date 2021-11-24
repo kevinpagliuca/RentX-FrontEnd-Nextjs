@@ -5,25 +5,29 @@ import { RiSearchLine } from 'react-icons/ri';
 
 import { CardCategory } from 'components/AdminComponents/CardCategory';
 import { ModalCategoryCreate } from 'components/AdminComponents/Category/ModalCategoryCreate';
+import { ModalCategoryDelete } from 'components/AdminComponents/Category/ModalCategoryDelete';
 import { ModalCategoryEdit } from 'components/AdminComponents/Category/ModalCategoryEdit';
 import { AdminInput } from 'components/AdminComponents/Input';
 import { AdminLayout } from 'components/AdminComponents/Layout';
 import { useGetCategories } from 'hooks/useCategory';
-import { CarCategory } from 'interfaces/cars';
+import { ICarCategory } from 'interfaces/cars';
 import { setupAPI } from 'services/client';
 import * as S from 'styles/pages/adminCategoryStyles';
 import { withSSRAdmin } from 'utils/withSSRAdmin';
 
 export default function AdminCategories({ categories }) {
-  const [categorySelected, setCategorySelected] = useState<CarCategory>();
+  const [categorySelected, setCategorySelected] = useState<ICarCategory>();
   const [editCategoryModalOpen, setEditCategoryModalOpen] = useState(false);
   const [createCategoryModalOpen, setCreateCategoryModalOpen] = useState(false);
+
+  const [deleteCategoryModalOpen, setDeleteCategoryModalOpen] = useState(false);
+
   const { control } = useForm();
   const { data } = useGetCategories({
     initialData: categories,
   });
 
-  const handleOpenEditCategoryModal = useCallback((data: CarCategory) => {
+  const handleOpenEditCategoryModal = useCallback((data: ICarCategory) => {
     setCategorySelected(data);
     setEditCategoryModalOpen(true);
   }, []);
@@ -31,6 +35,16 @@ export default function AdminCategories({ categories }) {
   const handleCloseEditCategoryModal = useCallback(() => {
     setCategorySelected(undefined);
     setEditCategoryModalOpen(false);
+  }, []);
+
+  const handleOpenDeleteCategoryModal = useCallback((data: ICarCategory) => {
+    setCategorySelected(data);
+    setDeleteCategoryModalOpen(true);
+  }, []);
+
+  const handleCloseDeleteCategoryModal = useCallback(() => {
+    setCategorySelected(undefined);
+    setDeleteCategoryModalOpen(false);
   }, []);
 
   return (
@@ -66,7 +80,8 @@ export default function AdminCategories({ categories }) {
               <CardCategory
                 key={category.id}
                 categoryData={category}
-                toggleModal={handleOpenEditCategoryModal}
+                toggleEdit={handleOpenEditCategoryModal}
+                toggleDelete={handleOpenDeleteCategoryModal}
               />
             ))}
           </div>
@@ -79,6 +94,12 @@ export default function AdminCategories({ categories }) {
           <ModalCategoryEdit
             modalIsOpen={editCategoryModalOpen}
             onRequestClose={handleCloseEditCategoryModal}
+            categoryDetails={categorySelected}
+          />
+
+          <ModalCategoryDelete
+            modalIsOpen={deleteCategoryModalOpen}
+            onRequestClose={handleCloseDeleteCategoryModal}
             categoryDetails={categorySelected}
           />
         </S.ContentContainer>

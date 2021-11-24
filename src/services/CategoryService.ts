@@ -1,23 +1,28 @@
 import { AxiosError } from 'axios';
-import { CarCategory } from 'interfaces/cars';
+import { ICarCategory } from 'interfaces/cars';
 import { ICreateCategoryDTO, IUpdateCategoryDTO } from 'interfaces/cars';
 import { Error500 } from 'shared/errors';
 
 import { api } from './client';
 
+interface IRequestUpdateCategoryDTO {
+  id: string;
+  payload: IUpdateCategoryDTO;
+}
+
 class CategoryService {
   async getAll() {
     try {
-      const { data } = await api.get<CarCategory[]>('/categories');
+      const { data } = await api.get<ICarCategory[]>('/categories');
       return data;
     } catch (err) {
       throw new Error('Erro ao carregar as categorias disponíveis!');
     }
   }
 
-  async createCategory(values: ICreateCategoryDTO) {
+  async create(values: ICreateCategoryDTO) {
     try {
-      const { data } = await api.post<CarCategory>('/categories', values);
+      const { data } = await api.post<ICarCategory>('/categories', values);
       return data;
     } catch (error) {
       const err = error as AxiosError;
@@ -37,23 +42,27 @@ class CategoryService {
     }
   }
 
-  async updateCategory(values: IUpdateCategoryDTO, id: string) {
+  async update({ id, payload }: IRequestUpdateCategoryDTO) {
     try {
-      const { data } = await api.put<CarCategory>(`/categories/${id}`, values);
+      const { data } = await api.put<ICarCategory>(
+        `/categories/${id}`,
+        payload
+      );
       return data;
     } catch (err) {
-      throw new Error('Erro ao criar as categorias disponíveis!');
+      throw new Error('Erro ao criar categoria.');
     }
   }
 
-  async deleteCategory(id: string) {
+  async delete(id: string) {
     try {
-      const { data } = await api.delete<CarCategory>(`/categories/${id}`);
+      const { data } = await api.delete<ICarCategory>(`/categories/${id}`);
       return data;
     } catch (err) {
-      throw new Error('Erro ao criar as categorias disponíveis!');
+      throw new Error('Erro ao apagar categoria!');
     }
   }
 }
 
-export default new CategoryService();
+const categoryService = new CategoryService();
+export { categoryService };

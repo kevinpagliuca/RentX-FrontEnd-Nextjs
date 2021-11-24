@@ -1,14 +1,11 @@
-import React, { useEffect } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import React from 'react';
 import { FiX } from 'react-icons/fi';
 import Modal, { Styles } from 'react-modal';
 
 import { Button } from 'components/Form/Button';
-import { useUpdateCategory } from 'hooks/useCategory';
+import { useDeleteCategory } from 'hooks/useCategory';
 import { ICarCategory } from 'interfaces/cars';
-import { IUpdateCategoryDTO } from 'interfaces/cars';
 
-import { CategoryForm } from '../Form';
 import * as S from './styles';
 
 const customStyles: Styles = {
@@ -18,6 +15,7 @@ const customStyles: Styles = {
     justifyContent: 'center',
     zIndex: 1100,
     margin: '0 auto',
+    maxHeight: 'calc(100% - 4rem)',
   },
   overlay: {
     zIndex: 1000,
@@ -36,34 +34,24 @@ interface ModalProps {
   categoryDetails: ICarCategory;
 }
 
-export const ModalCategoryEdit = ({
+export const ModalCategoryDelete = ({
   modalIsOpen,
   onRequestClose,
   categoryDetails,
 }: ModalProps) => {
-  const {
-    control,
-    formState: { errors, isSubmitting },
-    reset,
-    handleSubmit,
-  } = useForm();
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  useEffect(() => {
-    categoryDetails && reset(categoryDetails);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryDetails]);
+  const { mutateAsync } = useDeleteCategory();
 
-  const { mutateAsync } = useUpdateCategory();
-
-  const handleEditCategory: SubmitHandler<IUpdateCategoryDTO> = async (
-    data
-  ) => {
+  const handleDelete = async () => {
     try {
-      await mutateAsync({ id: categoryDetails.id, payload: data });
-      reset();
+      setIsLoading(true);
+      await mutateAsync(categoryDetails.id);
       onRequestClose();
     } catch (error) {
       return;
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -78,19 +66,25 @@ export const ModalCategoryEdit = ({
     >
       <S.ModalContainer>
         <S.ModalHeader>
-          <h1>Editar Categoria</h1>
+          <h1>
+            Você realmente deseja deletar a categoria{' '}
+            <span>{categoryDetails?.name}</span> ?
+          </h1>
           <FiX size={32} onClick={onRequestClose} />
         </S.ModalHeader>
 
-        <S.ModalContent onSubmit={handleSubmit(handleEditCategory)}>
-          <CategoryForm control={control} errors={errors} />
+        <S.ModalContent>
           <S.ButtonsContainer>
             <Button
-              loading={isSubmitting}
-              type="submit"
-              containerClass="buttonContainer"
+              type="button"
+              variant="green"
+              loading={isLoading}
+              onClick={handleDelete}
             >
-              Salvar
+              Sim
+            </Button>
+            <Button type="button" loading={isLoading} onClick={onRequestClose}>
+              Não
             </Button>
           </S.ButtonsContainer>
         </S.ModalContent>

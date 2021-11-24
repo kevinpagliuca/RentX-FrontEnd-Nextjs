@@ -25,16 +25,29 @@ export const CategoryForm = ({ control, errors }: UserFormProps) => {
           name={item.name}
           control={control}
           render={({ field: { value, onChange } }) => {
-            return (
-              <AdminInput
-                id={item.name}
-                placeholder={item.placeholder}
-                value={value}
-                onChange={onChange}
-                filled={value !== ''}
-                error={errors[item.name]}
-              />
-            );
+            if (item.type === 'text') {
+              return (
+                <AdminInput
+                  id={item.name}
+                  placeholder={item.placeholder}
+                  value={value}
+                  onChange={onChange}
+                  filled={value !== ''}
+                  error={errors[item.name]}
+                />
+              );
+            } else {
+              return (
+                <AdminInput
+                  id={item.name}
+                  placeholder={item.placeholder}
+                  value={value}
+                  onChange={onChange}
+                  filled={value !== ''}
+                  error={errors[item.name]}
+                />
+              );
+            }
           }}
         />
       ))}

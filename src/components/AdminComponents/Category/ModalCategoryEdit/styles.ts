@@ -5,7 +5,7 @@ export const ModalContainer = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 1rem;
-  width: 650px;
+  width: 400px;
   height: 100%;
   border-radius: 20px;
   color: var(--gray-350);
@@ -49,8 +49,12 @@ export const ButtonsContainer = styled.div`
   gap: 1.5rem;
   width: 100%;
 
+  .buttonContainer {
+    width: 100%;
+  }
+
   button {
     height: 3.5rem;
-    width: 20rem;
+    width: 100%;
   }
 `;

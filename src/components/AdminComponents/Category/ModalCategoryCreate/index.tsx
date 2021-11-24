@@ -2,14 +2,10 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FiX } from 'react-icons/fi';
 import Modal, { Styles } from 'react-modal';
-import { toast } from 'react-toastify';
 
 import { Button } from 'components/Form/Button';
-import { TextArea } from 'components/Form/TextArea';
-import { useGetCategories } from 'hooks/useCategory';
+import { useCreateCategory } from 'hooks/useCategory';
 import { ICreateCategoryDTO } from 'interfaces/cars';
-import categoryService from 'services/CategoryService';
-import { ToastifyCustomMessage } from 'styles/ToastifyCustomMessage';
 
 import { CategoryForm } from '../Form';
 import * as S from './styles';
@@ -49,23 +45,17 @@ export const ModalCategoryCreate = ({
     handleSubmit,
   } = useForm();
 
-  const { refetch } = useGetCategories();
+  const { mutateAsync } = useCreateCategory();
 
   const handleCreateCategory: SubmitHandler<ICreateCategoryDTO> = async (
-    values
+    data
   ) => {
     try {
-      await categoryService.createCategory(values);
-      toast.success(
-        ToastifyCustomMessage({ message: 'Cadastrado com sucesso!' })
-      );
+      await mutateAsync(data);
       reset();
       onRequestClose();
-      refetch();
     } catch (error) {
-      toast.error(ToastifyCustomMessage({ message: error.message }), {
-        className: 'customToast_dark',
-      });
+      return;
     }
   };
 
@@ -87,8 +77,11 @@ export const ModalCategoryCreate = ({
         <S.ModalContent onSubmit={handleSubmit(handleCreateCategory)}>
           <CategoryForm control={control} errors={errors} />
           <S.ButtonsContainer>
-            <TextArea />
-            <Button loading={isSubmitting} type="submit">
+            <Button
+              loading={isSubmitting}
+              type="submit"
+              containerClass="buttonContainer"
+            >
               Cadastrar
             </Button>
           </S.ButtonsContainer>

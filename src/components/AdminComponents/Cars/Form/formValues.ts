@@ -14,7 +14,8 @@ interface FormValues {
     | 'description';
   placeholder?: string;
   type: 'text' | 'select' | 'boolean' | 'textarea';
-  options?: string[];
+  options?: { value: string; label: string }[];
+  maxLength?: number;
 }
 
 export const formValues: FormValues[] = [
@@ -23,57 +24,78 @@ export const formValues: FormValues[] = [
     name: 'name',
     placeholder: 'Nome do carro',
     type: 'text',
+    maxLength: 200,
   },
   {
     id: '2',
     name: 'brand',
     placeholder: 'Marca',
     type: 'text',
+    maxLength: 200,
+  },
+  {
+    id: '39',
+    name: 'license_plate',
+    placeholder: 'Placa',
+    type: 'text',
+    maxLength: 8,
   },
   {
     id: '3',
     name: 'daily_rate',
     placeholder: 'Preço ao dia',
     type: 'text',
+    maxLength: 6,
   },
   {
     id: '4',
     name: 'fine_amount',
     placeholder: 'Valor da multa ao dia',
     type: 'text',
+    maxLength: 5,
   },
   {
     id: '5',
     name: 'seats',
     placeholder: 'Assentos',
     type: 'text',
+    maxLength: 3,
   },
   {
     id: '6',
     name: 'fuel_type',
     placeholder: 'Tipo de combustível',
     type: 'select',
-    options: ['Flex', 'Gasolina', 'Alcool', 'Elétrico', 'Híbrido'],
+    options: [
+      { value: 'Flex', label: 'Flex' },
+      { value: 'Gasolina', label: 'Gasolina' },
+      { value: 'Alcool', label: 'Alcool' },
+      { value: 'Elétrico', label: 'Elétrico' },
+      { value: 'Híbrido', label: 'Híbrido' },
+    ],
   },
   {
     id: '7',
     name: 'transmission_type',
     placeholder: 'Transmissão',
     type: 'select',
-    options: ['Manual', 'Automática'],
+    options: [
+      { value: 'Manual', label: 'Manual' },
+      { value: 'Automática', label: 'Automática' },
+    ],
   },
   {
     id: '8',
     name: 'category_id',
     placeholder: 'Categoria',
     type: 'select',
-    options: ['Hatch', 'Sedan', 'SUV'],
   },
   {
     id: '9',
     name: 'description',
     placeholder: 'Descrição',
     type: 'textarea',
+    maxLength: 400,
   },
   {
     id: '10',

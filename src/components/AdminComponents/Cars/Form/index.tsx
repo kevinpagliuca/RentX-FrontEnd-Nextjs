@@ -10,6 +10,7 @@ import {
 import { AdminInput } from 'components/AdminComponents/Input';
 import { AdminSelect } from 'components/AdminComponents/Select';
 import { Switcher } from 'components/Switcher';
+import { useGetCategories } from 'hooks/useCategory';
 
 import { formValues } from './formValues';
 
@@ -19,6 +20,8 @@ interface UserFormProps {
 }
 
 export const CarsForm = ({ control, errors }: UserFormProps) => {
+  const { categoriesOptions } = useGetCategories();
+
   return (
     <React.Fragment>
       {formValues.map((item) => (
@@ -36,13 +39,25 @@ export const CarsForm = ({ control, errors }: UserFormProps) => {
                   onChange={onChange}
                   filled={value !== ''}
                   error={errors[item.name]}
+                  maxLength={item.maxLength}
+                />
+              );
+            } else if (item.type === 'select' && item.name === 'category_id') {
+              return (
+                <AdminSelect
+                  placeholder={item.placeholder}
+                  id={item.name}
+                  onChange={onChange}
+                  value={value}
+                  options={categoriesOptions || []}
+                  error={errors[item.name]}
                 />
               );
             } else if (item.type === 'select') {
               return (
                 <AdminSelect
-                  placeholder={item.placeholder}
                   id={item.name}
+                  placeholder={item.placeholder}
                   onChange={onChange}
                   value={value}
                   options={item.options}
@@ -52,21 +67,23 @@ export const CarsForm = ({ control, errors }: UserFormProps) => {
             } else if (item.type === 'boolean') {
               return (
                 <Switcher
-                  label={item.placeholder}
                   id={item.name}
+                  label={item.placeholder}
                   onChange={onChange}
                   value={value}
                   placement="right"
                 />
               );
-            } else {
+            } else if (item.type === 'textarea') {
               return (
-                <Switcher
-                  label={item.placeholder}
+                <AdminInput
                   id={item.name}
-                  onChange={onChange}
+                  placeholder={item.placeholder}
                   value={value}
-                  placement="right"
+                  onChange={onChange}
+                  filled={value !== ''}
+                  error={errors[item.name]}
+                  maxLength={item.maxLength}
                 />
               );
             }

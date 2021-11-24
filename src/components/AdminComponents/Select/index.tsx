@@ -12,12 +12,17 @@ interface SelectProps {
   startIcon?: ReactElement;
   endIcon?: ReactElement;
   error?: FieldError;
-  onChange: (value: string | number | readonly string[]) => void;
-  value: string | number | readonly string[];
+  onChange: (value: string) => void;
+  value: string;
   id: string;
-  options: string[];
-  defaultValue?: string | number | readonly string[];
+  options: { value: string; label: string }[];
+  defaultValue?: string;
 }
+
+type IOptionSelected = {
+  value: string;
+  label: string;
+};
 
 export const AdminSelect = ({
   placeholder,
@@ -25,13 +30,13 @@ export const AdminSelect = ({
   error,
   options,
   onChange,
-  ...rest
+  value,
 }: SelectProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [optionSelected, setOptionSelected] = useState(rest.defaultValue || '');
+  const [optionSelected, setOptionSelected] = useState<IOptionSelected>();
 
   const [isReverse, setIsReverse] = useState(false);
 
@@ -51,19 +56,26 @@ export const AdminSelect = ({
   }, []);
 
   useEffect(() => {
-    onChange(optionSelected);
+    onChange(optionSelected?.value);
   }, [optionSelected, onChange]);
+
+  useEffect(() => {
+    if (value) {
+      const option = options.find((option) => option.value === value);
+      setOptionSelected(option);
+    }
+  }, [value, options]);
 
   return (
     <S.Container ref={containerRef}>
       <ClickAwayListener onClickAway={() => setIsOpen(false)}>
         <S.ContentContainer
-          optionSelected={!!optionSelected}
+          optionSelected={!!optionSelected?.value}
           onClick={() => setIsOpen(!isOpen)}
         >
           {!!startIcon && startIcon}
           <span>{placeholder}</span>
-          {optionSelected && <p>{optionSelected}</p>}
+          {!!optionSelected?.value && <p>{optionSelected?.label}</p>}
           <FiChevronDown className="select-icon" size={20} />
         </S.ContentContainer>
       </ClickAwayListener>
@@ -74,17 +86,18 @@ export const AdminSelect = ({
         isReverse={isReverse}
         ref={menuRef}
       >
-        {options.map((item) => (
-          <S.MenuItem
-            key={item}
-            isSelected={item === optionSelected}
-            onClick={() => setOptionSelected(item)}
-          >
-            {item}
-          </S.MenuItem>
-        ))}
+        {options.length > 0 &&
+          options.map((item) => (
+            <S.MenuItem
+              key={item.value}
+              isSelected={item.value === optionSelected?.value}
+              onClick={() => setOptionSelected(item)}
+            >
+              {item.label}
+            </S.MenuItem>
+          ))}
         {optionSelected && (
-          <S.ClearMenuItemSelected onClick={() => setOptionSelected('')}>
+          <S.ClearMenuItemSelected onClick={() => setOptionSelected(undefined)}>
             Limpar
           </S.ClearMenuItemSelected>
         )}

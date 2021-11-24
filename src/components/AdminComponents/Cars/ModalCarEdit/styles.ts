@@ -6,11 +6,12 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
   width: 650px;
-  height: 100%;
+  height: 500px;
   border-radius: 20px;
   color: var(--gray-350);
   background: var(--dark);
   padding: 1.5rem 2rem;
+  overflow: hidden;
   transition: all 0.3s;
 `;
 
@@ -21,8 +22,16 @@ export const ModalHeader = styled.div`
   width: 100%;
   h1 {
     color: var(--white);
-    font: 600 2rem 'Inter', sans-serif;
+    font: 600 1.5rem 'Inter', sans-serif;
     line-height: 2.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    span {
+      color: var(--main);
+      font: 700 1.25rem 'Inter', sans-serif;
+    }
   }
 
   svg {
@@ -35,11 +44,12 @@ export const ModalHeader = styled.div`
   }
 `;
 
-export const ModalContent = styled.div`
+export const ModalContent = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
   gap: 1rem;
+  overflow: hidden auto;
 `;
 
 export const ButtonsContainer = styled.div`

@@ -1,4 +1,4 @@
-export type CarCategory = {
+export type ICarCategory = {
   id: string;
   name: string;
   description: string;
@@ -38,7 +38,7 @@ export interface ICars {
   fine_amount: number;
   daily_rate: number;
   license_plate: string;
-  category: CarCategory;
+  category: ICarCategory;
   seats: number;
   max_velocity?: number;
   // fuel_type: 'Gasolina' | 'Álcool' | 'Híbrido' | 'Flex' | 'Elétrico';
@@ -49,6 +49,7 @@ export interface ICars {
 }
 
 export type ICreateCarsDTO = Omit<ICars, 'id'>;
+export type IUpdateCarsDTO = ICars;
 
 export type RGetAllCars = {
   totalCount: number;

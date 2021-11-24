@@ -1,6 +1,16 @@
-import { RGetAllCars, ICreateCarsDTO, ICars } from 'interfaces/cars';
+import {
+  RGetAllCars,
+  ICreateCarsDTO,
+  ICars,
+  IUpdateCarsDTO,
+} from 'interfaces/cars';
 
 import { api } from './client';
+
+interface IRequestUpdateCarsDTO {
+  id: string;
+  payload: IUpdateCarsDTO;
+}
 
 class CarsService {
   async getAll() {
@@ -27,6 +37,22 @@ class CarsService {
       return response;
     } catch (err) {
       throw new Error('Erro ao criar o carro!');
+    }
+  }
+
+  async delete(id: string) {
+    try {
+      await api.delete(`/cars/${id}`);
+    } catch {
+      throw new Error('Erro ao excluir o carro.');
+    }
+  }
+
+  async update({ id, payload }: IRequestUpdateCarsDTO) {
+    try {
+      await api.put(`/cars/${id}`, payload);
+    } catch {
+      throw new Error('Erro ao atualizar o carro.');
     }
   }
 
