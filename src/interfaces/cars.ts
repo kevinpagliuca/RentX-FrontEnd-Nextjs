@@ -5,6 +5,11 @@ export type CarCategory = {
   created_at: string;
 };
 
+export type ICreateCategoryDTO = {
+  name: string;
+  description: string;
+};
+
 export enum FuelTypes {
   GASOLINE = 'Gasolina',
   ALCOHOL = 'Álcool',

@@ -11,6 +11,7 @@ import { ModalUserEdit } from 'components/AdminComponents/Users/ModalUserEdit';
 import { IUser } from 'interfaces/auth';
 import { usersService } from 'services/UsersService';
 import * as S from 'styles/pages/adminUsersStyles';
+import { withSSRAdmin } from 'utils/withSSRAdmin';
 
 export default function AdminUsers() {
   const [users, setUsers] = useState<IUser[]>([]);
@@ -89,3 +90,9 @@ export default function AdminUsers() {
     </AdminLayout>
   );
 }
+
+export const getServerSideProps = withSSRAdmin(async () => {
+  return {
+    props: {},
+  };
+});

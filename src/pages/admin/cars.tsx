@@ -13,6 +13,7 @@ import { ICars } from 'interfaces/cars';
 import CarsService from 'services/CarsService';
 import * as S from 'styles/pages/adminCarsStyles';
 import { ToastifyCustomMessage } from 'styles/ToastifyCustomMessage';
+import { withSSRAdmin } from 'utils/withSSRAdmin';
 
 export default function AdminCars() {
   const [cars, setCars] = useState<ICars[]>([]);
@@ -90,3 +91,9 @@ export default function AdminCars() {
     </AdminLayout>
   );
 }
+
+export const getServerSideProps = withSSRAdmin(async () => {
+  return {
+    props: {},
+  };
+});

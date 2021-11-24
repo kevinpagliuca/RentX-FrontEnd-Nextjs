@@ -8,28 +8,25 @@ import { ModalCategoryCreate } from 'components/AdminComponents/Category/ModalCa
 import { ModalCategoryEdit } from 'components/AdminComponents/Category/ModalCategoryEdit';
 import { AdminInput } from 'components/AdminComponents/Input';
 import { AdminLayout } from 'components/AdminComponents/Layout';
+import { useGetCategories } from 'hooks/useCategory';
 import { CarCategory } from 'interfaces/cars';
 import CategoryService from 'services/CategoryService';
+import { setupAPI } from 'services/client';
 import * as S from 'styles/pages/adminCategoryStyles';
+import { withSSRAdmin } from 'utils/withSSRAdmin';
 
-export default function AdminCategories() {
+export default function AdminCategories({ categories }) {
   const [category, setCategory] = useState<CarCategory[]>([]);
   const [categorySelected, setCategorySelected] = useState<CarCategory>();
   const [editCategoryModalOpen, setEditCategoryModalOpen] = useState(false);
   const [createCategoryModalOpen, setCreateCategoryModalOpen] = useState(false);
   const { control } = useForm();
+  const { data } = useGetCategories({
+    initialData: categories,
+  });
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = await CategoryService.getAll();
-        setCategory(data);
-      } catch (error) {}
-    })();
-  }, []);
-
-  const handleOpenEditCategoryModal = useCallback((category: CarCategory) => {
-    setCategorySelected(category);
+  const handleOpenEditCategoryModal = useCallback((data: CarCategory) => {
+    setCategorySelected(data);
     setEditCategoryModalOpen(true);
   }, []);
 
@@ -67,7 +64,7 @@ export default function AdminCategories() {
           </S.ContentHeader>
 
           <div className="containerCard">
-            {category?.map((category) => (
+            {data?.map((category) => (
               <CardCategory
                 key={category.id}
                 categoryData={category}
@@ -91,3 +88,15 @@ export default function AdminCategories() {
     </AdminLayout>
   );
 }
+
+export const getServerSideProps = withSSRAdmin(async (ctx) => {
+  const api = setupAPI(ctx);
+
+  const { data: categories } = await api.get('categories');
+
+  return {
+    props: {
+      categories,
+    },
+  };
+});
