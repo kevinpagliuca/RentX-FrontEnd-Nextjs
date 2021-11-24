@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { FiUserPlus } from 'react-icons/fi';
 import { RiSearchLine } from 'react-icons/ri';
@@ -7,6 +7,7 @@ import { CardUser } from 'components/AdminComponents/CardUser';
 import { AdminInput } from 'components/AdminComponents/Input';
 import { AdminLayout } from 'components/AdminComponents/Layout';
 import { ModalUserCreate } from 'components/AdminComponents/Users/ModalUserCreate';
+import { ModalUserDelete } from 'components/AdminComponents/Users/ModalUserDelete';
 import { ModalUserEdit } from 'components/AdminComponents/Users/ModalUserEdit';
 import { IUser } from 'interfaces/auth';
 import { usersService } from 'services/UsersService';
@@ -17,6 +18,7 @@ export default function AdminUsers() {
   const [userSelected, setUserSelected] = useState<IUser>();
   const [editUserModalOpen, setEditUserModalOpen] = useState(false);
   const [createUserModalOpen, setCreateUserModalOpen] = useState(false);
+  const [deleteUserModalOpen, setDeleteUserModalOpen] = useState(false);
   const { control } = useForm();
 
   useEffect(() => {
@@ -36,6 +38,11 @@ export default function AdminUsers() {
   const handleCloseEditUserModal = useCallback(() => {
     setUserSelected(undefined);
     setEditUserModalOpen(false);
+  }, []);
+
+  const handleDeleteUserModal = useCallback((user) => {
+    setUserSelected(user);
+    setDeleteUserModalOpen(true);
   }, []);
 
   return (
@@ -71,6 +78,7 @@ export default function AdminUsers() {
               key={user.id}
               userData={user}
               toggleModal={handleOpenEditUserModal}
+              handleDeleteUserModal={handleDeleteUserModal}
             />
           ))}
 
@@ -82,6 +90,12 @@ export default function AdminUsers() {
           <ModalUserEdit
             modalIsOpen={editUserModalOpen}
             onRequestClose={handleCloseEditUserModal}
+            userDetails={userSelected}
+          />
+
+          <ModalUserDelete
+            modalIsOpen={deleteUserModalOpen}
+            onRequestClose={() => setDeleteUserModalOpen(false)}
             userDetails={userSelected}
           />
         </S.ContentContainer>
