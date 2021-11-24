@@ -5,6 +5,7 @@ import Modal, { Styles } from 'react-modal';
 import { toast } from 'react-toastify';
 
 import { Button } from 'components/Form/Button';
+import { TextArea } from 'components/Form/TextArea';
 import { useGetCategories } from 'hooks/useCategory';
 import { ICreateCategoryDTO } from 'interfaces/cars';
 import categoryService from 'services/CategoryService';
@@ -86,6 +87,7 @@ export const ModalCategoryCreate = ({
         <S.ModalContent onSubmit={handleSubmit(handleCreateCategory)}>
           <CategoryForm control={control} errors={errors} />
           <S.ButtonsContainer>
+            <TextArea />
             <Button loading={isSubmitting} type="submit">
               Cadastrar
             </Button>
