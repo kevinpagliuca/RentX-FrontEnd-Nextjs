@@ -2,12 +2,10 @@ import React, { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FiX } from 'react-icons/fi';
 import Modal, { Styles } from 'react-modal';
-import { toast } from 'react-toastify';
 
 import { Button } from 'components/Form/Button';
+import { useUpdateUser } from 'hooks/useUsers';
 import { IUser, IUserUpdateRequestDTO } from 'interfaces/auth';
-import AuthService from 'services/AuthService';
-import { ToastifyCustomMessage } from 'styles/ToastifyCustomMessage';
 
 import { UsersForm } from '../Form';
 import * as S from './styles';
@@ -49,6 +47,8 @@ export const ModalUserEdit = ({
     handleSubmit,
   } = useForm();
 
+  const { mutateAsync } = useUpdateUser();
+
   useEffect(() => {
     if (userDetails) {
       reset({
@@ -66,18 +66,10 @@ export const ModalUserEdit = ({
     data
   ) => {
     try {
-      await AuthService.updateUserById(userDetails.id, data);
-      toast.success(
-        ToastifyCustomMessage({
-          message: 'Usuário atualizado com sucesso',
-        })
-      );
+      await mutateAsync({ id: userDetails.id, payload: data });
+      onRequestClose();
     } catch (err) {
-      toast.success(
-        ToastifyCustomMessage({
-          message: err.message,
-        })
-      );
+      return;
     }
   };
 

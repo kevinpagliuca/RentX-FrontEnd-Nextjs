@@ -8,14 +8,14 @@ import * as S from './styles';
 
 interface CardUserProps {
   userData: IUser;
-  toggleModal: (user: IUser) => void;
-  handleDeleteUserModal: (user: IUser) => void;
+  toggleEdit: (user: IUser) => void;
+  toggleDelete: (user: IUser) => void;
 }
 
 export const CardUser = ({
   userData,
-  toggleModal,
-  handleDeleteUserModal,
+  toggleEdit,
+  toggleDelete,
 }: CardUserProps) => {
   return (
     <S.Container>
@@ -52,11 +52,11 @@ export const CardUser = ({
       </S.CardContent>
 
       <S.CardButtonsContainer>
-        <button onClick={() => toggleModal(userData)}>
+        <button onClick={() => toggleEdit(userData)}>
           <FiSettings size={24} />
         </button>
 
-        <button onClick={() => handleDeleteUserModal(userData)}>
+        <button onClick={() => toggleDelete(userData)}>
           <FiTrash size={24} />
         </button>
       </S.CardButtonsContainer>

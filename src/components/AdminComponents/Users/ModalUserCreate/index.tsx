@@ -2,14 +2,12 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FiX } from 'react-icons/fi';
 import Modal, { Styles } from 'react-modal';
-import { toast } from 'react-toastify';
 
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { Button } from 'components/Form/Button';
+import { useCreateUser } from 'hooks/useUsers';
 import { IUserSignUpRequestDTO } from 'interfaces/auth';
-import AuthService from 'services/AuthService';
 import { registerFormSchema } from 'shared/validators';
-import { ToastifyCustomMessage } from 'styles/ToastifyCustomMessage';
 
 import { UsersForm } from '../Form';
 import * as S from './styles';
@@ -51,22 +49,16 @@ export const ModalUserCreate = ({
     resolver: yupResolver(registerFormSchema),
   });
 
+  const { mutateAsync } = useCreateUser();
+
   const handleCreateUser: SubmitHandler<IUserSignUpRequestDTO> = async (
     data
   ) => {
     try {
-      await AuthService.signUp(data);
-      toast.success(
-        ToastifyCustomMessage({
-          message: 'Usuário criado com sucesso!',
-        })
-      );
+      await mutateAsync(data);
+      onRequestClose();
     } catch (error) {
-      toast.error(
-        ToastifyCustomMessage({
-          message: 'Falha ao cadastrar usuário',
-        })
-      );
+      return;
     }
   };
 

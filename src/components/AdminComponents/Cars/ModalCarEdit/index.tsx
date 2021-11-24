@@ -2,12 +2,10 @@ import React, { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FiX } from 'react-icons/fi';
 import Modal, { Styles } from 'react-modal';
-import { toast } from 'react-toastify';
 
 import { Button } from 'components/Form/Button';
 import { useUpdateCar } from 'hooks/useCars';
 import { ICars } from 'interfaces/cars';
-import { ToastifyCustomMessage } from 'styles/ToastifyCustomMessage';
 
 import { CarsForm } from '../Form';
 import * as S from './styles';
@@ -61,7 +59,7 @@ export const ModalCarEdit = ({
       await mutateAsync({ id: carDetails.id, payload: data });
       onRequestClose();
     } catch (error) {
-      toast.error(ToastifyCustomMessage({ message: 'Erro ao editar carro.' }));
+      return;
     }
   };
 

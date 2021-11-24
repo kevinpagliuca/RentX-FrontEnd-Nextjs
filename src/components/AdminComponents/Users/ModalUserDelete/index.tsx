@@ -1,12 +1,10 @@
 import React from 'react';
 import { FiX } from 'react-icons/fi';
 import Modal, { Styles } from 'react-modal';
-import { toast } from 'react-toastify';
 
 import { Button } from 'components/Form/Button';
+import { useDeleteUser } from 'hooks/useUsers';
 import { IUser } from 'interfaces/auth';
-import { usersService } from 'services/UsersService';
-import { ToastifyCustomMessage } from 'styles/ToastifyCustomMessage';
 
 import * as S from './styles';
 
@@ -42,22 +40,15 @@ export const ModalUserDelete = ({
   userDetails,
 }: ModalProps) => {
   const [isLoading, setIsLoading] = React.useState(false);
+
+  const { mutateAsync } = useDeleteUser();
   const handleDelete = async () => {
     try {
       setIsLoading(true);
-      await usersService.delete(userDetails.id);
-      toast.success(
-        ToastifyCustomMessage({
-          message: 'Usuário deletado com sucesso!',
-        })
-      );
+      await mutateAsync(userDetails.id);
       onRequestClose();
     } catch (error) {
-      toast.error(
-        ToastifyCustomMessage({
-          message: 'Falha ao deletar usuário',
-        })
-      );
+      return;
     } finally {
       setIsLoading(false);
     }

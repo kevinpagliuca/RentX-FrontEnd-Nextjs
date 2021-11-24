@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { FiUserPlus } from 'react-icons/fi';
 import { RiSearchLine } from 'react-icons/ri';
@@ -9,27 +9,18 @@ import { AdminLayout } from 'components/AdminComponents/Layout';
 import { ModalUserCreate } from 'components/AdminComponents/Users/ModalUserCreate';
 import { ModalUserDelete } from 'components/AdminComponents/Users/ModalUserDelete';
 import { ModalUserEdit } from 'components/AdminComponents/Users/ModalUserEdit';
+import { useGetUsers } from 'hooks/useUsers';
 import { IUser } from 'interfaces/auth';
-import { usersService } from 'services/UsersService';
 import * as S from 'styles/pages/adminUsersStyles';
 import { withSSRAdmin } from 'utils/withSSRAdmin';
 
 export default function AdminUsers() {
-  const [users, setUsers] = useState<IUser[]>([]);
+  const { data: users } = useGetUsers();
   const [userSelected, setUserSelected] = useState<IUser>();
   const [editUserModalOpen, setEditUserModalOpen] = useState(false);
   const [createUserModalOpen, setCreateUserModalOpen] = useState(false);
   const [deleteUserModalOpen, setDeleteUserModalOpen] = useState(false);
   const { control } = useForm();
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = await usersService.getAll();
-        setUsers(data);
-      } catch (error) {}
-    })();
-  }, []);
 
   const handleOpenEditUserModal = useCallback((user: IUser) => {
     setUserSelected(user);
@@ -78,8 +69,8 @@ export default function AdminUsers() {
             <CardUser
               key={user.id}
               userData={user}
-              toggleModal={handleOpenEditUserModal}
-              handleDeleteUserModal={handleDeleteUserModal}
+              toggleEdit={handleOpenEditUserModal}
+              toggleDelete={handleDeleteUserModal}
             />
           ))}
 

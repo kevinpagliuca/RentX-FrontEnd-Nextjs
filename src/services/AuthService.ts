@@ -128,26 +128,6 @@ class AuthService {
     }
   }
 
-  async updateUserById(id: string, payload: IUserUpdateRequestDTO) {
-    try {
-      const { data } = await api.put<IUser>(`/user/update/${id}`, payload);
-      return data;
-    } catch (error) {
-      const err = error as AxiosError;
-      if (err.isAxiosError) {
-        switch (err.response.status) {
-          case 400:
-            throw new Error('Erro ao atualizar dados.');
-          case 500:
-            throw new Error(Error500);
-          default:
-            throw new Error(err.response.statusText);
-        }
-      }
-      throw new Error(err.message);
-    }
-  }
-
   async changePassword(payload: IUserChangePasswordDTO) {
     try {
       await api.put('/user/change-password', payload);
