@@ -10,14 +10,16 @@ import {
 import { AdminInput } from 'components/AdminComponents/Input';
 import { Switcher } from 'components/Switcher';
 
-import { formValues } from './formValues';
+import { formValuesToCreate, formValuesToEdit } from './formValues';
 
 interface UserFormProps {
   control: Control<FieldValues>;
   errors: DeepMap<FieldValues, FieldErrors>;
+  update?: boolean;
 }
 
-export const UsersForm = ({ control, errors }: UserFormProps) => {
+export const UsersForm = ({ control, errors, update }: UserFormProps) => {
+  const formValues = !update ? formValuesToCreate : formValuesToEdit;
   return (
     <React.Fragment>
       {formValues.map((item) => (
@@ -30,9 +32,11 @@ export const UsersForm = ({ control, errors }: UserFormProps) => {
               return (
                 <AdminInput
                   id={item.name}
+                  type={item.type}
                   placeholder={item.placeholder}
                   value={value}
                   onChange={onChange}
+                  maxLength={item?.maxLenght}
                   filled={value !== ''}
                   error={errors[item.name]}
                 />

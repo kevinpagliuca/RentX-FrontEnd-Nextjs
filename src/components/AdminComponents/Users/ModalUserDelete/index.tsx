@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import React from 'react';
 import { FiX } from 'react-icons/fi';
 import Modal, { Styles } from 'react-modal';
 import { toast } from 'react-toastify';
 
 import { Button } from 'components/Form/Button';
-import { IUser, IUserUpdateRequestDTO } from 'interfaces/auth';
-import AuthService from 'services/AuthService';
+import { IUser } from 'interfaces/auth';
+import { usersService } from 'services/UsersService';
 import { ToastifyCustomMessage } from 'styles/ToastifyCustomMessage';
 
-import { UsersForm } from '../Form';
 import * as S from './styles';
 
 const customStyles: Styles = {
@@ -19,6 +17,7 @@ const customStyles: Styles = {
     justifyContent: 'center',
     zIndex: 1100,
     margin: '0 auto',
+    maxHeight: 'calc(100% - 4rem)',
   },
   overlay: {
     zIndex: 1000,
@@ -37,47 +36,30 @@ interface ModalProps {
   userDetails: IUser;
 }
 
-export const ModalUserEdit = ({
+export const ModalUserDelete = ({
   modalIsOpen,
   onRequestClose,
   userDetails,
 }: ModalProps) => {
-  const {
-    control,
-    formState: { errors },
-    reset,
-    handleSubmit,
-  } = useForm();
-
-  useEffect(() => {
-    if (userDetails) {
-      reset({
-        name: userDetails.name,
-        email: userDetails.email,
-        is_admin: userDetails.is_admin,
-        username: userDetails.username,
-        driver_license: userDetails.driver_license,
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userDetails]);
-
-  const handleUpdateUser: SubmitHandler<IUserUpdateRequestDTO> = async (
-    data
-  ) => {
+  const [isLoading, setIsLoading] = React.useState(false);
+  const handleDelete = async () => {
     try {
-      await AuthService.updateUserById(userDetails.id, data);
+      setIsLoading(true);
+      await usersService.delete(userDetails.id);
       toast.success(
         ToastifyCustomMessage({
-          message: 'Usuário atualizado com sucesso',
+          message: 'Usuário deletado com sucesso!',
         })
       );
-    } catch (err) {
-      toast.success(
+      onRequestClose();
+    } catch (error) {
+      toast.error(
         ToastifyCustomMessage({
-          message: err.message,
+          message: 'Falha ao deletar usuário',
         })
       );
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -92,14 +74,26 @@ export const ModalUserEdit = ({
     >
       <S.ModalContainer>
         <S.ModalHeader>
-          <h1>Editar usuário</h1>
+          <h1>
+            Você realmente deseja deletar o usuário{' '}
+            <span>{userDetails?.name}</span> ?
+          </h1>
           <FiX size={32} onClick={onRequestClose} />
         </S.ModalHeader>
 
-        <S.ModalContent onSubmit={handleSubmit(handleUpdateUser)}>
-          <UsersForm control={control} errors={errors} update />
+        <S.ModalContent>
           <S.ButtonsContainer>
-            <Button type="submit">Salvar</Button>
+            <Button
+              type="submit"
+              variant="green"
+              loading={isLoading}
+              onClick={handleDelete}
+            >
+              Sim
+            </Button>
+            <Button type="submit" loading={isLoading} onClick={onRequestClose}>
+              Não
+            </Button>
           </S.ButtonsContainer>
         </S.ModalContent>
       </S.ModalContainer>

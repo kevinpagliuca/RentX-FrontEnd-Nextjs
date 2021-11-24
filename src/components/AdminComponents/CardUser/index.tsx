@@ -9,9 +9,14 @@ import * as S from './styles';
 interface CardUserProps {
   userData: IUser;
   toggleModal: (user: IUser) => void;
+  handleDeleteUserModal: (user: IUser) => void;
 }
 
-export const CardUser = ({ userData, toggleModal }: CardUserProps) => {
+export const CardUser = ({
+  userData,
+  toggleModal,
+  handleDeleteUserModal,
+}: CardUserProps) => {
   return (
     <S.Container>
       <S.AvatarContainer>
@@ -51,7 +56,7 @@ export const CardUser = ({ userData, toggleModal }: CardUserProps) => {
           <FiSettings size={24} />
         </button>
 
-        <button>
+        <button onClick={() => handleDeleteUserModal(userData)}>
           <FiTrash size={24} />
         </button>
       </S.CardButtonsContainer>

@@ -5,13 +5,12 @@ export const ModalContainer = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 1rem;
-  width: 650px;
-  height: 100%;
+  max-width: 400px;
   max-height: 500px;
   border-radius: 20px;
   color: var(--gray-350);
   background: var(--dark);
-  padding: 1.5rem 2rem;
+  padding: 3rem 1rem 1.5rem;
   transition: all 0.3s;
 `;
 
@@ -22,12 +21,22 @@ export const ModalHeader = styled.div`
   width: 100%;
   h1 {
     color: var(--white);
-    font: 600 2rem 'Inter', sans-serif;
-    line-height: 2.5rem;
+    font: 500 1.5rem 'Inter', sans-serif;
+    line-height: 2rem;
+    text-align: center;
+
+    span {
+      color: var(--main);
+      font: 700 1.5rem 'Archivo', sans-serif;
+      text-decoration: underline;
+    }
   }
 
   svg {
     cursor: pointer;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
     transition: all 0.3s;
 
     &:hover {
@@ -41,8 +50,8 @@ export const ModalContent = styled.form`
   flex-direction: column;
   width: 100%;
   gap: 1rem;
-  padding-right: 1rem;
   overflow: auto;
+  padding-right: 1rem;
 `;
 
 export const ButtonsContainer = styled.div`
@@ -54,6 +63,7 @@ export const ButtonsContainer = styled.div`
 
   button {
     height: 3.5rem;
-    width: 20rem;
+    width: 100%;
+    padding: 0 3rem;
   }
 `;

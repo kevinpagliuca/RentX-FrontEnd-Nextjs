@@ -6,7 +6,7 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
   width: 650px;
-  height: 100%;
+  max-height: 500px;
   border-radius: 20px;
   color: var(--gray-350);
   background: var(--dark);
@@ -35,11 +35,13 @@ export const ModalHeader = styled.div`
   }
 `;
 
-export const ModalContent = styled.div`
+export const ModalContent = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
   gap: 1rem;
+  overflow: auto;
+  padding-right: 1rem;
 `;
 
 export const ButtonsContainer = styled.div`

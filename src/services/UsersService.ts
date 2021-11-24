@@ -11,6 +11,14 @@ class UsersService {
       throw new Error('Erro ao buscar usuários');
     }
   }
+
+  async delete(id: string) {
+    try {
+      await api.delete(`/user/${id}`);
+    } catch (err) {
+      throw new Error('Erro ao deletar usuário');
+    }
+  }
 }
 
 const usersService = new UsersService();
